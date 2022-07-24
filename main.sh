@@ -53,31 +53,28 @@ rm -rf $HOME/Hack-Tools/tmp/* #kendi tmp dizinini düzenli olarak temizlemesi i�
 while :
 do 
 clear
-echo "=============================="
-echo ""
-echo "	 - TheHive v1.6 -"
-echo ""
-echo "1 - Exiftool ile meta veri okuma          12-Offline iban çözümleyici"
-echo "2 - Cupp ile wordlist oluştur"
-echo "3 - IP-Tracer ile ip adresi takip et"
-echo "4 - Netdiscover ile ağ içi arp taraması"
-echo "5 - Nmap ile tarama"
-echo "6 - Sistemi güncelle"
-echo "7 - Bash shell başlat"
-echo "8 - Metasploit-framework kur (GitHub)"
-echo "9 - Msfvenom ile trojan oluştur"
-echo "10- Phoneinfoga ile telefon sorgusu"
-echo "11- Sqlmap ile işlemler"
-echo ""
-echo "96 - Tool dosyalarını kontrol et          97 - Log kayıtlarını sil..."
-echo "98 - Yapımcı ve lisans bilgileri          99 - Çıkış"
-echo "=============================="
-echo ""
-echo "Mevcut dizin -> $PWD"
-echo "Home dizini -> $HOME"
-echo ""
-echo "=============================="
-echo ""
+printf """${blue}==============================
+
+	 - TheHive v1.8 -\n
+==============================\n\n${reset}"""
+printf """${blue}1 - Exiftool ile meta veri okuma          		   12-Offline iban çözümleyici
+2 - Cupp ile wordlist oluştur                              13-Hash tipi tespit edici
+3 - IP-Tracer ile ip adresi takip et                       14-Sistem bilgisi
+4 - Netdiscover ile ağ içi arp taraması
+5 - Nmap ile tarama
+6 - Sistemi güncelle
+7 - Bash shell başlat
+8 - Metasploit-framework kur (GitHub)
+9 - Msfvenom ile trojan oluştur
+10- Phoneinfoga ile telefon sorgusu
+11- Sqlmap ile işlemler
+
+96 - Tool dosyalarını kontrol et          97 - Log kayıtlarını sil...
+98 - Yapımcı ve lisans bilgileri          99 - Çıkış${reset}\n\n"""
+printf """${green}==============================
+Mevcut dizin -> $PWD
+Home dizini -> $HOME
+==============================\n${reset}"""
 read -p "-İşlem-> " main_select
 
 if [[ "$main_select" = "1" ]] ; then 
@@ -92,8 +89,7 @@ elif [[ "$main_select" = "3" ]] ; then
 elif [[ "$main_select" = "4" ]]; then
     bash modules/netdiscover.sh || tool_status
 
-elif [[ "$main_select" = "5" ]] 
-then
+elif [[ "$main_select" = "5" ]] ;then
 	bash modules/nmap.sh || tool_status
 
 elif [[ "$main_select" = "6" ]];then
@@ -125,6 +121,11 @@ elif [[ "$main_select" = "12" ]] ; then
     clear 
     python3 modules/offline_iban/main.py || tool_status
     clear 
+elif [[ "$main_select" = "13" ]] ; then 
+	bash modules/hash_idenfer.sh
+	
+elif [[ "$main_select" = "14" ]] ; then 
+	bash modules/system_info.sh
 elif [[ "$main_select" = "96" ]];then
     tool_status
 elif [[ "$main_select" = "97" ]];then

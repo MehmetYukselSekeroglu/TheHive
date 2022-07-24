@@ -9,7 +9,11 @@ printf """${green}Teşekkürler:
     @setpassunlock
     @sacriphanius
     @m3rtozkn
-    @xsadrazam${reset}"""
+    @xsadrazam
+    @Professore_1
+    
+    Telegram Grup Linkimiz: https://t.me/SiberGuvenlikChat_Tr
+    ${reset}"""
 echo 
 printf "${green}Aynı zamanda MIT lisansı ile lisanslanmıştır.\n${reset}"
 echo 

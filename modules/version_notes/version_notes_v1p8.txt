@@ -1,0 +1,12 @@
+TheHive 1.8 sürüm notları 
+
+neofetch ile sistem bilgisi ekranı eklendi 
+gerekli paketleri indirme işlemi manuel eklemeler yerine tek fonksiyona bağlandı
+şuanki sürüm notları eklendi 
+destekçiler & yapımcılar kısmına eklemeler yapıldı
+giriş metnine grup reklamı eklendi
+
+- 24.07.2022 17:06 - 
+
+
+

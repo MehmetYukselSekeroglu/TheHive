@@ -10,7 +10,7 @@ print("""
   |_|  |_||_|\___||_||_||_| \_/ \___|
 
 	Sorulara yanıt vererek taramayı başlatabilirsiniz:
- """)
+""")
 print("\n\n")
 
 target_url = input("URL giriniz-> ")
