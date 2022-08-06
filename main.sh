@@ -1,5 +1,5 @@
 #!/bin/bash
-source modules/function_lib.sh
+source modules/function_lib.sh # gerekli fonksiyonları ve değişkenler içe aktrılır 
 login_standart 
 bash modules/first_start.sh #kurulum kontrolu için düzenli olarak kontrol sağlar 
 
@@ -13,21 +13,24 @@ function tool_status()
         read -p "Devam etmek için ENTER"
     else 
         clear
+        red='\033[1;31m'
+		reset='\033[0m'
+
         kurulum_tespit="Bulunamadı"
         tool_stat="Kritik gereksinim dosyaları bulunamadı...!"
-        printf "\n${red}$tool_stat\n${reset}"
+        printf "\n${red}$tool_stat\n"
         echo
         echo "Olası nedenler:"
         echo "Toolu kendi dizininde çalıştırmadıysanız"
         echo "Eksik veya yanlış kurulum"
         echo "Toola ait dosyaların adlarının veya içeriklerinin değiştirilmesi"
         echo "olabilir"
-        echo "7 - Bash shell başlat komutu her halukarda çalışacaktır ama"
+        echo "Bash shell başlat komutu her halukarda çalışacaktır ama${reset}"
         echo
         read -p "Devam etmek için ENTER"
-
     fi
 }
+
 
 function onar()
 {
@@ -42,6 +45,9 @@ function onar()
 	clear
 	bash
 }
+
+
+
 if [[ ! -d "$HOME/Hack-Tools/tmp" ]] #eğer geçici dizin tmp yi bulamazsa oluşturacak
 then
 	echo "tmp bulunamadı oluşturuluyor...!"
@@ -50,6 +56,9 @@ then
 fi 
 rm -rf $HOME/Hack-Tools/tmp/* #kendi tmp dizinini düzenli olarak temizlemesi için
 
+
+
+# ana kod başlama alanı
 while :
 do 
 clear

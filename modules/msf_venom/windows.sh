@@ -1,4 +1,5 @@
 #!/bin/bash
+
 if [[ ! -d "$HOME/Hack-Tools/msf" ]];then
 	echo "Kurulum yapılmamış...!"
 	sleep 1 && exit
@@ -55,7 +56,7 @@ do
 	echo "99- İptal et & çıkış"
 	echo
 	echo "=============================="
-	echo
+	echo	
 	read -p "-İşlem-> " encode_select
 	multi_encode="0"
 	if [[ "$encode_select" = "1" ]];then
@@ -191,6 +192,7 @@ do
 		touch $HOME/Hack-Tools/msf/generate-$out_format-$out_name.txt
 		date >> $HOME/Hack-Tools/msf/generate-$out_format-$out_name.txt
 		echo "$lhost_ip:$lport_no" >> $HOME/Hack-Tools/msf/generate-$out_format-$out_name.txt
+		
 		echo "$platform" >> $HOME/Hack-Tools/msf/generate-$out_format-$out_name.txt
 		echo "$pay_load" >> $HOME/Hack-Tools/msf/generate-$out_format-$out_name.txt
 		echo "$out_name.$out_format" >> $HOME/Hack-Tools/msf/generate-$out_format-$out_name.txt

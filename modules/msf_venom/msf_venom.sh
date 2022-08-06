@@ -1,5 +1,4 @@
 #!/bin/bash
-
 echo "kontroller yapılıyor...!"
 clear
 if [[ -e "/bin/msfvenom" ]];then

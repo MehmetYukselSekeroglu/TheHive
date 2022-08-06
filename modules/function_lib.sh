@@ -18,7 +18,17 @@ ADMIN_COMMAND_PATH_1="/sbin"
 ADMIN_COMMAND_PATH_2="/usr/sbin"
 ADMIN_COMMAND_PATH_3="/usr/local/sbin"
 
+function COMMAND_CHECK(){
 
+	searchto="$1"
+
+	if [[ -e "$COMMAND_PATH_1/$searchto" || -e "$COMMAND_PATH_2/$searchto" || -e "$COMMAND_PATH_3/$searchto" || -e "$ADMIN_COMMAND_PATH_1/$searchto" || -e "$ADMIN_COMMAND_PATH_2/$searchto" || -e "$ADMIN_COMMAND_PATH_3/$searchto" ]] ; then
+		command_st="1"
+	else 
+		command_st="0"
+	fi 
+	
+}
 
 function COMMAND_CONTROL(){
 
