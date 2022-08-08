@@ -89,9 +89,9 @@ echo "99- Çıkış"
 
 read -p "-İşlem-> " msf_select
 if [[ "$msf_select" = "1" ]];then
-	bash moduls/msf_venom/windows.sh 
+	bash modules/msf_venom/windows.sh 
 elif [[ "$msf_select" = "2" ]];then 
-	bash moduls/msf_venom/android.sh 
+	bash modules/msf_venom/android.sh 
 
 elif [[ "$msf_select" = "3" ]];then
 	echo "Çok yakında...!"
