@@ -62,7 +62,20 @@ def insertData_blobTable(db:sqlite3.Connection, db_cursor:sqlite3.Cursor, uniq_k
         return { "success":False, "data":f"data insert failed, {err}" }
     
     
+    
+    
 def is_authenticated(username:str, password:str,  db_cursor:sqlite3.Cursor) -> dict:
+    """
+    Yerel kimlik doğrulaması için otonom fonksiyon
+
+    Args:
+        username (str): doğrulama verisi
+        password (str): doğrulama verisi
+        db_cursor (sqlite3.Cursor): veritabanı ile iletişim için
+
+    Returns:
+        dict: { "success" -> Başarılı ise True değilse False, "data" -> durum için bilgi mesajı }
+    """
     try:
         username = loginCreditHhasher(username)
         password = loginCreditHhasher(password)
