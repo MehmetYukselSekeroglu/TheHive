@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AuthenticationScreen</class>
+ <widget class="QWidget" name="AuthenticationScreen">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>685</width>
+    <height>197</height>
+   </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>685</width>
+    <height>197</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="iconfile.qrc">
+    <normaloff>:/private_icon/private_logo_2.png</normaloff>:/private_icon/private_logo_2.png</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="1" colspan="4">
+    <widget class="QLabel" name="label">
+     <property name="minimumSize">
+      <size>
+       <width>521</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>521</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 14pt &quot;Hack&quot;;</string>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Authorization Required&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QLabel" name="label_3">
+     <property name="minimumSize">
+      <size>
+       <width>139</width>
+       <height>27</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>139</width>
+       <height>27</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Hack&quot;;</string>
+     </property>
+     <property name="text">
+      <string>PASSWORD:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLabel" name="label_2">
+     <property name="minimumSize">
+      <size>
+       <width>139</width>
+       <height>27</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>139</width>
+       <height>27</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Hack&quot;;</string>
+     </property>
+     <property name="text">
+      <string>USERNAME:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" rowspan="8">
+    <widget class="QWidget" name="widget" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>140</width>
+       <height>179</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>140</width>
+       <height>179</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">image: url(:/private_icon/private_logo_2.png);</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="2">
+    <widget class="QPushButton" name="pushButton_initralAuth_authenticateButton">
+     <property name="minimumSize">
+      <size>
+       <width>182</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>182</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Hack&quot;;</string>
+     </property>
+     <property name="text">
+      <string>authenticate</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="3">
+    <widget class="QPushButton" name="pushButton_initralAuth_exitButton">
+     <property name="minimumSize">
+      <size>
+       <width>182</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>182</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Hack&quot;;</string>
+     </property>
+     <property name="text">
+      <string>exit</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2" colspan="2">
+    <widget class="QLineEdit" name="lineEdit_initralAuth_username">
+     <property name="minimumSize">
+      <size>
+       <width>370</width>
+       <height>27</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>370</width>
+       <height>27</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="2" colspan="2">
+    <widget class="QLineEdit" name="lineEdit_initralAuth_password">
+     <property name="minimumSize">
+      <size>
+       <width>370</width>
+       <height>27</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>370</width>
+       <height>27</height>
+      </size>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1" colspan="3">
+    <widget class="QLabel" name="label_4_authenticate_status">
+     <property name="minimumSize">
+      <size>
+       <width>515</width>
+       <height>19</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>515</width>
+       <height>19</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12pt &quot;Hack&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Status:</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="iconfile.qrc"/>
+ </resources>
+ <connections/>
+</ui>
