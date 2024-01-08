@@ -20,7 +20,7 @@
    <string>Form</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="iconfile.qrc">
+   <iconset>
     <normaloff>:/private_icon/private_logo_2.png</normaloff>:/private_icon/private_logo_2.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -105,7 +105,7 @@
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">image: url(:/private_icon/private_logo_2.png);</string>
+      <string notr="true">image: url(:/mainLogo/logo.png);</string>
      </property>
     </widget>
    </item>
@@ -213,7 +213,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="iconfile.qrc"/>
+  <include location="main_icon_files.qrc"/>
  </resources>
  <connections/>
 </ui>

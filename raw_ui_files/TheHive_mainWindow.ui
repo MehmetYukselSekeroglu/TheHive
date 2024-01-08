@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TheHve_MainWindow</class>
+ <widget class="QMainWindow" name="TheHve_MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>967</width>
+    <height>656</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Welcome</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <widget class="QTextBrowser" name="textBrowser_WelcomeAndToolinfo"/>
+        </item>
+        <item row="2" column="0">
+         <widget class="QTextBrowser" name="textBrowser_systemStatus"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="Line" name="line_coolBar_tab_1">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Tab 2</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar_menuController">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>967</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuSecurity">
+    <property name="title">
+     <string>Security</string>
+    </property>
+    <addaction name="actionChange_Login_Password"/>
+   </widget>
+   <widget class="QMenu" name="menuOsintTools">
+    <property name="title">
+     <string>Osint Tools</string>
+    </property>
+   </widget>
+   <addaction name="menuSecurity"/>
+   <addaction name="menuOsintTools"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionChange_Login_Password">
+   <property name="text">
+    <string>Change Login Password</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="main_icon_files.qrc"/>
+ </resources>
+ <connections/>
+</ui>

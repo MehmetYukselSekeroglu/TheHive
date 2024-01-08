@@ -4,7 +4,6 @@ import sqlite3
 from hivelibrary.env import DB_BLOB_STORAGE, DB_SYSTEM_TABLE, DB_LOCAL_AUTHENTICATE_TABLE
 from hivelibrary.env import DB_DATA_TYPE__USER
 from hivelibrary.env import APPLICATION_NAME_KEY
-
 from hivelibrary.hash_tools import loginCreditHhasher
 
 def check_db_init_status(db:sqlite3.Connection, db_cursor:sqlite3.Cursor) -> bool:
@@ -112,17 +111,29 @@ def generate_admin_accounts(username:str, password:str,db:sqlite3.Connection, db
         STATIC_SQL_COMMAND = f"INSERT INTO {DB_LOCAL_AUTHENTICATE_TABLE} (username, password) VALUES (?, ?)"
         STATIC_DATA_TUPLE = (username, password)
         
-        db_cursor.execute(STATIC_SQL_COMMAND)
+        db_cursor.execute(STATIC_SQL_COMMAND,STATIC_DATA_TUPLE)
         db.commit()
         
         return {"success":True, "data":"user successfuly generated"}
             
     except Exception as err:
-        return {"success":False , "data":"database error"}
+        return {"success":False , "data":f"database error: {err}"}
     
     
     
 def change_admin_password(username:str, old_password:str, new_password:str, new_password_confirm:str) -> dict:
     pass
     
+
+def check_admin_is_generated(db_cursor:sqlite3.Cursor) -> dict:
+    try:
+        STATIC_SQL_COMMAND = f"SELECT * FROM {DB_LOCAL_AUTHENTICATE_TABLE}"
+        results = db_cursor.execute(STATIC_SQL_COMMAND).fetchall()
+        
+        if len(results) < 1:
+            return { "success":False, "data":"no user in databsae" }
     
+        return {"success":True, "data":"admin account successfuly"}
+    
+    except Exception as err:
+        return {"success":False, "data":"database error"}
