@@ -39,4 +39,4 @@ DEFAULT_LOG_FILE_NAME = "hive_logs.txt"
 # default app root dir
 
 DEFAULT_ROOT_DIR_NAME = "data"
-
+DEFAULT_TEMP_DIR ="tmp"

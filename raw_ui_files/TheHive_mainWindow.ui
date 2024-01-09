@@ -67,9 +67,18 @@
     </property>
     <addaction name="actioniban_Parser"/>
     <addaction name="actionreverse_ip_lookup"/>
+    <addaction name="actionPhone_number_parser"/>
+   </widget>
+   <widget class="QMenu" name="menuFile_operations">
+    <property name="title">
+     <string>File operations</string>
+    </property>
+    <addaction name="actionVideo_frame_extractor"/>
+    <addaction name="actionSound_Converter"/>
    </widget>
    <addaction name="menuSecurity"/>
    <addaction name="menuOsintTools"/>
+   <addaction name="menuFile_operations"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionChange_Login_Password">
@@ -79,12 +88,27 @@
   </action>
   <action name="actioniban_Parser">
    <property name="text">
-    <string>iban parser</string>
+    <string>Iban parser</string>
    </property>
   </action>
   <action name="actionreverse_ip_lookup">
    <property name="text">
-    <string>reverse ip lookup</string>
+    <string>Reverse ip lookup</string>
+   </property>
+  </action>
+  <action name="actionVideo_frame_extractor">
+   <property name="text">
+    <string>Video frame extractor</string>
+   </property>
+  </action>
+  <action name="actionSound_Converter">
+   <property name="text">
+    <string>Sound Converter</string>
+   </property>
+  </action>
+  <action name="actionPhone_number_parser">
+   <property name="text">
+    <string>Phone number parser</string>
    </property>
   </action>
  </widget>

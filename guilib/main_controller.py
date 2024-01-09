@@ -4,6 +4,11 @@ from guilib.TheHive_mainWindow import Ui_TheHve_MainWindow
 from guilib.coomingSoom_controller import CoomingSoonPage
 from guilib.ibanParser_controller import ibanParserPage
 from guilib.changePassword_controller import PasswordChangePage
+from guilib.soundConverter_controller import soundConverterPage
+
+
+from hivelibrary import env
+
 import sqlite3
 
 
@@ -25,7 +30,12 @@ class TheHive_mainPage(QMainWindow):
         
         self.mainScreen.actioniban_Parser.triggered.connect(self.menuAction_ibanParser)
         self.mainScreen.actionChange_Login_Password.triggered.connect(self.menuAction_loginPasswordChange)
+        self.mainScreen.actionSound_Converter.triggered.connect(self.menuAction_soundConverter)
         
+    
+    def menuAction_soundConverter(self):
+        self.soundConverterScreen = soundConverterPage(output_dir=env.DEFAULT_ROOT_DIR_NAME, temp_dir=env.DEFAULT_TEMP_DIR)
+        self.soundConverterScreen.show()
         
         
     def menuAction_loginPasswordChange(self):

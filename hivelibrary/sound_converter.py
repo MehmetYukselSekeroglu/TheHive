@@ -3,7 +3,7 @@
 import random
 import os
 from pydub import AudioSegment
-SUPPORTED_SOUND_FORMATS = ["MP3","OGG","FLAC","AAC","AIFF","WMA","WAV"]
+SUPPORTED_SOUND_FORMATS = ["MP3","OGG","FLAC","AAC","AIFF","WMA","WAV","M4A"]
 
 # SES DEN METNE FONKSIYONUNDA GOOGLE API ICIN * FORMATDAN VAW FORMATINA CEVIRME FONKSIYONIU 
 def GenericAudioConverter(target_file_path:str, temp_dir_path:str, TARGET_FILE_FORMAT="mp3") -> list:
@@ -19,7 +19,7 @@ def GenericAudioConverter(target_file_path:str, temp_dir_path:str, TARGET_FILE_F
     TEMP_DIR = temp_dir_path
     
     if not os.path.exists(target_file_path) or not os.path.exists(temp_dir_path):
-        return {"success":"false", "code":"invaid path"}
+        return {"success":"false", "code":"invalid path"}
     
     target_file_extensions = target_file_path.split(".")
     target_file_extensions = target_file_extensions[len(target_file_extensions)-1]
