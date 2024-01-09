@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import *
 from guilib.TheHive_mainWindow import Ui_TheHve_MainWindow
 from guilib.coomingSoom_controller import CoomingSoonPage
 from guilib.ibanParser_controller import ibanParserPage
-
+from guilib.changePassword_controller import PasswordChangePage
 import sqlite3
 
 
@@ -17,10 +17,20 @@ class TheHive_mainPage(QMainWindow):
         
         self.setWindowTitle("TheHive Remastred")
         
+        self.db_cnn = db_cnn
+        self.db_cursor = db_cursor
+        self.DBS_CONF = [self.db_cnn, self.db_cursor]
+        
+        
         
         self.mainScreen.actioniban_Parser.triggered.connect(self.menuAction_ibanParser)
+        self.mainScreen.actionChange_Login_Password.triggered.connect(self.menuAction_loginPasswordChange)
         
         
+        
+    def menuAction_loginPasswordChange(self):
+        self.passwordChangeScreen = PasswordChangePage(*self.DBS_CONF)
+        self.passwordChangeScreen.show()
         
     def menuAction_ibanParser(self):
         self.ibanScreen = ibanParserPage()

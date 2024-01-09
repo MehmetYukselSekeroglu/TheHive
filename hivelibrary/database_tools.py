@@ -121,8 +121,19 @@ def generate_admin_accounts(username:str, password:str,db:sqlite3.Connection, db
     
     
     
-def change_admin_password(username:str, old_password:str, new_password:str, new_password_confirm:str) -> dict:
-    pass
+def change_admin_password(username:str, new_password:str, db:sqlite3.Connection, db_cursor:sqlite3.Cursor ) -> dict:
+    try:
+        username = loginCreditHhasher(username)
+        new_password = loginCreditHhasher(new_password)
+        
+        STATIC_SQL_COMMAND = f"UPDATE {DB_LOCAL_AUTHENTICATE_TABLE} SET password=? WHERE username=?"
+        STATIC_DATA_TUPLE = (new_password, username)
+        
+        db_cursor.execute(STATIC_SQL_COMMAND, STATIC_DATA_TUPLE)
+        db.commit()
+        return {"success":True,"data":"Password successfuly updated"}
+    except Exception as err:
+        return {"success": False, "data":"database error"}
     
 
 def check_admin_is_generated(db_cursor:sqlite3.Cursor) -> dict:
