@@ -55,7 +55,13 @@ class Ui_TheHve_MainWindow(object):
         TheHve_MainWindow.setStatusBar(self.statusbar)
         self.actionChange_Login_Password = QtWidgets.QAction(TheHve_MainWindow)
         self.actionChange_Login_Password.setObjectName("actionChange_Login_Password")
+        self.actioniban_Parser = QtWidgets.QAction(TheHve_MainWindow)
+        self.actioniban_Parser.setObjectName("actioniban_Parser")
+        self.actionreverse_ip_lookup = QtWidgets.QAction(TheHve_MainWindow)
+        self.actionreverse_ip_lookup.setObjectName("actionreverse_ip_lookup")
         self.menuSecurity.addAction(self.actionChange_Login_Password)
+        self.menuOsintTools.addAction(self.actioniban_Parser)
+        self.menuOsintTools.addAction(self.actionreverse_ip_lookup)
         self.menubar_menuController.addAction(self.menuSecurity.menuAction())
         self.menubar_menuController.addAction(self.menuOsintTools.menuAction())
 
@@ -70,6 +76,8 @@ class Ui_TheHve_MainWindow(object):
         self.menuSecurity.setTitle(_translate("TheHve_MainWindow", "Security"))
         self.menuOsintTools.setTitle(_translate("TheHve_MainWindow", "Osint Tools"))
         self.actionChange_Login_Password.setText(_translate("TheHve_MainWindow", "Change Login Password"))
+        self.actioniban_Parser.setText(_translate("TheHve_MainWindow", "iban parser"))
+        self.actionreverse_ip_lookup.setText(_translate("TheHve_MainWindow", "reverse ip lookup"))
 import main_icon_files_rc
 
 

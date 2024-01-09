@@ -21,7 +21,7 @@ class LoginScreen(QWidget):
         self.loginScreen.setupUi(self)
         
         # set return window
-        self.targetMainWindow = targetWindow()
+        self.targetMainWindow = targetWindow(*self.DBS_CONF)
         
         # set login credientals
         self.MAX_LOGIN_TRY = 3

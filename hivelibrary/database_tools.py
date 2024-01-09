@@ -137,3 +137,13 @@ def check_admin_is_generated(db_cursor:sqlite3.Cursor) -> dict:
     
     except Exception as err:
         return {"success":False, "data":"database error"}
+    
+    
+
+
+def getValue_systemTable(db_cursor:sqlite3.Cursor,sql_key:str) -> dict:
+    try:
+        pass
+    
+    except Exception as err:
+        return { "success":False, "data":"database error" }

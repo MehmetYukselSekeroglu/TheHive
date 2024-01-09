@@ -1,19 +1,23 @@
+# -*- coding: utf-8 -*-
+# Project: TheHive v2 Remastred
+# Official GitHub Address: https://github.com/MehmetYukselSekeroglu/TheHive
+# Developed By Prime Security
+# Version: v2.0.0 Testing
+
+# importing hive toolkit
 from hivelibrary import console_tools
 from hivelibrary.env import *
 from hivelibrary import database_tools
 from hivelibrary import database_structure
 
-
+# importing python packagets
 from PyQt5.QtWidgets import *
+import sqlite3
 
-from guilib.TheHive_mainWindow import Ui_TheHve_MainWindow # for test imports
+# importing gui 
 from guilib.login_controller import LoginScreen
 from guilib.new_account_controller import NewAccountScreen
-import sqlite3
-import threading
-import pathlib
-import os
-import sys
+from guilib.main_controller import TheHive_mainPage
 
 
 
@@ -21,6 +25,7 @@ import sys
 DB_CNN = sqlite3.connect(DATABASE_PATH,check_same_thread=False)
 DB_CURSOR = DB_CNN.cursor()
 DBS_CONF = [DB_CNN, DB_CURSOR]
+
 
 if database_tools.check_db_init_status(*DBS_CONF) == False:
     console_tools.LogPrinter(f"Database init started")
@@ -34,29 +39,18 @@ if database_tools.check_db_init_status(*DBS_CONF) == False:
 console_tools.LogPrinter("Database alredy configurated")
 
 
-
-class mainApp(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        self.mainEkran = Ui_TheHve_MainWindow()
-        self.mainEkran.setupUi(self)
-
-
-
-
 if database_tools.check_admin_is_generated(db_cursor=DB_CURSOR)["success"] == True:
-    app = QApplication([])
-    app_win = LoginScreen(sqlite_cnn=DB_CNN,sqlite_curosr=DB_CURSOR,targetWindow=mainApp)
-    app_win.show()
-    app.exec_()
-    
+    standartApp = QApplication([])
+    standartWindow = LoginScreen(sqlite_cnn=DB_CNN,sqlite_curosr=DB_CURSOR,targetWindow=TheHive_mainPage)
+    standartWindow.show()
+    standartApp.exec_()
     
 else:
     console_tools.LogPrinter("admin account not be detect starting account manager")
-    main_application = QApplication([])
-    main_window = NewAccountScreen(db_connections=DB_CNN,db_cursor=DB_CURSOR,targetWindow=mainApp)
-    main_window.show()
-    main_application.exec_()
+    firstStartApp = QApplication([])
+    firstStartWindow = NewAccountScreen(db_connections=DB_CNN,db_cursor=DB_CURSOR,targetWindow=TheHive_mainPage)
+    firstStartWindow.show()
+    firstStartApp.exec_()
 
 
         

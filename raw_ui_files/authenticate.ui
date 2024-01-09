@@ -167,6 +167,9 @@
        <height>27</height>
       </size>
      </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12pt &quot;Hack&quot;;</string>
+     </property>
     </widget>
    </item>
    <item row="4" column="2" colspan="2">
@@ -182,6 +185,9 @@
        <width>370</width>
        <height>27</height>
       </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12pt &quot;Hack&quot;;</string>
      </property>
      <property name="echoMode">
       <enum>QLineEdit::Password</enum>

@@ -20,10 +20,12 @@ class NewAccountScreen(QWidget):
         # set dabase connections and cursor
         self.db_connections = db_connections
         self.db_cursor = db_cursor
-        
+        self.DBS_CONF =  [self.db_connections, self.db_cursor]
         # set return window
-        self.targetMainWindow = targetWindow()
+        self.targetMainWindow = targetWindow(*self.DBS_CONF)
         
+        # set window title
+        self.setWindowTitle("Configure Local Accounts")
         
         self.newAccountPage.pushButton_confirmAccount.clicked.connect(self.configureNewAccounts)
         self.newAccountPage.pushButton_exit_app.clicked.connect(self.exitProtocol)

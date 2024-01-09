@@ -1,3 +1,6 @@
+import os
+
+
 # table structure
 DB_SYSTEM_TABLE = "system_core"
 DB_BLOB_STORAGE = "blob_storage"
@@ -28,4 +31,12 @@ DATABASE_PATH = DATABASE_FILE_NAME
 
 DEFAULT_CHARSET = "utf-8"
 
+
+# default log file
+DEFAULT_LOG_FILE_NAME = "hive_logs.txt"
+
+
+# default app root dir
+
+DEFAULT_ROOT_DIR_NAME = "data"
 

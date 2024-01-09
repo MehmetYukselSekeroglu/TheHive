@@ -65,6 +65,8 @@
     <property name="title">
      <string>Osint Tools</string>
     </property>
+    <addaction name="actioniban_Parser"/>
+    <addaction name="actionreverse_ip_lookup"/>
    </widget>
    <addaction name="menuSecurity"/>
    <addaction name="menuOsintTools"/>
@@ -73,6 +75,16 @@
   <action name="actionChange_Login_Password">
    <property name="text">
     <string>Change Login Password</string>
+   </property>
+  </action>
+  <action name="actioniban_Parser">
+   <property name="text">
+    <string>iban parser</string>
+   </property>
+  </action>
+  <action name="actionreverse_ip_lookup">
+   <property name="text">
+    <string>reverse ip lookup</string>
    </property>
   </action>
  </widget>
