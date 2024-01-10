@@ -5,7 +5,7 @@ from guilib.coomingSoom_controller import CoomingSoonPage
 from guilib.ibanParser_controller import ibanParserPage
 from guilib.changePassword_controller import PasswordChangePage
 from guilib.soundConverter_controller import soundConverterPage
-
+from guilib.voiceVerification_controller import voiceVerificationPage
 
 from hivelibrary import env
 
@@ -31,7 +31,12 @@ class TheHive_mainPage(QMainWindow):
         self.mainScreen.actioniban_Parser.triggered.connect(self.menuAction_ibanParser)
         self.mainScreen.actionChange_Login_Password.triggered.connect(self.menuAction_loginPasswordChange)
         self.mainScreen.actionSound_Converter.triggered.connect(self.menuAction_soundConverter)
-        
+        self.mainScreen.actionVoice_verification.triggered.connect(self.menuAction_voiceVerification)
+    
+    
+    def menuAction_voiceVerification(self):
+        self.voiceVerificationScreen = voiceVerificationPage(temp_dir=env.DEFAULT_TEMP_DIR)
+        self.voiceVerificationScreen.show()
     
     def menuAction_soundConverter(self):
         self.soundConverterScreen = soundConverterPage(output_dir=env.DEFAULT_ROOT_DIR_NAME, temp_dir=env.DEFAULT_TEMP_DIR)
@@ -45,7 +50,8 @@ class TheHive_mainPage(QMainWindow):
     def menuAction_ibanParser(self):
         self.ibanScreen = ibanParserPage()
         self.ibanScreen.show()
-        
+    
+    
         
     def coomingSoonTheFuture(self):
         msg = """Bu özellik şuanda bu sürümde mevcut değildir. Güncellemekleri kontrol ediniz veya resmi github hesabını kontrol ediniz.<br>

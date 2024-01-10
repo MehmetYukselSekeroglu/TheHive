@@ -21,6 +21,7 @@ class soundConverterPage(QWidget):
         
         self.OUTPUT_DIRECTORY = output_dir
         self.TEMP_DIRECTORY = temp_dir
+        self.soundConverterSelectedFile = None
         
         self.setWindowTitle("Sound Converter")
         

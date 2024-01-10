@@ -4,3 +4,6 @@ hive_database.sqlite3
 *.db
 tmp*
 data*
+bin*
+lib*
+pyvenv.cfg

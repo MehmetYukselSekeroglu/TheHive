@@ -5,3 +5,6 @@ def func(a, b,c):
     
 
 func(*conf, c="selam")
+
+
+print(type(func))

@@ -71,14 +71,21 @@
    </widget>
    <widget class="QMenu" name="menuFile_operations">
     <property name="title">
-     <string>File operations</string>
+     <string>File Operations</string>
     </property>
     <addaction name="actionVideo_frame_extractor"/>
     <addaction name="actionSound_Converter"/>
    </widget>
+   <widget class="QMenu" name="menuIdentify_Tools">
+    <property name="title">
+     <string>Identify Tools</string>
+    </property>
+    <addaction name="actionVoice_verification"/>
+   </widget>
    <addaction name="menuSecurity"/>
    <addaction name="menuOsintTools"/>
    <addaction name="menuFile_operations"/>
+   <addaction name="menuIdentify_Tools"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionChange_Login_Password">
@@ -109,6 +116,11 @@
   <action name="actionPhone_number_parser">
    <property name="text">
     <string>Phone number parser</string>
+   </property>
+  </action>
+  <action name="actionVoice_verification">
+   <property name="text">
+    <string>Voice verification</string>
    </property>
   </action>
  </widget>
