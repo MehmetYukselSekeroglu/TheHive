@@ -4,4 +4,5 @@ psutil<=5.9.4
 colorama<=0.4.6
 beautifulsoup4<=4.11.2
 requests<=2.31.0
+Resemblyzer<=0.1.4
 #opencv-python<=4.8.0.74

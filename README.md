@@ -1,4 +1,4 @@
-<h1>TheHive Remastred</h1>
+<h1 aling=center>TheHive Remastred</h1>
 <p>Advanced professional osint toolkit with TheHive Remastred</p><br>
 
 
@@ -9,7 +9,7 @@
     - Extensive features
         - Face recognition
         - Face verification
-        - Voice verification
+        - Voice verification ( Now Active)
         - Clone voice detections
         - Iban parser ( Now Active)
         - Video frame extractor
