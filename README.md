@@ -53,7 +53,7 @@
 ## Iban Parser
 
 <br>
-<img src="./ibanParserResult.txt">
+<img src="./img/ibanParserGUI.png">
 <br>
 <br>
 

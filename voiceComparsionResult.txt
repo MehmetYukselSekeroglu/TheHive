@@ -1,6 +1,0 @@
-TheHive Remastred | Voice Verification
-Date: None
-Voice 1 Path: /home/delta/Masaüstü/prime_primary/opt/VoiceComparator/target.ogg
-Voice 2 Path: /home/delta/Masaüstü/prime_primary/opt/VoiceComparator/target2.m4a
-Similarity Rate: %72
-Message: Aynı kişi olma ihtimali çok yüksektir
