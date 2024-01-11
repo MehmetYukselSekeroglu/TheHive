@@ -67,7 +67,10 @@ class extractFrameThread(QThread):
         self.statusSignal.emit(msg)
         
         totalFrame = 0
-        while True and self.threadStopSignal != True:
+        while True:
+            
+            if self.threadStopSignal == True:
+                return
             is_succes, _ = prepared_video.read()
             if is_succes:
                 totalFrame += 1
@@ -98,7 +101,9 @@ class extractFrameThread(QThread):
         self.statusSignal.emit(msg)
         
         save_number = 0
-        while True and self.threadStopSignal != True:
+        while True :
+            if self.threadStopSignal == True:
+                return
             is_succes, now_frame = prepared_video.read()
             if is_succes:
                 cv2.imwrite(f"{self.OutputDirPath}frame_{save_number}.jpg", now_frame)
@@ -182,6 +187,11 @@ class VideoFrameExtractorPage(QWidget):
             self.video2framePage.textBrowser_outputDirPathPrint.setText(err_msg)
             return
         
+        if len(os.listdir(folder_dialog)) != 0:
+            err_msg = "Error: Selected directory not empty"
+            self.video2framePage.textBrowser_outputDirPathPrint.setText(err_msg)
+            return          
+        
         self.selectOutputDirectory = folder_dialog
         self.targetOutputDir_is_selected = True
         self.video2framePage.textBrowser_outputDirPathPrint.setText(folder_dialog)
@@ -213,6 +223,7 @@ class VideoFrameExtractorPage(QWidget):
             self.video2framePage.textBrowser_inputFilePathPrint.setText(err_msg)
             return
         
+        
         self.selectInputFile = self.targetVideoFile
         self.targetVideoFile_is_selected = True
         self.video2framePage.textBrowser_inputFilePathPrint.setText(self.targetVideoFile)
@@ -226,6 +237,9 @@ class VideoFrameExtractorPage(QWidget):
         self.resultPrinted = False
         self.clearLogResultConsole()
         
+        if self.targetOutputDir_is_selected != True or self.targetOutputDir_is_selected!= True:
+            self.video2framePage.textBrowser_logAndResults.append(f"<B>ERROR: </B>Video or directory not selected!")
+            return
         
         self.backEndWorkerThread = extractFrameThread(targetFilePath=self.selectInputFile,OutputDirPath=self.selectOutputDirectory)
         self.backEndWorkerThread.statusSignal.connect(self.threadSignalHandler)
