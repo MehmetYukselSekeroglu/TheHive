@@ -25,9 +25,6 @@ Contact information:<br>
 GitHub Page: https://MehmetYukselSekeroglu/TheHive<br>
 E-mail     : contact.primesec@gmail.com<br>
 <br>
-Other:<br>
-Telegram education channel: https://t.me/safaksizEgitim<br>
-Telegram SIGINT group: https://t.me/sigint_global<br>
 """
 
 
