@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="main_icon_files.qrc">
+    <normaloff>:/mainLogo/logo.png</normaloff>:/mainLogo/logo.png</iconset>
+  </property>
   <layout class="QGridLayout" name="gridLayout_5">
    <item row="0" column="0">
     <widget class="QWidget" name="widget_4" native="true">
@@ -327,6 +331,8 @@ p, li { white-space: pre-wrap; }
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="main_icon_files.qrc"/>
+ </resources>
  <connections/>
 </ui>

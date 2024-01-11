@@ -15,6 +15,9 @@ class Ui_voiceVerificationWidget(object):
     def setupUi(self, voiceVerificationWidget):
         voiceVerificationWidget.setObjectName("voiceVerificationWidget")
         voiceVerificationWidget.resize(1153, 520)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/mainLogo/logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        voiceVerificationWidget.setWindowIcon(icon)
         self.gridLayout_2 = QtWidgets.QGridLayout(voiceVerificationWidget)
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.widget_mainWidget = QtWidgets.QWidget(voiceVerificationWidget)
@@ -125,6 +128,7 @@ class Ui_voiceVerificationWidget(object):
 "</style></head><body style=\" font-family:\'Hack\'; font-size:14pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Cantarell\'; font-size:11pt; font-weight:600;\">LOG AND RESULTS:</span></p></body></html>"))
         self.label_4.setText(_translate("voiceVerificationWidget", "<html><head/><body><p align=\"center\">Voice Verification</p></body></html>"))
+import main_icon_files_rc
 
 
 if __name__ == "__main__":

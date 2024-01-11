@@ -15,6 +15,9 @@ class Ui_CoomingSoonScreen(object):
     def setupUi(self, CoomingSoonScreen):
         CoomingSoonScreen.setObjectName("CoomingSoonScreen")
         CoomingSoonScreen.resize(883, 421)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/mainLogo/logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        CoomingSoonScreen.setWindowIcon(icon)
         self.gridLayout = QtWidgets.QGridLayout(CoomingSoonScreen)
         self.gridLayout.setObjectName("gridLayout")
         self.widget = QtWidgets.QWidget(CoomingSoonScreen)
@@ -42,6 +45,7 @@ class Ui_CoomingSoonScreen(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Cantarell\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+import main_icon_files_rc
 
 
 if __name__ == "__main__":

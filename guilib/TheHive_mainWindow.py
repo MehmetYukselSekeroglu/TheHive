@@ -15,6 +15,9 @@ class Ui_TheHve_MainWindow(object):
     def setupUi(self, TheHve_MainWindow):
         TheHve_MainWindow.setObjectName("TheHve_MainWindow")
         TheHve_MainWindow.resize(1146, 728)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/mainLogo/logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        TheHve_MainWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(TheHve_MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)

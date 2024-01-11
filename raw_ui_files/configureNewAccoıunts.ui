@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="main_icon_files.qrc">
+    <normaloff>:/mainLogo/logo.png</normaloff>:/mainLogo/logo.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QFrame" name="frame_title">
@@ -209,6 +213,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="main_icon_files.qrc"/>
+ </resources>
  <connections/>
 </ui>

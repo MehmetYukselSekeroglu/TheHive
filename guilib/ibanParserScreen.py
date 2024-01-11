@@ -15,6 +15,9 @@ class Ui_iban_parser_form(object):
     def setupUi(self, iban_parser_form):
         iban_parser_form.setObjectName("iban_parser_form")
         iban_parser_form.resize(876, 614)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/mainLogo/logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        iban_parser_form.setWindowIcon(icon)
         self.gridLayout_4 = QtWidgets.QGridLayout(iban_parser_form)
         self.gridLayout_4.setObjectName("gridLayout_4")
         self.widget = QtWidgets.QWidget(iban_parser_form)
@@ -84,6 +87,7 @@ class Ui_iban_parser_form(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Hack\'; font-size:14pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Cantarell\'; font-size:11pt; font-weight:600;\">RESULT:</span></p></body></html>"))
+import main_icon_files_rc
 
 
 if __name__ == "__main__":

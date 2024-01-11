@@ -15,6 +15,9 @@ class Ui_SounConverter_widget(object):
     def setupUi(self, SounConverter_widget):
         SounConverter_widget.setObjectName("SounConverter_widget")
         SounConverter_widget.resize(1127, 660)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/mainLogo/logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        SounConverter_widget.setWindowIcon(icon)
         self.gridLayout_3 = QtWidgets.QGridLayout(SounConverter_widget)
         self.gridLayout_3.setObjectName("gridLayout_3")
         self.label = QtWidgets.QLabel(SounConverter_widget)
@@ -129,6 +132,7 @@ class Ui_SounConverter_widget(object):
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Output Directory:  (exec_dir)/output</p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Supported Formats: <span style=\" font-family:\'Cantarell\'; font-size:11pt;\">MP3, VAW, OPUS, FLAC, OGG, AAC, AIFF, WMA, M4A</span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Cantarell\'; font-size:11pt;\"><br /></p></body></html>"))
+import main_icon_files_rc
 
 
 if __name__ == "__main__":

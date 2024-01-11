@@ -15,6 +15,9 @@ class Ui_video2framWidget(object):
     def setupUi(self, video2framWidget):
         video2framWidget.setObjectName("video2framWidget")
         video2framWidget.resize(1057, 785)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/mainLogo/logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        video2framWidget.setWindowIcon(icon)
         self.gridLayout_5 = QtWidgets.QGridLayout(video2framWidget)
         self.gridLayout_5.setObjectName("gridLayout_5")
         self.widget_4 = QtWidgets.QWidget(video2framWidget)
@@ -132,6 +135,7 @@ class Ui_video2framWidget(object):
         self.pushButton_startExtraction.setText(_translate("video2framWidget", "Start"))
         self.pushButton_stopCurrentJob.setText(_translate("video2framWidget", "stop proccess"))
         self.label.setText(_translate("video2framWidget", "Progress Status:"))
+import main_icon_files_rc
 
 
 if __name__ == "__main__":

@@ -15,6 +15,9 @@ class Ui_ConfigureAccounts(object):
     def setupUi(self, ConfigureAccounts):
         ConfigureAccounts.setObjectName("ConfigureAccounts")
         ConfigureAccounts.resize(480, 520)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/mainLogo/logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        ConfigureAccounts.setWindowIcon(icon)
         self.verticalLayout = QtWidgets.QVBoxLayout(ConfigureAccounts)
         self.verticalLayout.setObjectName("verticalLayout")
         self.frame_title = QtWidgets.QFrame(ConfigureAccounts)
@@ -114,6 +117,7 @@ class Ui_ConfigureAccounts(object):
         self.pushButton_exit_app.setText(_translate("ConfigureAccounts", "exit application"))
         self.pushButton_confirmAccount.setText(_translate("ConfigureAccounts", "confirm"))
         self.label_status_info.setText(_translate("ConfigureAccounts", "Status:"))
+import main_icon_files_rc
 
 
 if __name__ == "__main__":
