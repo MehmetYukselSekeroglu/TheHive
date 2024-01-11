@@ -1,4 +1,7 @@
 from PyQt5.QtWidgets import *
+from PyQt5.QtCore import QThread
+from PyQt5.QtCore import pyqtSignal
+
 
 from guilib.TheHive_mainWindow import Ui_TheHve_MainWindow
 from guilib.coomingSoom_controller import CoomingSoonPage
@@ -10,8 +13,59 @@ from guilib.videoFrameExtractor_controller import VideoFrameExtractorPage
 
 
 from hivelibrary import env
-
+from hivelibrary import os_information
 import sqlite3
+import time
+
+
+WELCOME_SCREEN_TEXT = f"""Welcome to <B>TheHive Remastred</B><br><br>
+TheHive is a fully equipped professional osint kit project with v2 version. Developed by {env.APPLICATION_VENDOR_VALUE}.
+<br><br>
+Contact information:<br>
+GitHub Page: https://MehmetYukselSekeroglu/TheHive<br>
+E-mail     : contact.primesec@gmail.com<br>
+<br>
+Other:<br>
+Telegram education channel: https://t.me/safaksizEgitim<br>
+Telegram SIGINT group: https://t.me/sigint_global<br>
+"""
+
+
+class welcomeScreenSourceThread(QThread):
+    returnSignal = pyqtSignal(str)
+
+    
+    def __init__(self, updateSecond=1):
+        super().__init__()
+        
+        self.updateSecond = updateSecond
+        self.activeOsUser = os_information.get_active_user()
+        self.computerHostname = os_information.get_hostname()
+        self.totalCpuCount = os_information.total_cpu_count()
+        
+    def run(self):
+        while True:
+            currentBattaryStatus = os_information.get_battery_percentage()
+            memoryDict = os_information.get_memory_usage()
+            totalRam = memoryDict["total"]
+            usedRam = memoryDict["used"]
+            yuzdelikRam = memoryDict["yüzde"]
+            cpu_usage = os_information.get_cpu_usage()
+            
+            outputText =  f"""<B style="align:center;"> SYSTEM INFORMATION </B><br><br>
+Os User     :    {self.activeOsUser}<br>
+Hostname    :    {self.computerHostname}<br>
+Cpu count   :    {self.totalCpuCount}<br>
+<br>
+Cpu     :    %{cpu_usage}<br>
+Ram     :    {usedRam}/{totalRam} GB    %{yuzdelikRam}<br>
+Battary :    {currentBattaryStatus}<br>
+<br>
+Update  :    {self.updateSecond} sec<br>
+TheHive version: {env.APPLICATION_VERSION_KEY}"""
+          
+            self.returnSignal.emit(outputText)
+            time.sleep(self.updateSecond)
 
 
 class TheHive_mainPage(QMainWindow):
@@ -28,13 +82,21 @@ class TheHive_mainPage(QMainWindow):
         self.db_cursor = db_cursor
         self.DBS_CONF = [self.db_cnn, self.db_cursor]
         
-        
+        self.backEndWorkerThread = welcomeScreenSourceThread(updateSecond=1)
+        self.backEndWorkerThread.returnSignal.connect(self.sourceThreadSignalHandler)
+        self.backEndWorkerThread.start()
         
         self.mainScreen.actioniban_Parser.triggered.connect(self.menuAction_ibanParser)
         self.mainScreen.actionChange_Login_Password.triggered.connect(self.menuAction_loginPasswordChange)
         self.mainScreen.actionSound_Converter.triggered.connect(self.menuAction_soundConverter)
         self.mainScreen.actionVoice_verification.triggered.connect(self.menuAction_voiceVerification)
         self.mainScreen.actionVideo_frame_extractor.triggered.connect(self.menuAction_videoFrameExtactor)
+        
+        
+        self.mainScreen.textBrowser_WelcomeAndToolinfo.setText(WELCOME_SCREEN_TEXT)
+
+    def sourceThreadSignalHandler(self, data_strings):
+        self.mainScreen.textBrowser_systemStatus.setText(data_strings)
     
     def menuAction_voiceVerification(self):
         self.voiceVerificationScreen = voiceVerificationPage(temp_dir=env.DEFAULT_TEMP_DIR)

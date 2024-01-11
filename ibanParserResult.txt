@@ -1,0 +1,15 @@
+STATUS: iban successfuly parsed 
+Input iban: TR340001000497767929255001   
+Country: Turkey   
+Country number: TR 
+Max leng: 26 
+Account Control Support: False 
+Bank branc: True 
+Local bank code:: 00010 
+Reserve code: 0 
+Raw account number: 776792925 
+Account number: 0497767929255001 
+Bank name: Ziraat Bankası   
+Branch code: 0497 
+Branch city: Konya   
+Branch district: Yunak 

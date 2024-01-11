@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>967</width>
-    <height>656</height>
+    <width>1146</width>
+    <height>728</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,20 +15,31 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+    <item row="1" column="0">
      <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
         <string>Welcome</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="0">
-         <widget class="QTextBrowser" name="textBrowser_WelcomeAndToolinfo"/>
+        <item row="3" column="0">
+         <widget class="QTextBrowser" name="textBrowser_systemStatus">
+          <property name="styleSheet">
+           <string notr="true">font: 14pt &quot;Hack&quot;;</string>
+          </property>
+         </widget>
         </item>
-        <item row="2" column="0">
-         <widget class="QTextBrowser" name="textBrowser_systemStatus"/>
+        <item row="5" column="0">
+         <widget class="QTextBrowser" name="textBrowser_WelcomeAndToolinfo">
+          <property name="styleSheet">
+           <string notr="true">font: 14pt &quot;Hack&quot;;</string>
+          </property>
+         </widget>
         </item>
-        <item row="1" column="0">
+        <item row="4" column="0">
          <widget class="Line" name="line_coolBar_tab_1">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -51,7 +62,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>967</width>
+     <width>1146</width>
      <height>24</height>
     </rect>
    </property>
