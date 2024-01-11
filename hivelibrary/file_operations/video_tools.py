@@ -51,3 +51,13 @@ def getFrameCountOnVideo(preparedVideo:cv2.VideoCapture, counter:int) -> dict:
     
     
 #print(type(preparedVideoForCV2(video_path="/home/delta/Videolar/OBS/2023-07-23 21-21-03.mp4")["data"]))
+
+
+
+
+def frame_sharpening(frame) -> object:
+    converGray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    konstrat_arttir = cv2.adaptiveThreshold(converGray,255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11,2)
+    clear_noise = cv2.bilateralFilter(frame,9,75,75)
+    finaly_image = cv2.addWeighted(clear_noise, 1.5,konstrat_arttir,-0.5,0)
+    return finaly_image

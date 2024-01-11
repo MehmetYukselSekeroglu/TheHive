@@ -8,9 +8,8 @@ import os
 class extractFrameThread(QThread):
     statusSignal = pyqtSignal(dict)
     
-    def __init__(self, targetFilePath, OutputDirPath):
+    def __init__(self, targetFilePath, OutputDirPath, ):
         super().__init__()
-    
     
         self.targetFilePath = targetFilePath
         self.OutputDirPath = OutputDirPath
@@ -49,7 +48,6 @@ class extractFrameThread(QThread):
         }
         self.statusSignal.emit(msg)
         import cv2
-        
         try:
             prepared_video = cv2.VideoCapture(self.targetFilePath)
         except Exception as err:
@@ -106,9 +104,16 @@ class extractFrameThread(QThread):
                 return
             is_succes, now_frame = prepared_video.read()
             if is_succes:
-                cv2.imwrite(f"{self.OutputDirPath}frame_{save_number}.jpg", now_frame)
+                
+                cv2.imwrite(f"{self.OutputDirPath}frame_{save_number}.png", now_frame)
                 save_number += 1
-            else:
+            else:               
+                msg = {"end":False,"success":None,
+                "update_bar": True,
+                "text":f"<B>INFO: </B>Status: {save_number}/{totalFrame}",
+                "progress_value": 100
+                }
+                self.statusSignal.emit(msg)
                 break
             
             if save_number % 10 == 0:
@@ -119,6 +124,7 @@ class extractFrameThread(QThread):
                 }
                 self.statusSignal.emit(msg)
 
+    
         msg = {"end":True,"success":True,
         "update_bar": True,
         "text":f"<B>INFO: </B>Status: Complated!",
