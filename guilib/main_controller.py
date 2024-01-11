@@ -6,6 +6,8 @@ from guilib.ibanParser_controller import ibanParserPage
 from guilib.changePassword_controller import PasswordChangePage
 from guilib.soundConverter_controller import soundConverterPage
 from guilib.voiceVerification_controller import voiceVerificationPage
+from guilib.videoFrameExtractor_controller import VideoFrameExtractorPage
+
 
 from hivelibrary import env
 
@@ -32,7 +34,7 @@ class TheHive_mainPage(QMainWindow):
         self.mainScreen.actionChange_Login_Password.triggered.connect(self.menuAction_loginPasswordChange)
         self.mainScreen.actionSound_Converter.triggered.connect(self.menuAction_soundConverter)
         self.mainScreen.actionVoice_verification.triggered.connect(self.menuAction_voiceVerification)
-    
+        self.mainScreen.actionVideo_frame_extractor.triggered.connect(self.menuAction_videoFrameExtactor)
     
     def menuAction_voiceVerification(self):
         self.voiceVerificationScreen = voiceVerificationPage(temp_dir=env.DEFAULT_TEMP_DIR)
@@ -51,6 +53,9 @@ class TheHive_mainPage(QMainWindow):
         self.ibanScreen = ibanParserPage()
         self.ibanScreen.show()
     
+    def menuAction_videoFrameExtactor(self):
+        self.videoFrameExtractorScreen = VideoFrameExtractorPage()
+        self.videoFrameExtractorScreen.show()
     
         
     def coomingSoonTheFuture(self):
