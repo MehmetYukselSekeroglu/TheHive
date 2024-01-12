@@ -30,7 +30,7 @@
 <img src="./img/welcomeScreen.png">
 
 <br>
-<br>
+
 
 ## Voice Verification
 
@@ -38,7 +38,6 @@
 
 <img src="./img/voiceVerification.png">
 
-<br>
 <br>
 
 ## Video Frame Extractor
@@ -48,14 +47,14 @@
 
 
 <br>
-<br>
+
 
 ## Iban Parser
 
 <br>
 <img src="./img/ibanParserGUI.png">
 <br>
-<br>
+
 
 
 ## Sound Converter 
@@ -67,5 +66,8 @@
 
 
 
+<br>
 
+# Credit[s]
 
+Logo Designer <a hred="https://github.com/omersayak">Ömer Şayak</a>
