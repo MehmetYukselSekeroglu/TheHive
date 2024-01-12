@@ -1,5 +1,12 @@
 <h1 aling=center>TheHive Remastred</h1>
+
+<p align="center">
+<img width="400" height="400" style="border-radius: 50%;"src="./iconfiles/logo.png">
+</p>
+
 <p>Advanced professional osint toolkit with TheHive Remastred</p><br>
+
+
 
 
 - TheHive Remastred:
