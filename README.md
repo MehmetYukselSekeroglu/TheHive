@@ -47,6 +47,19 @@
 
 <br>
 
+## Face Verification
+
+<br>
+
+<img src="./img/FaceVerification.png">
+
+
+## Face Detection
+
+<br>
+
+<img src="./img/FaceDetection.png">
+
 ## Video Frame Extractor
 
 <br>
@@ -77,4 +90,7 @@
 
 # Credit[s]
 
+<p>
 Logo Designer <a hred="https://github.com/omersayak">Ömer Şayak</a>
+
+</p>
