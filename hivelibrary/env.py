@@ -40,3 +40,7 @@ DEFAULT_LOG_FILE_NAME = "hive_logs.txt"
 
 DEFAULT_ROOT_DIR_NAME = "data"
 DEFAULT_TEMP_DIR ="tmp"
+
+# DEFAULT LOGO PATH
+
+DEFAULT_LOGO_PATH = f"iconfiles{os.path.sep}logo.png"

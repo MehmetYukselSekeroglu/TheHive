@@ -95,7 +95,14 @@
     <property name="title">
      <string>Identify Tools</string>
     </property>
+    <widget class="QMenu" name="menuFace_Insight">
+     <property name="title">
+      <string>Face Insight</string>
+     </property>
+     <addaction name="actionFace_Detection"/>
+    </widget>
     <addaction name="actionVoice_verification"/>
+    <addaction name="menuFace_Insight"/>
    </widget>
    <addaction name="menuSecurity"/>
    <addaction name="menuOsintTools"/>
@@ -136,6 +143,11 @@
   <action name="actionVoice_verification">
    <property name="text">
     <string>Voice verification</string>
+   </property>
+  </action>
+  <action name="actionFace_Detection">
+   <property name="text">
+    <string>Face Detection</string>
    </property>
   </action>
  </widget>

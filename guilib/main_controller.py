@@ -10,7 +10,7 @@ from guilib.changePassword_controller import PasswordChangePage
 from guilib.soundConverter_controller import soundConverterPage
 from guilib.voiceVerification_controller import voiceVerificationPage
 from guilib.videoFrameExtractor_controller import VideoFrameExtractorPage
-
+from guilib.FaceDetection_controller import FaceDetectionWidget
 
 from hivelibrary import env
 from hivelibrary import os_information
@@ -88,12 +88,19 @@ class TheHive_mainPage(QMainWindow):
         self.mainScreen.actionSound_Converter.triggered.connect(self.menuAction_soundConverter)
         self.mainScreen.actionVoice_verification.triggered.connect(self.menuAction_voiceVerification)
         self.mainScreen.actionVideo_frame_extractor.triggered.connect(self.menuAction_videoFrameExtactor)
-        
+        self.mainScreen.actionFace_Detection.triggered.connect(self.menuAction_FaceInsight_faceDetection)
         
         self.mainScreen.textBrowser_WelcomeAndToolinfo.setText(WELCOME_SCREEN_TEXT)
 
+
+
     def sourceThreadSignalHandler(self, data_strings):
         self.mainScreen.textBrowser_systemStatus.setText(data_strings)
+
+
+    def menuAction_FaceInsight_faceDetection(self):
+        self.FaceDetectionScreen = FaceDetectionWidget()
+        self.FaceDetectionScreen.show()
     
     def menuAction_voiceVerification(self):
         self.voiceVerificationScreen = voiceVerificationPage(temp_dir=env.DEFAULT_TEMP_DIR)
