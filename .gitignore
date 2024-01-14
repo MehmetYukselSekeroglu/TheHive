@@ -8,3 +8,5 @@ bin*
 lib*
 pyvenv.cfg
 share*
+testFile*
+test*
