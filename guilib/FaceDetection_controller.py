@@ -57,7 +57,7 @@ class faceDetectionBackendThread(QThread):
         from hivelibrary.ImageTools.opencv_tools import landmarks_rectangle, landmarks_rectangle_2d
 
         faceAnalayserUI = insightface.app.FaceAnalysis()
-        faceAnalayserUI.prepare(ctx_id=-1)
+        faceAnalayserUI.prepare(ctx_id=-1,det_thresh=0.5)
         
         self.__runningStatusReturner(text=html_draft.gen_info_text("Yüz tespit sistemi CPU üzerinden çalışacak şekilde ayarlandı"))
         self.__runningStatusReturner(text=html_draft.gen_info_text("Resim openCV ile okunuyor"))
@@ -79,10 +79,27 @@ class faceDetectionBackendThread(QThread):
         currentFace = 0
         for single_face_data in analysedImage:
             self.__runningStatusReturner(html_draft.gen_info_text(f"İşlenen yüz numarası: {currentFace}"))
+            
             kareList = single_face_data["bbox"]
             noktaList = single_face_data["landmark_2d_106"]
             original_image_data = landmarks_rectangle(original_image_data,kareList)
             original_image_data = landmarks_rectangle_2d(original_image_data,noktaList)
+            
+            if single_face_data["gender"] == 1:
+                cinsiyet = "Erkek"
+            elif single_face_data["gender"] == 0:
+                cinsiyet = "Kadın"
+            else:
+                cinsiyet = "Tespit edilemedi"
+                
+                
+            tespit_dogruluk = int(single_face_data["det_score"] * 100)
+            msg_text = f"""<B>Bilgileri</B><br>
+Tespit Etme Doğruluğu:  %{tespit_dogruluk}<br>
+Cinsiyet             :  {cinsiyet}<br>
+Yaş                  :  {single_face_data["age"]}<br>"""
+            self.__runningStatusReturner(text=msg_text)
+            
             currentFace+=1
         
         

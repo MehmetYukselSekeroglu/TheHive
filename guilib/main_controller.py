@@ -11,6 +11,8 @@ from guilib.soundConverter_controller import soundConverterPage
 from guilib.voiceVerification_controller import voiceVerificationPage
 from guilib.videoFrameExtractor_controller import VideoFrameExtractorPage
 from guilib.FaceDetection_controller import FaceDetectionWidget
+from guilib.FaceVerificationFromImage_controller import FaceVerificationScreen_from_image
+
 
 from hivelibrary import env
 from hivelibrary import os_information
@@ -59,7 +61,7 @@ Ram     :    {usedRam}/{totalRam} GB    %{yuzdelikRam}<br>
 Battary :    {currentBattaryStatus}<br>
 <br>
 Update  :    {self.updateSecond} sec<br>
-TheHive version: {env.APPLICATION_VERSION_KEY}"""
+TheHive version: {env.APPLICATION_VERSION_VALUE}"""
           
             self.returnSignal.emit(outputText)
             time.sleep(self.updateSecond)
@@ -89,10 +91,14 @@ class TheHive_mainPage(QMainWindow):
         self.mainScreen.actionVoice_verification.triggered.connect(self.menuAction_voiceVerification)
         self.mainScreen.actionVideo_frame_extractor.triggered.connect(self.menuAction_videoFrameExtactor)
         self.mainScreen.actionFace_Detection.triggered.connect(self.menuAction_FaceInsight_faceDetection)
+        self.mainScreen.actionFace_Verification.triggered.connect(self.menuAction_FaceInsight_faceVerification)
         
         self.mainScreen.textBrowser_WelcomeAndToolinfo.setText(WELCOME_SCREEN_TEXT)
 
 
+    def menuAction_FaceInsight_faceVerification(self):
+        self.faceVerificationScreen = FaceVerificationScreen_from_image()
+        self.faceVerificationScreen.show()
 
     def sourceThreadSignalHandler(self, data_strings):
         self.mainScreen.textBrowser_systemStatus.setText(data_strings)

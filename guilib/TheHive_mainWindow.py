@@ -80,6 +80,10 @@ class Ui_TheHve_MainWindow(object):
         self.actionVoice_verification.setObjectName("actionVoice_verification")
         self.actionFace_Detection = QtWidgets.QAction(TheHve_MainWindow)
         self.actionFace_Detection.setObjectName("actionFace_Detection")
+        self.actionFace_Verification = QtWidgets.QAction(TheHve_MainWindow)
+        self.actionFace_Verification.setObjectName("actionFace_Verification")
+        self.actionFace_Recognition = QtWidgets.QAction(TheHve_MainWindow)
+        self.actionFace_Recognition.setObjectName("actionFace_Recognition")
         self.menuSecurity.addAction(self.actionChange_Login_Password)
         self.menuOsintTools.addAction(self.actioniban_Parser)
         self.menuOsintTools.addAction(self.actionreverse_ip_lookup)
@@ -87,6 +91,8 @@ class Ui_TheHve_MainWindow(object):
         self.menuFile_operations.addAction(self.actionVideo_frame_extractor)
         self.menuFile_operations.addAction(self.actionSound_Converter)
         self.menuFace_Insight.addAction(self.actionFace_Detection)
+        self.menuFace_Insight.addAction(self.actionFace_Verification)
+        self.menuFace_Insight.addAction(self.actionFace_Recognition)
         self.menuIdentify_Tools.addAction(self.actionVoice_verification)
         self.menuIdentify_Tools.addAction(self.menuFace_Insight.menuAction())
         self.menubar_menuController.addAction(self.menuSecurity.menuAction())
@@ -115,7 +121,9 @@ class Ui_TheHve_MainWindow(object):
         self.actionSound_Converter.setText(_translate("TheHve_MainWindow", "Sound Converter"))
         self.actionPhone_number_parser.setText(_translate("TheHve_MainWindow", "Phone number parser"))
         self.actionVoice_verification.setText(_translate("TheHve_MainWindow", "Voice verification"))
-        self.actionFace_Detection.setText(_translate("TheHve_MainWindow", "Face Detection"))
+        self.actionFace_Detection.setText(_translate("TheHve_MainWindow", "Face Detection ( image file )"))
+        self.actionFace_Verification.setText(_translate("TheHve_MainWindow", "Face Verification ( image file )"))
+        self.actionFace_Recognition.setText(_translate("TheHve_MainWindow", "Face Recognition ( image file )"))
 import main_icon_files_rc
 
 

@@ -100,6 +100,8 @@
       <string>Face Insight</string>
      </property>
      <addaction name="actionFace_Detection"/>
+     <addaction name="actionFace_Verification"/>
+     <addaction name="actionFace_Recognition"/>
     </widget>
     <addaction name="actionVoice_verification"/>
     <addaction name="menuFace_Insight"/>
@@ -147,7 +149,17 @@
   </action>
   <action name="actionFace_Detection">
    <property name="text">
-    <string>Face Detection</string>
+    <string>Face Detection ( image file )</string>
+   </property>
+  </action>
+  <action name="actionFace_Verification">
+   <property name="text">
+    <string>Face Verification ( image file )</string>
+   </property>
+  </action>
+  <action name="actionFace_Recognition">
+   <property name="text">
+    <string>Face Recognition ( image file )</string>
    </property>
   </action>
  </widget>
