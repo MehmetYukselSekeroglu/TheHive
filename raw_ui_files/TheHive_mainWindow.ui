@@ -109,10 +109,24 @@
     <addaction name="actionVoice_verification"/>
     <addaction name="menuFace_Insight"/>
    </widget>
+   <widget class="QMenu" name="menuRegion_specific_only">
+    <property name="title">
+     <string>Region specific only</string>
+    </property>
+    <widget class="QMenu" name="menuTurkey_Only">
+     <property name="title">
+      <string>Türkey Only</string>
+     </property>
+     <addaction name="actionTC_Verification"/>
+     <addaction name="actionTC_Calculator"/>
+    </widget>
+    <addaction name="menuTurkey_Only"/>
+   </widget>
    <addaction name="menuSecurity"/>
    <addaction name="menuOsintTools"/>
    <addaction name="menuFile_operations"/>
    <addaction name="menuIdentify_Tools"/>
+   <addaction name="menuRegion_specific_only"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionChange_Login_Password">
@@ -163,6 +177,16 @@
   <action name="actionFace_Recognition">
    <property name="text">
     <string>Face Recognition ( image file )</string>
+   </property>
+  </action>
+  <action name="actionTC_Verification">
+   <property name="text">
+    <string>TC Verification</string>
+   </property>
+  </action>
+  <action name="actionTC_Calculator">
+   <property name="text">
+    <string>TC Calculator</string>
    </property>
   </action>
  </widget>
