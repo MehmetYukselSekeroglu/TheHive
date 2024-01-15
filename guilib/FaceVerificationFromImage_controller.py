@@ -136,8 +136,6 @@ class FaceVerificationScreen_from_image(QWidget):
         self.FaceVerificationFromImage.pushButton_startVerification.clicked.connect(self.startVerification)
 
 
-        self.FaceVerificationFromImage.comboBox_detectionModelSelecter.insertItem(0,"Auto")
-        self.FaceVerificationFromImage.comboBox_verificationModelSelecter.insertItem(0, "w600k_r50")
 
 
 

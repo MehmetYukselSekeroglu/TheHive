@@ -47,4 +47,19 @@ def check_number_only_TR(phone_numbber:str) -> dict:
         SaglayıcıBilgisi="Tespit edilemedi, bölgesel numara olabilir"
         operator_supported_codes = [ "No Data" ]
         
-    return {"success":True, "operatör":SaglayıcıBilgisi, "supported_codes":operator_supported_codes}
+    googleDork = generateGoogleDork(phone_numbber)
+    return {"success":True, "operatör":SaglayıcıBilgisi, "supported_codes":operator_supported_codes, "dork":googleDork}
+
+
+
+
+
+def generateGoogleDork(phone_numbber:str) -> str:
+    abone_numarası = phone_numbber[3:10]
+    raw_number = phone_numbber
+    raw_number_2 = "0" + abone_numarası
+    
+    DORK = f"""INURL:"{raw_number}" OR INTEXT:{raw_number} OR INTITLE:"{raw_number}" OR INURL:"{abone_numarası}" OR INTEXT:{abone_numarası} OR INTITLE:"{abone_numarası}" """
+    return DORK
+    
+    
