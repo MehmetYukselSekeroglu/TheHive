@@ -14,7 +14,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_FaceDetectionOnly(object):
     def setupUi(self, FaceDetectionOnly):
         FaceDetectionOnly.setObjectName("FaceDetectionOnly")
-        FaceDetectionOnly.resize(1378, 715)
+        FaceDetectionOnly.resize(1288, 482)
+        FaceDetectionOnly.setStyleSheet("font: 11pt \"Hack\";")
         self.gridLayout = QtWidgets.QGridLayout(FaceDetectionOnly)
         self.gridLayout.setObjectName("gridLayout")
         self.tabWidget_tabController = QtWidgets.QTabWidget(FaceDetectionOnly)
@@ -43,19 +44,19 @@ class Ui_FaceDetectionOnly(object):
         self.line_4.setObjectName("line_4")
         self.gridLayout_6.addWidget(self.line_4, 5, 0, 1, 3)
         self.textBrowser_logConsole = QtWidgets.QTextBrowser(self.widget_2)
-        self.textBrowser_logConsole.setStyleSheet("font: 12pt \"Hack\";")
+        self.textBrowser_logConsole.setStyleSheet("font: 11pt \"Hack\";")
         self.textBrowser_logConsole.setObjectName("textBrowser_logConsole")
         self.gridLayout_6.addWidget(self.textBrowser_logConsole, 4, 0, 1, 3)
         self.pushButton_selectImage = QtWidgets.QPushButton(self.widget_2)
-        self.pushButton_selectImage.setStyleSheet("font: 14pt \"Hack\";")
+        self.pushButton_selectImage.setStyleSheet("font: 11pt \"Hack\";")
         self.pushButton_selectImage.setObjectName("pushButton_selectImage")
         self.gridLayout_6.addWidget(self.pushButton_selectImage, 2, 0, 1, 1)
         self.pushButton_runDetection = QtWidgets.QPushButton(self.widget_2)
-        self.pushButton_runDetection.setStyleSheet("font: 14pt \"Hack\";")
+        self.pushButton_runDetection.setStyleSheet("font: 11pt \"Hack\";")
         self.pushButton_runDetection.setObjectName("pushButton_runDetection")
         self.gridLayout_6.addWidget(self.pushButton_runDetection, 2, 1, 1, 1)
         self.pushButton_clearLogConsole = QtWidgets.QPushButton(self.widget_2)
-        self.pushButton_clearLogConsole.setStyleSheet("font: 14pt \"Hack\";")
+        self.pushButton_clearLogConsole.setStyleSheet("font: 11pt \"Hack\";")
         self.pushButton_clearLogConsole.setObjectName("pushButton_clearLogConsole")
         self.gridLayout_6.addWidget(self.pushButton_clearLogConsole, 2, 2, 1, 1)
         self.gridLayout_4.addWidget(self.widget_2, 0, 2, 1, 1)
@@ -100,8 +101,8 @@ class Ui_FaceDetectionOnly(object):
         self.textBrowser_logConsole.setHtml(_translate("FaceDetectionOnly", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Hack\'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Cantarell\'; font-size:11pt; font-weight:600;\">LOG CONSOLE:</span></p></body></html>"))
+"</style></head><body style=\" font-family:\'Hack\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Cantarell\'; font-weight:600;\">LOG CONSOLE:</span></p></body></html>"))
         self.pushButton_selectImage.setText(_translate("FaceDetectionOnly", "Select Image"))
         self.pushButton_runDetection.setText(_translate("FaceDetectionOnly", "Run Detection"))
         self.pushButton_clearLogConsole.setText(_translate("FaceDetectionOnly", "Clear"))

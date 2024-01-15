@@ -21,6 +21,9 @@
    <layout class="QGridLayout" name="gridLayout">
     <item row="1" column="0">
      <widget class="QTabWidget" name="tabWidget">
+      <property name="styleSheet">
+       <string notr="true">font: 11pt &quot;Hack&quot;;</string>
+      </property>
       <property name="currentIndex">
        <number>0</number>
       </property>

@@ -18,10 +18,11 @@ class Ui_SounConverter_widget(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/mainLogo/logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         SounConverter_widget.setWindowIcon(icon)
+        SounConverter_widget.setStyleSheet("font: 11pt \"Hack\";")
         self.gridLayout_3 = QtWidgets.QGridLayout(SounConverter_widget)
         self.gridLayout_3.setObjectName("gridLayout_3")
         self.label = QtWidgets.QLabel(SounConverter_widget)
-        self.label.setStyleSheet("font: 15pt \"Hack\";")
+        self.label.setStyleSheet("font: 11pt \"Hack\";")
         self.label.setObjectName("label")
         self.gridLayout_3.addWidget(self.label, 0, 0, 1, 1)
         self.widget_2 = QtWidgets.QWidget(SounConverter_widget)
@@ -34,7 +35,7 @@ class Ui_SounConverter_widget(object):
         self.gridLayout.setObjectName("gridLayout")
         self.comboBox_soundConverter_selectTargetFormat = QtWidgets.QComboBox(self.widget)
         self.comboBox_soundConverter_selectTargetFormat.setMaximumSize(QtCore.QSize(141, 31))
-        self.comboBox_soundConverter_selectTargetFormat.setStyleSheet("font: 14pt \"FreeMono\";")
+        self.comboBox_soundConverter_selectTargetFormat.setStyleSheet("font: 11pt \"Hack\";")
         self.comboBox_soundConverter_selectTargetFormat.setObjectName("comboBox_soundConverter_selectTargetFormat")
         self.comboBox_soundConverter_selectTargetFormat.addItem("")
         self.comboBox_soundConverter_selectTargetFormat.addItem("")
@@ -51,50 +52,53 @@ class Ui_SounConverter_widget(object):
         self.gridLayout.addItem(spacerItem, 1, 2, 1, 1)
         self.pushButton_soundConverter_selectSoundFile = QtWidgets.QPushButton(self.widget)
         self.pushButton_soundConverter_selectSoundFile.setMaximumSize(QtCore.QSize(181, 41))
-        self.pushButton_soundConverter_selectSoundFile.setStyleSheet("font: 14pt \"FreeMono\";")
+        self.pushButton_soundConverter_selectSoundFile.setStyleSheet("font: 11pt \"Hack\";")
         self.pushButton_soundConverter_selectSoundFile.setObjectName("pushButton_soundConverter_selectSoundFile")
         self.gridLayout.addWidget(self.pushButton_soundConverter_selectSoundFile, 4, 0, 1, 1)
         self.label_3 = QtWidgets.QLabel(self.widget)
         self.label_3.setMaximumSize(QtCore.QSize(141, 31))
-        self.label_3.setStyleSheet("font: 14pt \"FreeMono\";")
+        self.label_3.setStyleSheet("font: 11pt \"Hack\";")
         self.label_3.setObjectName("label_3")
         self.gridLayout.addWidget(self.label_3, 1, 0, 1, 1)
         spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout.addItem(spacerItem1, 5, 1, 1, 1)
         self.label_4 = QtWidgets.QLabel(self.widget)
-        self.label_4.setStyleSheet("font: 14pt \"FreeMono\";")
+        self.label_4.setStyleSheet("font: 11pt \"Hack\";")
         self.label_4.setObjectName("label_4")
         self.gridLayout.addWidget(self.label_4, 3, 0, 1, 1)
         self.label_2 = QtWidgets.QLabel(self.widget)
         self.label_2.setMaximumSize(QtCore.QSize(151, 31))
-        self.label_2.setStyleSheet("font: 14pt \"FreeMono\";")
+        self.label_2.setStyleSheet("font: 11pt \"Hack\";")
         self.label_2.setObjectName("label_2")
         self.gridLayout.addWidget(self.label_2, 0, 0, 1, 1)
         self.pushButton_soundConverter_runConvert = QtWidgets.QPushButton(self.widget)
         self.pushButton_soundConverter_runConvert.setMaximumSize(QtCore.QSize(141, 41))
-        self.pushButton_soundConverter_runConvert.setStyleSheet("font: 14pt \"FreeMono\";")
+        self.pushButton_soundConverter_runConvert.setStyleSheet("font: 11pt \"Hack\";")
         self.pushButton_soundConverter_runConvert.setObjectName("pushButton_soundConverter_runConvert")
         self.gridLayout.addWidget(self.pushButton_soundConverter_runConvert, 4, 1, 1, 1)
         self.textBrowser_soundConverter_sourceFile_print = QtWidgets.QTextBrowser(self.widget)
         self.textBrowser_soundConverter_sourceFile_print.setMinimumSize(QtCore.QSize(571, 31))
         self.textBrowser_soundConverter_sourceFile_print.setMaximumSize(QtCore.QSize(571, 31))
+        self.textBrowser_soundConverter_sourceFile_print.setStyleSheet("font: 11pt \"Hack\";")
         self.textBrowser_soundConverter_sourceFile_print.setObjectName("textBrowser_soundConverter_sourceFile_print")
         self.gridLayout.addWidget(self.textBrowser_soundConverter_sourceFile_print, 0, 1, 1, 1)
         self.lineEdit_soundConverter_outputName_input = QtWidgets.QLineEdit(self.widget)
         self.lineEdit_soundConverter_outputName_input.setMinimumSize(QtCore.QSize(571, 31))
         self.lineEdit_soundConverter_outputName_input.setMaximumSize(QtCore.QSize(571, 31))
+        self.lineEdit_soundConverter_outputName_input.setStyleSheet("font: 11pt \"Hack\";")
         self.lineEdit_soundConverter_outputName_input.setObjectName("lineEdit_soundConverter_outputName_input")
         self.gridLayout.addWidget(self.lineEdit_soundConverter_outputName_input, 1, 1, 1, 1)
         self.gridLayout_2.addWidget(self.widget, 0, 0, 1, 1)
         self.textBrowser = QtWidgets.QTextBrowser(self.widget_2)
         self.textBrowser.setMinimumSize(QtCore.QSize(1091, 131))
         self.textBrowser.setMaximumSize(QtCore.QSize(1091, 131))
-        self.textBrowser.setStyleSheet("font: 14pt \"FreeMono\";")
+        self.textBrowser.setStyleSheet("font: 11pt \"Hack\";")
         self.textBrowser.setObjectName("textBrowser")
         self.gridLayout_2.addWidget(self.textBrowser, 3, 0, 1, 1)
         self.textBrowser_soundConverter_logConsole = QtWidgets.QTextBrowser(self.widget_2)
         self.textBrowser_soundConverter_logConsole.setMinimumSize(QtCore.QSize(1091, 192))
         self.textBrowser_soundConverter_logConsole.setMaximumSize(QtCore.QSize(1091, 192))
+        self.textBrowser_soundConverter_logConsole.setStyleSheet("font: 11pt \"Hack\";")
         self.textBrowser_soundConverter_logConsole.setObjectName("textBrowser_soundConverter_logConsole")
         self.gridLayout_2.addWidget(self.textBrowser_soundConverter_logConsole, 1, 0, 1, 1)
         spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
@@ -126,12 +130,12 @@ class Ui_SounConverter_widget(object):
         self.textBrowser.setHtml(_translate("SounConverter_widget", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'FreeMono\'; font-size:14pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; text-decoration: underline;\">SOUND CONVERTER:</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600; text-decoration: underline;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Output Directory:  (exec_dir)/output</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Supported Formats: <span style=\" font-family:\'Cantarell\'; font-size:11pt;\">MP3, VAW, OPUS, FLAC, OGG, AAC, AIFF, WMA, M4A</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Cantarell\'; font-size:11pt;\"><br /></p></body></html>"))
+"</style></head><body style=\" font-family:\'Hack\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'FreeMono\'; font-size:14pt; font-weight:600; text-decoration: underline;\">SOUND CONVERTER:</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'FreeMono\'; font-size:14pt; font-weight:600; text-decoration: underline;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'FreeMono\'; font-size:14pt;\">Output Directory:  (exec_dir)/output</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'FreeMono\'; font-size:14pt;\">Supported Formats: </span><span style=\" font-family:\'Cantarell\';\">MP3, VAW, OPUS, FLAC, OGG, AAC, AIFF, WMA, M4A</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Cantarell\';\"><br /></p></body></html>"))
 import main_icon_files_rc
 
 

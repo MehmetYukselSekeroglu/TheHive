@@ -24,7 +24,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_title">
         <property name="styleSheet">
-         <string notr="true">font: 15pt &quot;Hack&quot;;</string>
+         <string notr="true">font: 11pt &quot;Hack&quot;;</string>
         </property>
         <property name="text">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;iban parser &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -36,11 +36,14 @@
    </item>
    <item row="1" column="0">
     <widget class="QWidget" name="widget_2" native="true">
+     <property name="styleSheet">
+      <string notr="true">font: 11pt &quot;Hack&quot;;</string>
+     </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="0" column="0">
        <widget class="QLabel" name="label_2">
         <property name="styleSheet">
-         <string notr="true">font: 14pt &quot;Hack&quot;;</string>
+         <string notr="true">font: 11pt &quot;Hack&quot;;</string>
         </property>
         <property name="text">
          <string>Enter iban:</string>
@@ -48,12 +51,16 @@
        </widget>
       </item>
       <item row="1" column="0" colspan="3">
-       <widget class="QLineEdit" name="lineEdit_iban_input"/>
+       <widget class="QLineEdit" name="lineEdit_iban_input">
+        <property name="styleSheet">
+         <string notr="true">font: 11pt &quot;Hack&quot;;</string>
+        </property>
+       </widget>
       </item>
       <item row="1" column="3">
        <widget class="QComboBox" name="comboBox_saveType">
         <property name="styleSheet">
-         <string notr="true">font: 12pt &quot;Hack&quot;;</string>
+         <string notr="true">font: 11pt &quot;Hack&quot;;</string>
         </property>
         <item>
          <property name="text">
@@ -70,7 +77,7 @@
       <item row="2" column="0">
        <widget class="QPushButton" name="pushButton_parse_iban">
         <property name="styleSheet">
-         <string notr="true">font: 14pt &quot;Hack&quot;;</string>
+         <string notr="true">font: 11pt &quot;Hack&quot;;</string>
         </property>
         <property name="text">
          <string>parse</string>
@@ -80,7 +87,7 @@
       <item row="2" column="1">
        <widget class="QPushButton" name="pushButton_clearResult">
         <property name="styleSheet">
-         <string notr="true">font: 14pt &quot;Hack&quot;;</string>
+         <string notr="true">font: 11pt &quot;Hack&quot;;</string>
         </property>
         <property name="text">
          <string>clear</string>
@@ -90,7 +97,7 @@
       <item row="2" column="3">
        <widget class="QPushButton" name="pushButton_save_result">
         <property name="styleSheet">
-         <string notr="true">font: 14pt &quot;Hack&quot;;</string>
+         <string notr="true">font: 11pt &quot;Hack&quot;;</string>
         </property>
         <property name="text">
          <string>save</string>
@@ -106,14 +113,14 @@
       <item row="0" column="0">
        <widget class="QTextBrowser" name="textBrowser_resultConsole">
         <property name="styleSheet">
-         <string notr="true">font: 14pt &quot;Hack&quot;;</string>
+         <string notr="true">font: 11pt &quot;Hack&quot;;</string>
         </property>
         <property name="html">
          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Hack'; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Cantarell'; font-size:11pt; font-weight:600;&quot;&gt;RESULT:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Hack'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Cantarell'; font-weight:600;&quot;&gt;RESULT:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </item>

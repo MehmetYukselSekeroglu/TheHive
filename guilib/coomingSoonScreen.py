@@ -25,11 +25,12 @@ class Ui_CoomingSoonScreen(object):
         self.gridLayout_2 = QtWidgets.QGridLayout(self.widget)
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.label_title = QtWidgets.QLabel(self.widget)
-        self.label_title.setStyleSheet("font: 15pt \"Hack\";")
+        self.label_title.setStyleSheet("font: 11pt \"Hack\";")
         self.label_title.setObjectName("label_title")
         self.gridLayout_2.addWidget(self.label_title, 0, 0, 1, 1)
         self.gridLayout.addWidget(self.widget, 0, 0, 1, 1)
         self.textBrowser_infotmationPage = QtWidgets.QTextBrowser(CoomingSoonScreen)
+        self.textBrowser_infotmationPage.setStyleSheet("font: 11pt \"Hack\";")
         self.textBrowser_infotmationPage.setObjectName("textBrowser_infotmationPage")
         self.gridLayout.addWidget(self.textBrowser_infotmationPage, 1, 0, 1, 1)
 
@@ -43,8 +44,8 @@ class Ui_CoomingSoonScreen(object):
         self.textBrowser_infotmationPage.setHtml(_translate("CoomingSoonScreen", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Cantarell\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+"</style></head><body style=\" font-family:\'Hack\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Cantarell\';\"><br /></p></body></html>"))
 import main_icon_files_rc
 
 

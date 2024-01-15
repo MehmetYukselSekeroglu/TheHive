@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1153</width>
+    <width>978</width>
     <height>520</height>
    </rect>
   </property>
@@ -27,7 +27,7 @@
          <item row="0" column="2">
           <widget class="QPushButton" name="pushButton_selectFile1">
            <property name="styleSheet">
-            <string notr="true">font: 14pt &quot;Hack&quot;;</string>
+            <string notr="true">font: 11pt &quot;Hack&quot;;</string>
            </property>
            <property name="text">
             <string>select file 1</string>
@@ -37,7 +37,7 @@
          <item row="1" column="4">
           <widget class="QPushButton" name="pushButton_runComparsion">
            <property name="styleSheet">
-            <string notr="true">font: 14pt &quot;Hack&quot;;</string>
+            <string notr="true">font: 11pt &quot;Hack&quot;;</string>
            </property>
            <property name="text">
             <string>compare</string>
@@ -47,7 +47,7 @@
          <item row="0" column="0">
           <widget class="QLabel" name="label">
            <property name="styleSheet">
-            <string notr="true">font: 14pt &quot;Hack&quot;;</string>
+            <string notr="true">font: 11pt &quot;Hack&quot;;</string>
            </property>
            <property name="text">
             <string>Voice 1:</string>
@@ -57,7 +57,7 @@
          <item row="1" column="2">
           <widget class="QPushButton" name="pushButton_selectFile2">
            <property name="styleSheet">
-            <string notr="true">font: 14pt &quot;Hack&quot;;</string>
+            <string notr="true">font: 11pt &quot;Hack&quot;;</string>
            </property>
            <property name="text">
             <string>select file 2</string>
@@ -80,7 +80,7 @@
          <item row="1" column="0">
           <widget class="QLabel" name="label_2">
            <property name="styleSheet">
-            <string notr="true">font: 14pt &quot;Hack&quot;;</string>
+            <string notr="true">font: 11pt &quot;Hack&quot;;</string>
            </property>
            <property name="text">
             <string>Voice 2:</string>
@@ -114,12 +114,15 @@
              <height>31</height>
             </size>
            </property>
+           <property name="styleSheet">
+            <string notr="true">font: 11pt &quot;Hack&quot;;</string>
+           </property>
           </widget>
          </item>
          <item row="0" column="4">
           <widget class="QPushButton" name="pushButton_saveResults">
            <property name="styleSheet">
-            <string notr="true">font: 14pt &quot;Hack&quot;;</string>
+            <string notr="true">font: 11pt &quot;Hack&quot;;</string>
            </property>
            <property name="text">
             <string>save result</string>
@@ -139,6 +142,9 @@
              <width>601</width>
              <height>31</height>
             </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font: 11pt &quot;Hack&quot;;</string>
            </property>
           </widget>
          </item>
@@ -190,7 +196,7 @@
          <item row="0" column="0" colspan="2">
           <widget class="QLabel" name="label_3">
            <property name="styleSheet">
-            <string notr="true">font: 14pt &quot;Hack&quot;;</string>
+            <string notr="true">font: 11pt &quot;Hack&quot;;</string>
            </property>
            <property name="text">
             <string>similarity ratio:</string>
@@ -206,7 +212,7 @@
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">font: 14pt &quot;Hack&quot;;</string>
+            <string notr="true">font: 11pt &quot;Hack&quot;;</string>
            </property>
            <property name="value">
             <number>0</number>
@@ -231,14 +237,14 @@
       <item row="3" column="0">
        <widget class="QTextBrowser" name="textBrowser_logAndResults">
         <property name="styleSheet">
-         <string notr="true">font: 14pt &quot;Hack&quot;;</string>
+         <string notr="true">font: 11pt &quot;Hack&quot;;</string>
         </property>
         <property name="html">
          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Hack'; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Cantarell'; font-size:11pt; font-weight:600;&quot;&gt;LOG AND RESULTS:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Hack'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Cantarell'; font-weight:600;&quot;&gt;LOG AND RESULTS:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </item>
@@ -248,7 +254,7 @@ p, li { white-space: pre-wrap; }
          <item row="1" column="0">
           <widget class="QLabel" name="label_4">
            <property name="styleSheet">
-            <string notr="true">font: 14pt &quot;Hack&quot;;</string>
+            <string notr="true">font: 11pt &quot;Hack&quot;;</string>
            </property>
            <property name="text">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Voice Verification&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>

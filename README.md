@@ -15,7 +15,8 @@
     - Open soruce & Free
     - Extensive features
         - Face recognition
-        - Face verification
+        - Face detection (Now Active)
+        - Face verification ( Now Active )
         - Voice verification ( Now Active)
         - Clone voice detections
         - Iban parser ( Now Active)
