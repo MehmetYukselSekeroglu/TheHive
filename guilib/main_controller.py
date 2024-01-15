@@ -12,7 +12,7 @@ from guilib.voiceVerification_controller import voiceVerificationPage
 from guilib.videoFrameExtractor_controller import VideoFrameExtractorPage
 from guilib.FaceDetection_controller import FaceDetectionWidget
 from guilib.FaceVerificationFromImage_controller import FaceVerificationScreen_from_image
-
+from guilib.PhoneNumberParser_controller import PhoneNumberParserWidget
 
 from hivelibrary import env
 from hivelibrary import os_information
@@ -92,9 +92,14 @@ class TheHive_mainPage(QMainWindow):
         self.mainScreen.actionVideo_frame_extractor.triggered.connect(self.menuAction_videoFrameExtactor)
         self.mainScreen.actionFace_Detection.triggered.connect(self.menuAction_FaceInsight_faceDetection)
         self.mainScreen.actionFace_Verification.triggered.connect(self.menuAction_FaceInsight_faceVerification)
+        self.mainScreen.actionPhone_number_parser.triggered.connect(self.menuAction_phoneNumberParser)
         
         self.mainScreen.textBrowser_WelcomeAndToolinfo.setText(WELCOME_SCREEN_TEXT)
 
+
+    def menuAction_phoneNumberParser(self):
+        self.phoneNumberParser = PhoneNumberParserWidget()
+        self.phoneNumberParser.show()
 
     def menuAction_FaceInsight_faceVerification(self):
         self.faceVerificationScreen = FaceVerificationScreen_from_image()

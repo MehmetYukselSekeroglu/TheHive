@@ -26,13 +26,19 @@ class PhoneNumberParserWidget(QWidget):
         
         getNumber = self.phoneNumberParser.lineEdit_phoneInput.text()
         
+        if len(getNumber) < 4:
+            self.phoneNumberParser.textBrowser_logConsole.append(gen_error_text(
+                f"Geçersiz numara formatı, format: +12948938591"
+            ))
+            return     
+        
         if getNumber[0] != "+":
             self.phoneNumberParser.textBrowser_logConsole.append(gen_error_text(
                 f"Geçersiz numara formatı, format: +12948938591"
             ))
             return
         
-        if getNumber[0:2] != "+90":         
+        if getNumber[0:3] != "+90":         
             self.phoneNumberParser.textBrowser_logConsole.append(gen_error_text(
                 f"Şuanda sadece türk numaraları desteklenmektedir."
             ))
@@ -50,13 +56,13 @@ class PhoneNumberParserWidget(QWidget):
         otherCodesForCurrentOperator = data_is["supported_codes"]
         googleDorkForNumber = data_is["dork"]
         
-        text = f"""<B>Numara için sonuçlar: </B><br>
+        text = f"""<B>Numara için sonuçlar: </B><br><br>
 Geçerli operatör: {currentOperator}<br>
 Operatöre ait diğer kodlar: {otherCodesForCurrentOperator}<br>
 <br>
-Google Dork: {googleDorkForNumber}<br>
-{"-"*30}<br>"""
-        self.phoneNumberParser.textBrowser_logConsole.append(text=text)
+Google Dork: {googleDorkForNumber}<br><br>
+{"-"*30}"""
+        self.phoneNumberParser.textBrowser_logConsole.append(text)
 
     
     def saveResult(self):

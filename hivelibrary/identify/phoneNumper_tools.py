@@ -4,16 +4,18 @@
 
 
 def check_number_only_TR(phone_numbber:str) -> dict:
-    abone_numarası = phone_numbber[3:10]
+    
+    abone_numarası = phone_numbber[6:13]
+    
     abone_numarası = str(abone_numarası)
     
-    if len(phone_numbber) < 10:
+    if len(phone_numbber) < 13:
         return {"success":False, "message":"numara olması gerekenden kısa"}
     
-    if len(phone_numbber) > 10:
+    if len(phone_numbber) > 13:
         return {"success":False, "message":"numara olması gerekenden uzun"}
     
-    saglayıcı_kodu=phone_numbber[0:3]
+    saglayıcı_kodu=phone_numbber[3:6]
     TurkTelekom = ["501", "505", "506","507","552","553","554","555","559"]
     TurkCell = ["530","531","532","533","534","535", "536", "537", "538", "539"]
     Vodafone = ["541", "542", "543", "544", "545", "546", "547", "548", "549"]
@@ -55,11 +57,11 @@ def check_number_only_TR(phone_numbber:str) -> dict:
 
 
 def generateGoogleDork(phone_numbber:str) -> str:
-    abone_numarası = phone_numbber[3:10]
+    abone_numarası = phone_numbber[3:13]
     raw_number = phone_numbber
     raw_number_2 = "0" + abone_numarası
     
-    DORK = f"""INURL:"{raw_number}" OR INTEXT:{raw_number} OR INTITLE:"{raw_number}" OR INURL:"{abone_numarası}" OR INTEXT:{abone_numarası} OR INTITLE:"{abone_numarası}" """
+    DORK = f"""INURL:"{raw_number}" OR INTEXT:"{raw_number}" OR INTITLE:"{raw_number}" OR INURL:"{abone_numarası}" OR INTEXT:"{abone_numarası}" OR INTITLE:"{abone_numarası}" """
     return DORK
     
     
