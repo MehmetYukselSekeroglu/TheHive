@@ -101,6 +101,8 @@ deactivate
 <br>
 
 <img src="./img/welcomeScreen.png">
+<br>
+<p>A simple welcome screen welcomes you. At the top, there is the latest status of the system and TheHive, and at the bottom, there is brief information about the vehicle and producer contact information. In general, most operations are performed through the menu bar.</p>
 
 <br>
 
@@ -111,6 +113,9 @@ deactivate
 
 <img src="./img/voiceVerification.png">
 
+<br>
+
+<p>Thanks to Resemblyzer-based voice verification, you can understand whether 2 voice samples belong to the same person or to others. Thanks to Resemblyzer, the parts of the voice for analysis are detected and the similarity ratio is calculated using cosine similarity. Generally, rates of 75% and above belong to the same person, but do not forget that the model may be wrong.</p>
 <br>
 
 ## Face Verification
@@ -132,14 +137,21 @@ deactivate
 
 <br>
 
+
 <img src="./img/FaceDetection.png">
+
+<p>All analysis results are printed in the other tab to get full details about the insightFace based face detection system detections for the detection system and trials before the face verification system</p>
+
+<br>
+
 
 ## Video Frame Extractor
 
 <br>
 <img src="./img/video2frame.png">
 
-
+<br>
+<p>In order to examine the videos more easily and in detail, the opencv-based video frame parsing feature separates the videos into frames, giving the entire status to the screen without the application freezing, thanks to its multi-threading feature</p>
 <br>
 
 
@@ -148,7 +160,8 @@ deactivate
 <br>
 <img src="./img/ibanParserGUI.png">
 <br>
-
+<p>IBAN, which is frequently used in payment transactions, contains certain information. You can access certain open source information by analyzing them. This module does this automatically. Currently, there is full support only for IBANs belonging to Turkey. It is possible that it may provide incomplete information for other IBANs.</p>
+<br>
 
 
 ## Sound Converter 
@@ -157,10 +170,11 @@ deactivate
 
 <img src="./img/soundConverter.png">
 
-
-
+<br>
+<p>Although it is not necessary in this tool, I wanted to add the audio converter that I wrote during the learning phase :)</p>
 
 <br>
+
 
 # Credit[s]
 
