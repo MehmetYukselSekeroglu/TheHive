@@ -18,19 +18,21 @@ class TcValidatorCheckerWidget(QWidget):
         
         self.TcValidator.pushButton_runValidationChecker.clicked.connect(self.__runValidtorChecker)
         
-        
-    
     
     def __runValidtorChecker(self):
         self.__clearLogConsole()
         
         getInput = self.TcValidator.lineEdit_tcInput.text()
-        
         tcStatus = gecerlilik_kontrol(getInput)
-        self.TcValidator.textBrowser_logConsole.append(str(tcStatus["data"]))
+        
+        if len(getInput) != 11:
+            return self.TcValidator.textBrowser_logConsole.append("<B>HATA: </B>Lütfen 11 haneli hedef tc numarası giriniz.")
+        
+        if not getInput.isnumeric():
+            return self.TcValidator.textBrowser_logConsole.append("<B>HATA: </B>Tc numarası sadece rakamlardan oluşmalıdır.")
         
         
+        self.TcValidator.textBrowser_logConsole.append(tcStatus["data"])
         
-    
     def __clearLogConsole(self):
-        pass
+        self.TcValidator.textBrowser_logConsole.setHtml("<B>LOG AND RESULTS: </B><br>")

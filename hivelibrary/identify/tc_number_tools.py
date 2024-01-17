@@ -14,10 +14,10 @@ Github Page: https://github.com/MehmetYukselSekeroglu/tc-hesaplayici
 def gecerlilik_kontrol(tc:str) -> dict:
 
     if len(tc) != 11:
-        return { "success": False, "data":"Invalid Tc length" }
+        return { "success": False, "data":"TC numarası 11 hane olmadığı için geçerli değildir" }
     
     if not tc.isnumeric():
-        return { "success": False, "data":"Tc number not be numeric" }
+        return { "success": False, "data":"Tc numarası nümerik olmadığı için geçerli değildir" }
 
     step_1 = int(tc[0]) + int(tc[2]) + int(tc[4]) + int(tc[6]) + int(tc[8])
     step_1 = step_1 * 7
@@ -38,9 +38,9 @@ def gecerlilik_kontrol(tc:str) -> dict:
 
 
     if final_indis_10 == tc[9] and final_indis_11 == tc[10]:
-        return { "success": True, "data":"Tc number is valid" }
+        return { "success": True, "data":f"{str(tc)} numarası geçerlidir" }
     
-    return { "success":False, "data":"Tc number not valid" }
+    return { "success":False, "data":"Tc numarası geçerisz yapıdadır" }
     
 def kontrol_basamakları(ilk_9_indis):
     tc = str(ilk_9_indis)
