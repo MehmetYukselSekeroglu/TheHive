@@ -1,8 +1,9 @@
 <h1 aling=center>TheHive Remastred</h1>
 
-<p align="center">
-<img width="400" height="400" style="border-radius: 50%;"src="./iconfiles/logo.png">
-</p>
+<div align="center">
+
+<img src="./iconfiles/logo.png"    style="border-radius: 50%;" height="500px" />
+</div>
 
 <p>Advanced professional osint toolkit with TheHive Remastred</p><br>
 
@@ -14,16 +15,22 @@
     - Local authentication to prevent files from being scrambled
     - Open soruce & Free
     - Extensive features
-        - Face recognition
+        - Face recognition ( coming soon )
         - Face detection (Now Active)
         - Face verification ( Now Active )
         - Voice verification ( Now Active)
-        - Clone voice detections
+        - Clone voice detections ( coming soon )
         - Iban parser ( Now Active)
         - Video frame extractor ( Now Active)
-        - Phone number parser
-        - Google dork generator
-        - Hash identify
+        - Phone number parser ( Now Active )
+        - Google dork generator ( coming soon )
+        - Hash identify ( coming soon )
+        - External module support ( coming soon )
+
+        - Region based tools
+            - Tc Verificator ( math algorithm ) ( dev stage ) 
+            - Tc Calculator ( math algorithm ) ( dev stage )
+
 
 <br>
 <br>
