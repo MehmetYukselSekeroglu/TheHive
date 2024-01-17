@@ -117,8 +117,16 @@ deactivate
 
 <br>
 
+### Result given by faces belonging to the same person
 <img src="./img/FaceVerification.png">
 
+
+### The results on different people's faces
+<img src="./img/FaceVerificationFarkliKisiler.png" />
+<br>
+
+<p>There is a high rate of difference between the detection of different and the same people. InsightFace's buffalo_l model is used to detect facial points, then the cosine similarity formula is used via numpy to calculate the similarity, which is why it does not give 100% in different pictures of the same people.
+<br>
 
 ## Face Detection
 

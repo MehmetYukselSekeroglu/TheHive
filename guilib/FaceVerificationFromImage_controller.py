@@ -104,6 +104,9 @@ class FaceVerificationBackendThread(QThread):
         originalTargetImageData = landmarks_rectangle(originalTargetImageData,data_list=analysedTargetImage[0]["bbox"])
         originalTargetImageData = landmarks_rectangle_2d(originalTargetImageData, data_list=analysedTargetImage[0]["landmark_2d_106"])
         
+        if GetSimilarity < 0:
+            GetSimilarity = 0
+        
         final_text = f"""<B>{"-"*20}</B><br>
 Benzerlik Oranı: %{GetSimilarity}<br>
 <B>{"-"*20}</B><br>"""
@@ -153,6 +156,7 @@ class FaceVerificationScreen_from_image(QWidget):
             import cv2
             self.FaceVerificationFromImage.textBrowser_logConsole.append(str(data_dict["text"]))      
             siimilarity_rate = data_dict["verification"]
+
             self.FaceVerificationFromImage.progressBar_similarityBar.setValue(siimilarity_rate)
             
             img_height, img_width = self.labelDefaultResulation
