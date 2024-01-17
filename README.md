@@ -1,8 +1,8 @@
 <h1 aling=center>TheHive Remastred</h1>
 
-<div align="center">
+<div align="center"  >
 
-<img src="./iconfiles/logo.png"  border-radius="50%;" height="500px" />
+<img src="./iconfiles/logo.png" style="border-radius:50%" height="auto" width="auto"/>
 </div>
 
 <p>Advanced professional osint toolkit with TheHive Remastred</p><br>
@@ -28,8 +28,8 @@
         - External module support ( coming soon )
 
         - Region based tools
-            - Tc Verificator ( math algorithm ) ( dev stage ) 
-            - Tc Calculator ( math algorithm ) ( dev stage )
+            - Tc Verificator ( math algorithm ) ( Now Active ) 
+            - Tc Calculator ( math algorithm ) ( Now Active )
 
 
 <br>
