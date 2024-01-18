@@ -45,6 +45,7 @@ class FaceRecognitionWidget(QWidget):
         self.showDefaultImage(targetLabel=self.FaceRecognitionPage.label_detectedImageShower)
         
         
+        
     def showDefaultImage(self, targetLabel):
         import cv2
         
