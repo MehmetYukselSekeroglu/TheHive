@@ -6,33 +6,133 @@ from guilib.FaceRecognitionScreen import Ui_FaceRecognitionWidget
 from guilib.html_text_generator.html_draft import gen_error_text,gen_info_text
 
 from hivelibrary.console_tools import InformationPrinter
-from hivelibrary.env import DEFAULT_LOGO_PATH
+from hivelibrary.env import DEFAULT_LOGO_PATH,DB_FACE_RECOGNITION_TABLE,DEFAULT_TEMP_DIR
 from hivelibrary.face_recognition_database_tools import recognitionDbTools
 from hivelibrary.file_operations import generic_tools
+
 import os
 import sqlite3
 
 class faceRecognitionBackendThread(QThread):
     
     statusSignal = pyqtSignal(dict)
+    """Dict types
+    success -> bool
+    text    -> status text
+    cv2_image -> raw image
+    face_name -> name from db
+    add date -> date from db UTC
+    similarity -> similartiy rate
     
     
-    def __init__(self):
+    """
+    
+    
+    def __init__(self, targetFaceImagePath:str, faceAnalayserUI:object, db_curosr:sqlite3.Cursor,):
         super().__init__()
         
+        self.databaseCursor = db_curosr
+        self.targetImagePath = targetFaceImagePath
+        self.faceAnalayserUI = faceAnalayserUI
+        self.threadStopSignal = False
+        self.minSimilarity = 30
+        self.similartiyStorageDcit = {}
+        self.maxThread = 100
+        
+    def stop(self):
+        self.threadStopSignal = True
+        msg = {"end":True,"success":False,"text":f"<B>INFO: </B>Thread killed by user!",}
+        self.statusSignal.emit(msg)
+        return
     
     def __runningStatusReturner(self, text:str):
-        pass
-    
-    def __finalyStatusReturner(self,text:str):
-        pass
-    
-    def run(self):
-        pass    
+        data_dict = {"success":None, "end":False, "text":text}
+        self.statusSignal.emit(data_dict)
         
-    
+            
+    def __finalyStatusReturner(self,text:str,success_status:bool, cv2_image=None,face_name=None,add_date=None,similartiy=None,target_raw_data=None):
+        data_dcit = {"success":success_status, "end":True, "text":text, "cv2_image":cv2_image, "face_name":face_name,"add_date":add_date, "similartiy":similartiy }
+        self.statusSignal.emit(data_dcit)
+    def run(self):
+        
+        import cv2
+        import numpy
+        from hivelibrary.ImageTools.opencv_tools import landmarks_rectangle,landmarks_rectangle_2d
+        self.__runningStatusReturner(text="Gereksinimler başarıyla içe aktarıldı")
+        raw_cv2_image = cv2.imread(self.targetImagePath)
+        analysedSourceImage = self.faceAnalayserUI.get(raw_cv2_image)
+        
+        if len(analysedSourceImage) > 1:
+            self.__finalyStatusReturner(text=gen_error_text("Kaynak resimde 1 den fazla yüz kabul edilemez"),
+                success_status=False,)
+            return
+
+        if len(analysedSourceImage) == 0:
+            self.__finalyStatusReturner(text=gen_error_text("Kaynak resimde herhangi bir yüz bulunamadı"),
+                success_status=False,)
+            return      
+        
+        sourceFaceEmbeddings = analysedSourceImage[0]["embedding"]
+        STATIC_SQL_COMMAND = f"SELECT id,face_name,face_embedding_data FROM {DB_FACE_RECOGNITION_TABLE}"
+        
+        self.databaseCursor.execute(STATIC_SQL_COMMAND)
+        
+        self.__runningStatusReturner(text="Arama için döngü başlatıldı")
+        
+        totalAnalysCount = 0
+        while self.threadStopSignal != True:
+            
+            get_rows = self.databaseCursor.fetchmany(self.maxThread)
+            if not get_rows:
+                break
+            
+            for single_row in get_rows:
+                row_id = single_row[0]
+                face_name = single_row[1]
+                targetEmbeds = numpy.frombuffer(single_row[2],dtype=numpy.float32)
+                calculateSimilartiy = generic_tools.cosineSimilarityCalculator(sourceFaceEmbeddings,targetEmbeds)
+
+                if calculateSimilartiy >= self.minSimilarity:
+                    self.similartiyStorageDcit[row_id] = calculateSimilartiy
+        
+        if self.threadStopSignal == True:
+            return
+        
+        #self.__runningStatusReturner(text=f"%30 ve üzeri eşleşme veren id ler ve oranları {str(self.similartiyStorageDcit)}")
+        
+        self.__runningStatusReturner(text="arama tamamlandı en yüksek benzerlik içeren kişi ekrana getiriliyor")
+        
+        enBenzerID = max(list(self.similartiyStorageDcit.values()))
+        enYuksekBenzerlik = enBenzerID
+        
+        for key, value in self.similartiyStorageDcit.items():
+            if value == enYuksekBenzerlik:
+                enBenzerID = key
+        
+        STATIC_SQL_COMMAND = f"SELECT * FROM {DB_FACE_RECOGNITION_TABLE} WHERE id=?"
+        STATIC_DATA_TUPLE = (enBenzerID,)
+        
+        results = self.databaseCursor.execute(STATIC_SQL_COMMAND,STATIC_DATA_TUPLE).fetchall()[0]
+        
+        detectedFaceSimilartiyRate = self.similartiyStorageDcit[enBenzerID]
+        detectedFaceDatabaseID= enBenzerID
+        detectedFacePictur = results[1]
+        detectedFacePictureHash = results[2]
+        #detectedFace2Dlandmakrs = numpy.frombuffer(results[4],dtype=numpy.float32)
+        #detectedFaceFaceBox = numpy.frombuffer(results[5],dtype=numpy.float32)
+        detectedFaceName = results[6]
+        detectedFaceAddDate = results[8]
+
+        return_text = f"""<B>Bulunan Eşleşme Bilgileri: </B><br>
+<B>Kişinin kayıtlı adı:</B> {detectedFaceName}<br>
+<B>Benzerlik oranı: </B> %{enYuksekBenzerlik}<br>
+<B>Veritabanı ID: </B>{detectedFaceDatabaseID}<br>
+<B>Resim sha1 hash'i: </B> {detectedFacePictureHash}<br>
+<B>Veritabanına eklenme tarihi UTC: </B> {detectedFaceAddDate}<br>
+<B>{"-"*20}<B/><br>"""
 
 
+        self.__finalyStatusReturner(text=return_text,success_status=True,cv2_image=detectedFacePictur,face_name=detectedFaceName,similartiy=detectedFaceSimilartiyRate)
 
 class FaceRecognitionWidget(QWidget):
     def __init__(self, db_cnn:sqlite3.Connection, db_curosr:sqlite3.Cursor):
@@ -53,7 +153,8 @@ class FaceRecognitionWidget(QWidget):
         self.sistemeEklenecekImageSelected = None
         self.FaceRecognitionPage.pushButton_selectSourceImage.clicked.connect(self.selectSourceImage)
         self.FaceRecognitionPage.pushButton_removeSourceImage.clicked.connect(self.removeSourceImage)
-        
+        self.FaceRecognitionPage.pushButton_startDbSearch.clicked.connect(self.startDatabaseSearch)
+        self.FaceRecognitionPage.pushButton_stopSearch.clicked.connect(self.sendKillSignalThread)
         
         self.FaceRecognitionPage.pushButton_tab2_resim_sec.clicked.connect(self.selectEklenecekResim)
         self.FaceRecognitionPage.pushButton_tab2_sistemeEkle.clicked.connect(self.tekilResimEkleme_start)
@@ -74,11 +175,58 @@ class FaceRecognitionWidget(QWidget):
         self.faceRecDbTools = recognitionDbTools(db_cnn=self.databaseConnections,db_curosr=self.databaseCursor)        
         InformationPrinter("FaceRecognitionDatabaseTools successfuly init")
         
+    def threadSignalHandler(self,thread_dict):
+        if thread_dict["success"] == None and thread_dict["end"] == False:
+            self.FaceRecognitionPage.textBrowser_logConsole.append(gen_info_text(str(thread_dict["text"])))
+            return
+        
+        if thread_dict["success"] != True and thread_dict["end"] == True:
+            self.FaceRecognitionPage.textBrowser_logConsole.append(gen_error_text(str(thread_dict["text"])))
+            return
+        
+        if thread_dict["success"] == True and thread_dict["end"] == True:
+            self.FaceRecognitionPage.textBrowser_logConsole.append(str(thread_dict["text"]))
+            self.FaceRecognitionPage.progressBar_benzerlikBari.setValue(thread_dict["similartiy"])
+            self.show_cv2_image_target_label(image_data=thread_dict["cv2_image"],targetLabel=self.FaceRecognitionPage.label_detectedImageShower)
+        
     def sendKillSignalThread(self):
-        pass
+        if not self.DatabaseSearchThread.isRunning():
+            err_msg = "<B>ERROR: </B>No running jobs!"
+            self.FaceRecognitionPage.textBrowser_logConsole.append(err_msg)
+            return
+        
+        
+        info_msg = "<B>INFO: </B>Sending kill signal..."
+        self.FaceRecognitionPage.textBrowser_logConsole.append(info_msg)
+        self.DatabaseSearchThread.stop()
     
     def startDatabaseSearch(self):
-        pass
+        
+        if self.selectedSourceImage == None :
+            self.FaceRecognitionPage.textBrowser_logConsole.append(
+                gen_error_text("Kaynak resim veya hedef resim seçilmedi, işlem iptal edildi"))
+            return
+        
+        self.FaceRecognitionPage.textBrowser_logConsole.append(gen_info_text("Veritabanı araması başlaılıyor"))
+        
+        self.DatabaseSearchThread = faceRecognitionBackendThread(
+            targetFaceImagePath=self.selectedSourceImage,faceAnalayserUI=self.FaceAnalysisUI,db_curosr=self.databaseCursor
+        )
+        self.DatabaseSearchThread.statusSignal.connect(self.threadSignalHandler)
+        self.DatabaseSearchThread.start()
+
+        
+        """
+        # Thread reference code
+        self.backEndWorkerThread = FaceVerificationBackendThread(
+            sourceImagePath=self.selectedSourceImage, targetImagePath=self.selectedTargetImage
+        )
+        self.backEndWorkerThread.statusSignal.connect(self.threadSignalHandler)
+        self.backEndWorkerThread.start()
+        
+        """
+        
+        
         
     def showDefaultImage(self, targetLabel):
         import cv2
@@ -89,6 +237,23 @@ class FaceRecognitionWidget(QWidget):
         image_data = QtGui.QImage(image_data, img_width, img_height,QtGui.QImage.Format.Format_RGB888)
         targetLabel.setPixmap(QtGui.QPixmap(image_data))
         
+    def show_cv2_image_target_label(self,image_data,targetLabel):
+        import cv2
+        import random
+        
+        rand_save_name =str(DEFAULT_TEMP_DIR) +str(os.path.sep) + f"temp_save_{random.randint(1,9999)}.png"
+        with open(rand_save_name, "wb+") as savefile:
+            savefile.write(image_data)
+            
+        image_data = cv2.imread(rand_save_name)
+        print("Resim okundu")
+        os.remove(rand_save_name)
+        
+        image_data = cv2.resize(image_data, self.LabelSupportedResulation)
+        image_data = cv2.cvtColor(image_data, cv2.COLOR_BGR2RGB)
+        img_height, img_width = self.LabelSupportedResulation
+        image_data = QtGui.QImage(image_data, img_width, img_height,QtGui.QImage.Format.Format_RGB888)
+        targetLabel.setPixmap(QtGui.QPixmap(image_data))
         
     def addImageInWindow_usingFilePath(self,target_image,target_label):
         import cv2

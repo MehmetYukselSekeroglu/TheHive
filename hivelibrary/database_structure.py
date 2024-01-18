@@ -31,9 +31,9 @@ CREATE TABLE IF NOT EXISTS {DB_FACE_RECOGNITION_TABLE} (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     face_picture_blob BLOB NOT NULL, 
     picture_sha1_hash TEXT NOT NULL UNIQUE,
-    face_embedding_data TEXT NOT NULL,
-    landmarks_2d TEXT NOT NULL,
-    face_box TEXT NOT NULL,
+    face_embedding_data BLOB NOT NULL,
+    landmarks_2d BLOB NOT NULL,
+    face_box BLOB NOT NULL,
     face_name TEXT NOT NULL,
     raw_face_data TEXT NOT NULL,
     add_date DATETIME DEFAULT CURRENT_TIMESTAMP

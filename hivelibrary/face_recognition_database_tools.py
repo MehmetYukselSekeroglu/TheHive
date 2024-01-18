@@ -76,7 +76,7 @@ class recognitionDbTools():
             STATIC_SQL_COMMAND = f"""INSERT INTO {DB_FACE_RECOGNITION_TABLE} (
                 face_picture_blob, picture_sha1_hash, face_embedding_data, landmarks_2d, face_box, face_name, raw_face_data)
                 VALUES (?, ?, ?, ?, ?,?,? )"""
-            STATIC_DATA_TUPLE = (blobl_image_data, str(cv2_image_hash), str(face_embedding_sourceFile), str(landmark_2d),str(face_box) ,str(face_name), str(all_face_data))
+            STATIC_DATA_TUPLE = (blobl_image_data, str(cv2_image_hash), sqlite3.Binary(face_embedding_sourceFile), sqlite3.Binary(landmark_2d),sqlite3.Binary(face_box) ,str(face_name), str(all_face_data))
             
             self.databaseCursor.execute(STATIC_SQL_COMMAND, STATIC_DATA_TUPLE)
             self.databaseConnections.commit()

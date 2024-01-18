@@ -41,3 +41,11 @@ def get_memory_usage() -> dict:
     used = memory.used / (1024 ** 3)  # GB
     percentage = memory.percent
     return { "total":round(total, 1),"used": round(used,1),"yüzde": percentage}
+
+
+
+
+def max_thread_calculator() -> int:
+    total_cpu_count = total_cpu_count()
+    maxThread = total_cpu_count * 3
+    return maxThread

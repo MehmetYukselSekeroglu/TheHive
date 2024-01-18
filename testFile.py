@@ -8,8 +8,9 @@ import sqlite3
 if __name__ == "__main__":
 
     db = sqlite3.connect("hive_database.sqlite3",check_same_thread=False)
+    
     db_curosr = db.cursor()
-
+    db_curosr.executescript(FACE_RECOGNITION_DATABASE_STRUCTUR_COMMAND)
     
     app = QApplication([])
     win = FaceRecognitionWidget(db_cnn=db,db_curosr=db_curosr)
