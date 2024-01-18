@@ -5,7 +5,7 @@ import os
 DB_SYSTEM_TABLE = "system_core"
 DB_BLOB_STORAGE = "blob_storage"
 DB_LOCAL_AUTHENTICATE_TABLE = "local_authentication"
-
+DB_FACE_RECOGNITION_TABLE = "face_recognition_storage"
 
 # Data storage types
 DB_DATA_TYPE__SYSTEM = "system"

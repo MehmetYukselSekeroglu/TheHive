@@ -43,12 +43,16 @@ class FaceRecognitionWidget(QWidget):
         
         self.showDefaultImage(targetLabel=self.FaceRecognitionPage.label_soruceImageShower)
         self.showDefaultImage(targetLabel=self.FaceRecognitionPage.label_detectedImageShower)
+        self.showDefaultImage(targetLabel=self.FaceRecognitionPage.label_selected_image_show)
         
+        self.selectedSourceImage = None
+        self.sistemeEklenecekImageSelected = None
+        #self.FaceRecognitionPage.pushButton_selectSourceImage.clicked.connect()
+        self.FaceRecognitionPage.pushButton_removeSourceImage.clicked.connect(self.removeSourceImage)
         
         
     def showDefaultImage(self, targetLabel):
         import cv2
-        
         image_data = cv2.imread(DEFAULT_LOGO_PATH)
         image_data = cv2.resize(image_data, self.LabelSupportedResulation)
         image_data = cv2.cvtColor(image_data, cv2.COLOR_BGR2RGB)
