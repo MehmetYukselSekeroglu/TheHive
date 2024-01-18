@@ -15,5 +15,3 @@ def landmarks_rectangle_2d(cv2_image:numpy.ndarray, data_list:list) -> numpy.nda
         cv2.circle(cv2_image, (x,y),1, (0,255,0), -1)
         
     return cv2_image
-
-

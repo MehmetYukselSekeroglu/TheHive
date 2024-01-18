@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS {DB_FACE_RECOGNITION_TABLE} (
     picture_sha1_hash TEXT NOT NULL UNIQUE,
     face_embedding_data TEXT NOT NULL,
     landmarks_2d TEXT NOT NULL,
+    face_box TEXT NOT NULL,
     face_name TEXT NOT NULL,
     raw_face_data TEXT NOT NULL,
     add_date DATETIME DEFAULT CURRENT_TIMESTAMP

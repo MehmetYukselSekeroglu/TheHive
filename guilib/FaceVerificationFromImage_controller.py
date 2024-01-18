@@ -34,7 +34,6 @@ class FaceVerificationBackendThread(QThread):
         import insightface
         import numpy as np
         from hivelibrary.ImageTools.opencv_tools import landmarks_rectangle, landmarks_rectangle_2d
-        import face_recognition
         
         faceAnalayserUI = insightface.app.FaceAnalysis()
         faceAnalayserUI.prepare(ctx_id=-1,det_thresh=0.5)
