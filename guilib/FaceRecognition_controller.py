@@ -138,7 +138,7 @@ class faceRecognitionBackendThread(QThread):
         #detectedFace2Dlandmakrs = numpy.frombuffer(results[4],dtype=numpy.float32)
         #detectedFaceFaceBox = numpy.frombuffer(results[5],dtype=numpy.float32)
         detectedFaceName = results[6]
-        detectedFaceAddDate = results[8]
+        detectedFaceAddDate = results[7]
 
         return_text = f"""<B>Bulunan Eşleşme Bilgileri: </B><br>
 <B>Kişinin kayıtlı adı:</B> {detectedFaceName}<br>
