@@ -116,7 +116,7 @@ class faceRecognitionBackendThread(QThread):
         
         if len(self.similartiyStorageDcit) < 1:
             self.__finalyStatusReturner(text=gen_error_text("Veritabanında kişiye benzer birisi bulunamadı."),
-                success_status=False,cv2_image=None,face_name="Failed To detec")
+                success_status=False,face_name="Failed To detec",similartiy=0)
             return
         
         enBenzerID = max(list(self.similartiyStorageDcit.values()))
@@ -208,6 +208,8 @@ class FaceRecognitionWidget(QWidget):
         
         if thread_dict["success"] != True and thread_dict["end"] == True:
             self.FaceRecognitionPage.textBrowser_logConsole.append(gen_error_text(str(thread_dict["text"])))
+            self.FaceRecognitionPage.progressBar_benzerlikBari.setValue(0)
+            self.showDefaultImage(targetLabel=self.FaceRecognitionPage.label_detectedImageShower)
             return
         
         if thread_dict["success"] == True and thread_dict["end"] == True:
