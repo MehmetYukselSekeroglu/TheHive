@@ -4,11 +4,13 @@ from PyQt5 import QtGui
 
 from guilib.FaceRecognitionScreen import Ui_FaceRecognitionWidget
 from guilib.html_text_generator.html_draft import gen_error_text,gen_info_text
+from guilib.external_thread_modules.FaceRecognitionDirectoryTransfer import directoryAdderThread
 
 from hivelibrary.console_tools import InformationPrinter
 from hivelibrary.env import DEFAULT_LOGO_PATH,DB_FACE_RECOGNITION_TABLE,DEFAULT_TEMP_DIR
 from hivelibrary.face_recognition_database_tools import recognitionDbTools
 from hivelibrary.file_operations import generic_tools
+
 
 import os
 import sqlite3
@@ -113,8 +115,9 @@ class faceRecognitionBackendThread(QThread):
         self.__runningStatusReturner(text="arama tamamlandı sonuçlar işleniyor")
         
         if len(self.similartiyStorageDcit) < 1:
-            pass
-            
+            self.__finalyStatusReturner(text=gen_error_text("Veritabanında kişiye benzer birisi bulunamadı."),
+                success_status=False,cv2_image=None,face_name="Failed To detec")
+            return
         
         enBenzerID = max(list(self.similartiyStorageDcit.values()))
         enYuksekBenzerlik = enBenzerID
@@ -172,12 +175,19 @@ class FaceRecognitionWidget(QWidget):
         
         self.FaceRecognitionPage.pushButton_tab2_resim_sec.clicked.connect(self.selectEklenecekResim)
         self.FaceRecognitionPage.pushButton_tab2_sistemeEkle.clicked.connect(self.tekilResimEkleme_start)
+        self.FaceRecognitionPage.pushButton_selectDirectory.clicked.connect(self.selectTargetDirectory)
+        self.FaceRecognitionPage.pushButton_startMultiAdder.clicked.connect(self.startMultiAdder)
+        self.FaceRecognitionPage.pushButton_stopMultiAdder.clicked.connect(self.mulitAdderThreadKillSignal)
         
         self.DatabaseSearchThread = QThread()
+        self.MultiAdderThread = QThread()
+        
+        self.MultiAdderActive = False
         
         self.databaseConnections = db_cnn
         self.databaseCursor = db_curosr
-
+        self.selectedDirectory = None
+        self.targettDir_is_selected = True
         
         InformationPrinter(f"importing insightFace")
         import insightface
@@ -363,3 +373,73 @@ class FaceRecognitionWidget(QWidget):
         self.FaceRecognitionPage.textBrowser_singleFaceAddTab_logConsole.append(gen_info_text(f"Target file: {self.sistemeEklenecekImageSelected}"))
         self.addImageInWindow_usingFilePath(target_image=self.sistemeEklenecekImageSelected,target_label=self.FaceRecognitionPage.label_selected_image_show)
     
+    
+    def selectTargetDirectory(self):
+        self.targettDir_is_selected = False
+        folder_dialog = QFileDialog()
+        folder_dialog = QFileDialog.getExistingDirectory(self,"Select Directory")
+
+        if folder_dialog:
+            if os.name == "nt":
+                check_digit = str(folder_dialog[-2:])
+                if not str(os.path.sep) in check_digit:
+                    folder_dialog = str(folder_dialog) + str(os.path.sep)
+            else:
+                check_digit = str(folder_dialog[-1])
+                if not str(os.path.sep) in check_digit:
+                    folder_dialog = str(folder_dialog) + str(os.path.sep)
+
+        if folder_dialog == None or not os.path.exists(folder_dialog) or not os.path.isdir(folder_dialog):
+            err_msg = "Error: Invalid file selections"
+            self.FaceRecognitionPage.textBrowser_showTargetDir.setText(err_msg)
+            return
+        
+        if len(os.listdir(folder_dialog)) == 0:
+            err_msg = "Error: Selected directory empty"
+            self.FaceRecognitionPage.textBrowser_showTargetDir.setText(err_msg)
+            return          
+        
+        self.selectedDirectory = folder_dialog
+        self.targettDir_is_selected = True
+        self.FaceRecognitionPage.textBrowser_showTargetDir.setText(folder_dialog)
+        
+    def clearLogConsoleTab2(self):
+        self.FaceRecognitionPage.textBrowser_cokluEkleme_logConsole.setText("<B>LOG AND RESULTS:</B>")
+        
+    def multiAdderThreadSignalHandler(self,data_dict):
+        self.FaceRecognitionPage.textBrowser_cokluEkleme_logConsole.append(data_dict["text"])
+    
+    def mulitAdderThreadKillSignal(self):
+        if not self.MultiAdderThread.isRunning():
+            err_msg = "<B>ERROR: </B>No running jobs!"
+            self.FaceRecognitionPage.textBrowser_cokluEkleme_logConsole.append(err_msg)
+            return
+        
+        
+        info_msg = "<B>INFO: </B>Sending kill signal..."
+        self.FaceRecognitionPage.textBrowser_cokluEkleme_logConsole.append(info_msg)
+        self.MultiAdderThread.stop()
+        self.MultiAdderActive = False
+        
+    def startMultiAdder(self):
+        self.clearLogConsoleTab2()
+        
+        if self.MultiAdderActive == True:
+            self.FaceRecognitionPage.textBrowser_cokluEkleme_logConsole.append(f"<B>ERROR: </B>Ekleme işlemi zaten aktif önce işlemi durdurmanız gerek!")
+            return
+        
+        if self.targettDir_is_selected != True:
+            self.FaceRecognitionPage.textBrowser_cokluEkleme_logConsole.append(f"<B>ERROR: </B>Hedef klasör seçilmedi!")
+            return
+        
+        if not os.path.exists(str(self.selectedDirectory)):
+            self.FaceRecognitionPage.textBrowser_cokluEkleme_logConsole.append(f"<B>ERROR: </B>Hedef klasör seçilmedi!")
+            return    
+        
+        self.MultiAdderActive = True
+        self.MultiAdderThread = directoryAdderThread(faceAnalayserUI=self.FaceAnalysisUI,targetDirectory=self.selectedDirectory,
+            databaseConnections=self.databaseConnections,databaseCursor=self.databaseCursor)
+        
+        self.MultiAdderThread.statusSignal.connect(self.multiAdderThreadSignalHandler)
+        
+        self.MultiAdderThread.start()

@@ -67,16 +67,15 @@ class recognitionDbTools():
                 return {"success":False, "data":"Kaynak resimde herhangi bir yüz bulunamadı, işlem iptal edildi."}
             
             face_embedding_sourceFile = analysedSourceImage[0]["embedding"]
-            all_face_data = analysedSourceImage[0]
             landmark_2d = analysedSourceImage[0]["landmark_2d_106"]
             face_box = analysedSourceImage[0]["bbox"]
             
             
             
             STATIC_SQL_COMMAND = f"""INSERT INTO {DB_FACE_RECOGNITION_TABLE} (
-                face_picture_blob, picture_sha1_hash, face_embedding_data, landmarks_2d, face_box, face_name, raw_face_data)
-                VALUES (?, ?, ?, ?, ?,?,? )"""
-            STATIC_DATA_TUPLE = (blobl_image_data, str(cv2_image_hash), sqlite3.Binary(face_embedding_sourceFile), sqlite3.Binary(landmark_2d),sqlite3.Binary(face_box) ,str(face_name), str(all_face_data))
+                face_picture_blob, picture_sha1_hash, face_embedding_data, landmarks_2d, face_box, face_name)
+                VALUES (?, ?, ?, ?, ?,? )"""
+            STATIC_DATA_TUPLE = (blobl_image_data, str(cv2_image_hash), sqlite3.Binary(face_embedding_sourceFile), sqlite3.Binary(landmark_2d),sqlite3.Binary(face_box) ,str(face_name))
             
             self.databaseCursor.execute(STATIC_SQL_COMMAND, STATIC_DATA_TUPLE)
             self.databaseConnections.commit()

@@ -35,7 +35,6 @@ CREATE TABLE IF NOT EXISTS {DB_FACE_RECOGNITION_TABLE} (
     landmarks_2d BLOB NOT NULL,
     face_box BLOB NOT NULL,
     face_name TEXT NOT NULL,
-    raw_face_data TEXT NOT NULL,
     add_date DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 """
