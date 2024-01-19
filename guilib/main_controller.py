@@ -15,6 +15,7 @@ from guilib.FaceVerificationFromImage_controller import FaceVerificationScreen_f
 from guilib.PhoneNumberParser_controller import PhoneNumberParserWidget
 from guilib.TcNumberValidationChecker_controller import TcValidatorCheckerWidget
 from guilib.TcNumberCalculator_controller import TcCalculatorWidget
+from guilib.FaceRecognition_controller import FaceRecognitionWidget
 
 from hivelibrary import env
 from hivelibrary import os_information
@@ -97,9 +98,14 @@ class TheHive_mainPage(QMainWindow):
         self.mainScreen.actionPhone_number_parser.triggered.connect(self.menuAction_phoneNumberParser)
         self.mainScreen.actionTC_Verification.triggered.connect(self.menuAction_TcValidator)
         self.mainScreen.actionTC_Calculator.triggered.connect(self.menuAction_TcCalculator)
+        self.mainScreen.actionFace_Recognition.triggered.connect(self.menuAction_FaceInsight_FaceRecognition)
         
         self.mainScreen.textBrowser_WelcomeAndToolinfo.setText(WELCOME_SCREEN_TEXT)
 
+
+    def menuAction_FaceInsight_FaceRecognition(self):
+        self.FaceRecognition = FaceRecognitionWidget(db_cnn=self.db_cnn, db_curosr=self.db_cursor)
+        self.FaceRecognition.show()
 
     def menuAction_TcCalculator(self):
         self.TcCalculator = TcCalculatorWidget()

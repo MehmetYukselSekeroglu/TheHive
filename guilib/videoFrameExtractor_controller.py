@@ -150,6 +150,7 @@ class VideoFrameExtractorPage(QWidget):
         self.video2framePage.pushButton_startExtraction.clicked.connect(self.startExtractions)
         self.video2framePage.pushButton_stopCurrentJob.clicked.connect(self.cancelProccess)
         
+        self.backEndWorkerThread = QThread()
         
         self.targetVideoFile_is_selected = False
         self.targetOutputDir_is_selected = False

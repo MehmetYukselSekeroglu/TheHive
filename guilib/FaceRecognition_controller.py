@@ -62,6 +62,14 @@ class faceRecognitionBackendThread(QThread):
         raw_cv2_image = cv2.imread(self.targetImagePath)
         analysedSourceImage = self.faceAnalayserUI.get(raw_cv2_image)
         
+        self.__runningStatusReturner(text="Veritabanı kontrol ediliyor")
+        rsults = self.databaseCursor.execute(f"SELECT COUNT(*) FROM {DB_FACE_RECOGNITION_TABLE}").fetchall()[0][0]
+        
+        if int(rsults) < 1:
+            self.__finalyStatusReturner(text=gen_error_text("Veritabanı boş, arama yapmak için önce veritabanına ekleme yapınız"),
+                success_status=False,)
+            return 
+        
         if len(analysedSourceImage) > 1:
             self.__finalyStatusReturner(text=gen_error_text("Kaynak resimde 1 den fazla yüz kabul edilemez"),
                 success_status=False,)
@@ -76,7 +84,7 @@ class faceRecognitionBackendThread(QThread):
         STATIC_SQL_COMMAND = f"SELECT id,face_name,face_embedding_data FROM {DB_FACE_RECOGNITION_TABLE}"
         
         self.databaseCursor.execute(STATIC_SQL_COMMAND)
-        
+        self.__runningStatusReturner(text=f"Veritabanı boyutu: {rsults}")
         self.__runningStatusReturner(text="Arama için döngü başlatıldı")
         
         totalAnalysCount = 0
@@ -96,11 +104,17 @@ class faceRecognitionBackendThread(QThread):
                     self.similartiyStorageDcit[row_id] = calculateSimilartiy
         
         if self.threadStopSignal == True:
+            self.__finalyStatusReturner(text=gen_error_text(f"%{self.minSimilarity} veya daha yüksek bir oranda eşleşme bulunamadı sistemde"),
+                success_status=False,)
             return
         
         #self.__runningStatusReturner(text=f"%30 ve üzeri eşleşme veren id ler ve oranları {str(self.similartiyStorageDcit)}")
         
-        self.__runningStatusReturner(text="arama tamamlandı en yüksek benzerlik içeren kişi ekrana getiriliyor")
+        self.__runningStatusReturner(text="arama tamamlandı sonuçlar işleniyor")
+        
+        if len(self.similartiyStorageDcit) < 1:
+            pass
+            
         
         enBenzerID = max(list(self.similartiyStorageDcit.values()))
         enYuksekBenzerlik = enBenzerID
@@ -159,6 +173,8 @@ class FaceRecognitionWidget(QWidget):
         self.FaceRecognitionPage.pushButton_tab2_resim_sec.clicked.connect(self.selectEklenecekResim)
         self.FaceRecognitionPage.pushButton_tab2_sistemeEkle.clicked.connect(self.tekilResimEkleme_start)
         
+        self.DatabaseSearchThread = QThread()
+        
         self.databaseConnections = db_cnn
         self.databaseCursor = db_curosr
 
@@ -204,7 +220,7 @@ class FaceRecognitionWidget(QWidget):
         
         if self.selectedSourceImage == None :
             self.FaceRecognitionPage.textBrowser_logConsole.append(
-                gen_error_text("Kaynak resim veya hedef resim seçilmedi, işlem iptal edildi"))
+                gen_error_text("Kaynak resim seçilmedi, işlem iptal edildi"))
             return
         
         self.FaceRecognitionPage.textBrowser_logConsole.append(gen_info_text("Veritabanı araması başlaılıyor"))
@@ -246,7 +262,6 @@ class FaceRecognitionWidget(QWidget):
             savefile.write(image_data)
             
         image_data = cv2.imread(rand_save_name)
-        print("Resim okundu")
         os.remove(rand_save_name)
         
         image_data = cv2.resize(image_data, self.LabelSupportedResulation)
