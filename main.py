@@ -19,7 +19,11 @@ from guilib.login_controller import LoginScreen
 from guilib.new_account_controller import NewAccountScreen
 from guilib.main_controller import TheHive_mainPage
 
+if not os.path.exists(DEFAULT_TEMP_DIR) or not os.path.isdir(DEFAULT_TEMP_DIR):
+    os.makedirs(DEFAULT_TEMP_DIR)
 
+if not os.path.exists(DEFAULT_ROOT_DIR_NAME) or not os.path.isdir(DEFAULT_ROOT_DIR_NAME):
+    os.makedirs(DEFAULT_ROOT_DIR_NAME)
 
 # Start database connections
 DB_CNN = sqlite3.connect(DATABASE_PATH,check_same_thread=False)
