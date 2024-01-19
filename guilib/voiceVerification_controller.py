@@ -22,38 +22,21 @@ class comparsionThread(QThread):
             self.temp_dir_path += str(os.sep)
             
     def run(self):
-        msg = {"end":False,
-            "text":"<B>INFO:</B> Backend thread started."
-            }
+        msg = {"end":False,"text":"<B>INFO:</B> Backend thread started."}
         self.statusSignal.emit(msg)
-
-        msg = {"end":False,
-            "success":None,
-            "text":"<B>INFO:</B> Conversion of input files to vaw format has started."
-            }
-        
+        msg = {"end":False,"success":None,"text":"<B>INFO:</B> Conversion of input files to vaw format has started."}
         self.statusSignal.emit(msg)
-
         raw_file_1_convert_status = ConvertAnyAudio_to_wav(target_file_path=self.raw_file_1,temp_dir_path=self.temp_dir_path)
         raw_file_2_convert_status = ConvertAnyAudio_to_wav(target_file_path=self.raw_file_2,temp_dir_path=self.temp_dir_path)
-        
-        
         if raw_file_1_convert_status["success"] == "false" or raw_file_2_convert_status["success"] == "false":
-            msg = {"end":True, 
-                   "success":False,
-                   "text":"<B>ERROR:</B> File conversion failed, proccess stoping."
-                   }
+            msg = {"end":True, "success":False,"text":"<B>ERROR:</B> File conversion failed, proccess stoping."}
             self.statusSignal.emit(msg)
             return
         
         vaw_file_1 = raw_file_1_convert_status["path"]
         vaw_file_2 = raw_file_2_convert_status["path"]
 
-        msg = {
-            "end":False,
-            "success":None,
-            "text":"<B>INFO: </B>Comparing voice similarity rates..."
-        }
+        msg = {"end":False,"success":None,"text":"<B>INFO: </B>Comparing voice similarity rates..."}
         self.statusSignal.emit(msg)
         
         try:
@@ -62,28 +45,16 @@ class comparsionThread(QThread):
             finally_status = {"success":False, "code":err}
         
         if not finally_status["success"] == True:
-            msg = {
-                "end": True,
-                "success": False,
-                "text":f"<B>ERROR:</B> Audio comparison failed api feedback: {finally_status['code']}, proccess stoping."
-            }
+            msg = {"end": True,"success": False,"text":f"<B>ERROR:</B> Audio comparison failed api feedback: {finally_status['code']}, proccess stoping."}
             self.statusSignal.emit(msg)
             os.remove(vaw_file_1)
             os.remove(vaw_file_2)
-
             return
         
         ses_benzerlik_oranı = finally_status["similarity"]
-        
-        msg = {
-            "end":True,
-            "success":True,
-            "text":ses_benzerlik_oranı
-        }
-        
+        msg = {"end":True,"success":True,"text":ses_benzerlik_oranı}
         os.remove(vaw_file_1)
         os.remove(vaw_file_2)
-        
         self.statusSignal.emit(msg)
         
 
@@ -114,26 +85,20 @@ class voiceVerificationPage(QWidget):
         
     def saveOutputResult(self):
         saveFileName, _ = QFileDialog.getSaveFileName(self, "Save Result",filter="Text file (*.txt)")
-
-
         if not saveFileName:
             err_msg = f"[ - ] Save file not selected"
             self.voiceVerifyWidget.textBrowser_logAndResults.append(err_msg)
             return         
-                
                 
         if self.resultPrinted != True:
             err_msg = f"[ - ] There are no results to save"
             self.voiceVerifyWidget.textBrowser_logAndResults.append(err_msg)
             return
                 
-            
         self.voiceVerifyWidget.textBrowser_logAndResults.append(str("-"*30))
         self.voiceVerifyWidget.textBrowser_logAndResults.append("[ + ] Saving operation started")
-                
         with open(saveFileName, "w") as saveFile:
             saveFile.write(self.for_save_data)
-                      
         self.voiceVerifyWidget.textBrowser_logAndResults.append("[ + ] File successfuly saved ")
     
     
@@ -142,6 +107,8 @@ class voiceVerificationPage(QWidget):
         self.voiceVerifyWidget.textBrowser_logAndResults.clear()
         self.voiceVerifyWidget.textBrowser_logAndResults.setText(f"<B>LOG AND RESULTS: </B><br>")
         self.voiceVerifyWidget.widget_3_similarityProgressBar.setVisible(False)
+        
+        
         
         
     def selectTargetFile_1(self):
@@ -161,6 +128,7 @@ class voiceVerificationPage(QWidget):
         
         self.voiceVerifyWidget.textBrowser_voice1showPath.setText(self.selectedTargetFile_1)
         self.file_1_selected = True
+        
         
         
     def selectTargetFile_2(self):
@@ -193,6 +161,7 @@ class voiceVerificationPage(QWidget):
         self.backEndWorkerThread.statusSignal.connect(self.threadStatusHandler)
         self.backEndWorkerThread.start()
         
+        
     
     def threadStatusHandler(self,result_dict:dict):
         
@@ -207,7 +176,6 @@ class voiceVerificationPage(QWidget):
             elif int(similarity_rate) >= 70:
                 data_status = "Aynı kişi olma ihtimali çok yüksektir"
             
-            
             self.voiceVerifyWidget.textBrowser_logAndResults.append(f"<B>INFO: </B>Proccess successfuly.")
             self.voiceVerifyWidget.textBrowser_logAndResults.append(f"<B>INFO: </B>{'-'*20}")
             self.voiceVerifyWidget.textBrowser_logAndResults.append(f"Similarity rate: %{similarity_rate}")
@@ -215,19 +183,13 @@ class voiceVerificationPage(QWidget):
             self.voiceVerifyWidget.textBrowser_logAndResults.append(f"<B>INFO: </B>{'-'*20}")
             self.voiceVerifyWidget.widget_3_similarityProgressBar.setVisible(True)
             self.voiceVerifyWidget.progressBar_similarityShower.setValue(int(similarity_rate))
-            
             self.for_save_data = f"""TheHive Remastred | Voice Verification
 Date: None
 Voice 1 Path: {self.selectedTargetFile_1}
 Voice 2 Path: {self.selectedTargetFile_2}
 Similarity Rate: %{similarity_rate}
 Message: {data_status}
-"""
-            
-            
+"""         
             return
-            
-        
-        
         self.voiceVerifyWidget.textBrowser_logAndResults.append(str(result_dict["text"]))
     

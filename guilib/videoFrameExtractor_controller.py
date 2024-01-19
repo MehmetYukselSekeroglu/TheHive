@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QThread, pyqtSignal
 
 from guilib.videoFrameExtractorScreen import Ui_video2framWidget
-
+from guilib.html_text_generator.html_draft import *
 import os
 
 class extractFrameThread(QThread):
@@ -10,58 +10,33 @@ class extractFrameThread(QThread):
     
     def __init__(self, targetFilePath, OutputDirPath, ):
         super().__init__()
-    
         self.targetFilePath = targetFilePath
         self.OutputDirPath = OutputDirPath
-        
         self.threadStopSignal = False
-           
-    
     
     def stop(self):
         self.threadStopSignal = True
-        msg = {"end":True,"success":False,
-        "update_bar": True,
-        "text":f"<B>INFO: </B>Thread killed by user!",
-        "progress_value": 0 
-        }
+        msg = {"end":True,"success":False,"update_bar": True,"text":f"<B>INFO: </B>Thread killed by user!","progress_value": 0 }
         self.statusSignal.emit(msg)
         return
     def run(self):
-        msg = {"end": False,"success":None,"update_bar": False,
-            "text":"<B>INFO:</B> Backend thread started.",
-            "progress_value": 0}
+        msg = {"end": False,"success":None,"update_bar": False,"text":"<B>INFO:</B> Backend thread started.","progress_value": 0}
         self.statusSignal.emit(msg)
 
-
-        msg = {"end":False,"success":None,"update_bar": False,
-            "text":"<B>WARNING: </B>Please note that the output size may be very high depending on the size of the video file.",
-            "progress_value":0
-        }
+        msg = {"end":False,"success":None,"update_bar": False,"text":"<B>WARNING: </B>Please note that the output size may be very high depending on the size of the video file.","progress_value":0}
         self.statusSignal.emit(msg)
 
-        
-        
-        msg = {"end":False,"success":None,"update_bar": False,
-            "text":"<B>INFO: </B>importing cv2 (OpenCV)",
-            "progress_value":0
-        }
+        msg = {"end":False,"success":None,"update_bar": False,"text":"<B>INFO: </B>importing cv2 (OpenCV)","progress_value":0}
         self.statusSignal.emit(msg)
         import cv2
         try:
             prepared_video = cv2.VideoCapture(self.targetFilePath)
         except Exception as err:
-            msg = {"end":True,"success":False,"update_bar": False,
-                "text":f"<B>ERROR: </B>{err}",
-                "progress_value":0
-            }
+            msg = {"end":True,"success":False,"update_bar": False,"text":f"<B>ERROR: </B>{err}","progress_value":0}
             self.statusSignal.emit(msg)
             return
         
-        msg = {"end":False,"success":None,"update_bar": False,
-            "text":"<B>INFO: </B>Reading video and counting frames",
-            "progress_value":0
-        }
+        msg = {"end":False,"success":None,"update_bar": False, "text":"<B>INFO: </B>Reading video and counting frames","progress_value":0}
         self.statusSignal.emit(msg)
         
         totalFrame = 0
@@ -76,26 +51,16 @@ class extractFrameThread(QThread):
                 break
             
             if totalFrame % 1000 == 0:
-                msg = {"end":False,"success":None,"update_bar": False,
-            "text":f"<B>INFO: </B> Counting frame: <B>{totalFrame}</B> ",
-            "progress_value":0
-            }
+                msg = {"end":False,"success":None,"update_bar": False,"text":f"<B>INFO: </B> Counting frame: <B>{totalFrame}</B> ","progress_value":0}
                 self.statusSignal.emit(msg)         
         
-        msg = {"end":False,"success":None,"update_bar": False,
-            "text":f"<B>INFO: </B> Total frame: <B>{totalFrame}</B> ",
-            "progress_value":0
-        }
+        msg = {"end":False,"success":None,"update_bar": False,"text":f"<B>INFO: </B> Total frame: <B>{totalFrame}</B> ","progress_value":0}
         self.statusSignal.emit(msg)
         
         prepared_video.release()
         prepared_video = cv2.VideoCapture(self.targetFilePath)
         
-        msg = {"end":False,"success":None,
-            "update_bar": False,
-            "text":f"<B>INFO: </B> Starting extractions ",
-            "progress_value":0
-        }
+        msg = {"end":False,"success":None,"update_bar": False,"text":f"<B>INFO: </B> Starting extractions ","progress_value":0}
         self.statusSignal.emit(msg)
         
         save_number = 0
@@ -104,32 +69,19 @@ class extractFrameThread(QThread):
                 return
             is_succes, now_frame = prepared_video.read()
             if is_succes:
-                
                 cv2.imwrite(f"{self.OutputDirPath}frame_{save_number}.png", now_frame)
                 save_number += 1
             else:               
-                msg = {"end":False,"success":None,
-                "update_bar": True,
-                "text":f"<B>INFO: </B>Status: {save_number}/{totalFrame}",
-                "progress_value": 100
-                }
+                msg = {"end":False,"success":None,"update_bar": True,"text":f"<B>INFO: </B>Status: {save_number}/{totalFrame}","progress_value": 100}
                 self.statusSignal.emit(msg)
                 break
             
             if save_number % 10 == 0:
-                msg = {"end":False,"success":None,
-                "update_bar": True,
-                "text":f"<B>INFO: </B>Status: {save_number}/{totalFrame}",
-                "progress_value": int((save_number / totalFrame) *100 )
-                }
+                msg = {"end":False,"success":None,"update_bar": True,"text":f"<B>INFO: </B>Status: {save_number}/{totalFrame}","progress_value": int((save_number / totalFrame) *100 )}
                 self.statusSignal.emit(msg)
 
     
-        msg = {"end":True,"success":True,
-        "update_bar": True,
-        "text":f"<B>INFO: </B>Status: Complated!",
-        "progress_value": 100 
-        }
+        msg = {"end":True,"success":True,"update_bar": True,"text":f"<B>INFO: </B>Status: Complated!","progress_value": 100 }
         self.statusSignal.emit(msg)
         
         
@@ -139,10 +91,8 @@ class VideoFrameExtractorPage(QWidget):
     def __init__(self):
         super().__init__()
         
-        
         self.video2framePage = Ui_video2framWidget()
         self.video2framePage.setupUi(self)
-        
         self.setWindowTitle("Video Frame Extractor")
         
         self.video2framePage.pushButton_selectOutputDir.clicked.connect(self.selectOutputDirectory)
@@ -154,13 +104,11 @@ class VideoFrameExtractorPage(QWidget):
         
         self.targetVideoFile_is_selected = False
         self.targetOutputDir_is_selected = False
-        self.resultPrinted = False
     
     def threadSignalHandler(self, result_dict):
         if result_dict["end"] == True and result_dict["success"] == True:
             self.video2framePage.textBrowser_logAndResults.append(str(result_dict["text"]))
             return
-        
         
         if result_dict["update_bar"] == True:
             self.video2framePage.progressBar_statusPrinterBar.setValue(result_dict["progress_value"])
@@ -190,13 +138,11 @@ class VideoFrameExtractorPage(QWidget):
                     folder_dialog = str(folder_dialog) + str(os.path.sep)
 
         if folder_dialog == None or not os.path.exists(folder_dialog) or not os.path.isdir(folder_dialog):
-            err_msg = "Error: Invalid file selections"
-            self.video2framePage.textBrowser_outputDirPathPrint.setText(err_msg)
+            self.video2framePage.textBrowser_outputDirPathPrint.setText(gen_error_text("Invalid file selections"))
             return
         
         if len(os.listdir(folder_dialog)) != 0:
-            err_msg = "Error: Selected directory not empty"
-            self.video2framePage.textBrowser_outputDirPathPrint.setText(err_msg)
+            self.video2framePage.textBrowser_outputDirPathPrint.setText(gen_error_text("Selected directory not empty"))
             return          
         
         self.selectOutputDirectory = folder_dialog
@@ -207,13 +153,10 @@ class VideoFrameExtractorPage(QWidget):
     
     def cancelProccess(self):
         if not self.backEndWorkerThread.isRunning():
-            err_msg = "<B>ERROR: </B>No running jobs!"
-            self.video2framePage.textBrowser_logAndResults.append(err_msg)
+            self.video2framePage.textBrowser_logAndResults.append(gen_error_text("No running jobs!"))
             return
         
-        
-        info_msg = "<B>INFO: </B>Sending kill signal..."
-        self.video2framePage.textBrowser_logAndResults.append(info_msg)
+        self.video2framePage.textBrowser_logAndResults.append(gen_info_text("Sending kill signal..."))
         self.backEndWorkerThread.stop()
 
     
@@ -226,10 +169,8 @@ class VideoFrameExtractorPage(QWidget):
             self.targetVideoFile = file_dialog.selectedFiles()[0]
         
         if self.targetVideoFile == None or not os.path.exists(self.targetVideoFile) or not os.path.isfile(self.targetVideoFile):
-            err_msg = "Error: Invalid file selections"
-            self.video2framePage.textBrowser_inputFilePathPrint.setText(err_msg)
+            self.video2framePage.textBrowser_inputFilePathPrint.setText(gen_error_text("Error: Invalid file selections"))
             return
-        
         
         self.selectInputFile = self.targetVideoFile
         self.targetVideoFile_is_selected = True
@@ -240,12 +181,15 @@ class VideoFrameExtractorPage(QWidget):
         self.video2framePage.textBrowser_logAndResults.clear()
         self.video2framePage.textBrowser_logAndResults.setText(f"<B>LOG AND RESULTS: </B><br>")
     
+    
     def startExtractions(self):
-        self.resultPrinted = False
         self.clearLogResultConsole()
+        if self.backEndWorkerThread.isRunning():
+            self.video2framePage.textBrowser_logAndResults.append(gen_error_text("İşelm zaten çalışıyor, işlemi durdurmadan veya bitmeden tekrar başlatılamaz"))
+            return         
         
         if self.targetOutputDir_is_selected != True or self.targetOutputDir_is_selected!= True:
-            self.video2framePage.textBrowser_logAndResults.append(f"<B>ERROR: </B>Video or directory not selected!")
+            self.video2framePage.textBrowser_logAndResults.append(gen_error_text("Video or directory not selected!"))
             return
         
         self.backEndWorkerThread = extractFrameThread(targetFilePath=self.selectInputFile,OutputDirPath=self.selectOutputDirectory)

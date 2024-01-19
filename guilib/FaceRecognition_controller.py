@@ -151,11 +151,10 @@ class FaceRecognitionWidget(QWidget):
         self.FaceRecognitionPage.pushButton_stopMultiAdder.clicked.connect(self.mulitAdderThreadKillSignal)
         self.DatabaseSearchThread = QThread()
         self.MultiAdderThread = QThread()
-        self.MultiAdderActive = False
         self.databaseConnections = db_cnn
         self.databaseCursor = db_curosr
         self.selectedDirectory = None
-        self.targettDir_is_selected = True
+        self.targettDir_is_selected = False
         InformationPrinter(f"importing insightFace")
         import insightface
         InformationPrinter(f"initing face detection system")
@@ -188,17 +187,19 @@ class FaceRecognitionWidget(QWidget):
             
     def sendKillSignalThread(self):
         if not self.DatabaseSearchThread.isRunning():
-            err_msg = "<B>ERROR: </B>No running jobs!"
-            self.FaceRecognitionPage.textBrowser_logConsole.append(err_msg)
+            self.FaceRecognitionPage.textBrowser_logConsole.append(gen_error_text("No running jobs!"))
             return
         
-        info_msg = "<B>INFO: </B>Sending kill signal..."
-        self.FaceRecognitionPage.textBrowser_logConsole.append(info_msg)
+        self.FaceRecognitionPage.textBrowser_logConsole.append(gen_info_text("ending kill signal..."))
         self.DatabaseSearchThread.stop()
     
     
     
-    def startDatabaseSearch(self):        
+    def startDatabaseSearch(self):
+        if self.DatabaseSearchThread.isRunning():
+            self.FaceRecognitionPage.textBrowser_logConsole.append(gen_error_text("İşlem zaten aktif, yeniden başlatmak için bitmeli veya durdurulmalı"))
+            return   
+        
         if self.selectedSourceImage == None :
             self.FaceRecognitionPage.textBrowser_logConsole.append(gen_error_text("Kaynak resim seçilmedi, işlem iptal edildi"))
             return
@@ -336,13 +337,11 @@ class FaceRecognitionWidget(QWidget):
                     folder_dialog = str(folder_dialog) + str(os.path.sep)
 
         if folder_dialog == None or not os.path.exists(folder_dialog) or not os.path.isdir(folder_dialog):
-            err_msg = "Error: Invalid file selections"
-            self.FaceRecognitionPage.textBrowser_showTargetDir.setText(err_msg)
+            self.FaceRecognitionPage.textBrowser_showTargetDir.setText(gen_error_text("Invalid file selections"))
             return
     
         if len(os.listdir(folder_dialog)) == 0:
-            err_msg = "Error: Selected directory empty"
-            self.FaceRecognitionPage.textBrowser_showTargetDir.setText(err_msg)
+            self.FaceRecognitionPage.textBrowser_showTargetDir.setText(gen_error_text("elected directory empty"))
             return          
         
         self.selectedDirectory = folder_dialog
@@ -363,20 +362,17 @@ class FaceRecognitionWidget(QWidget):
     
     def mulitAdderThreadKillSignal(self):
         if not self.MultiAdderThread.isRunning():
-            err_msg = "<B>ERROR: </B>No running jobs!"
-            self.FaceRecognitionPage.textBrowser_cokluEkleme_logConsole.append(err_msg)
+            self.FaceRecognitionPage.textBrowser_cokluEkleme_logConsole.append(gen_error_text("No running jobs!"))
             return
         
-        info_msg = "<B>INFO: </B>Sending kill signal..."
-        self.FaceRecognitionPage.textBrowser_cokluEkleme_logConsole.append(info_msg)
+        self.FaceRecognitionPage.textBrowser_cokluEkleme_logConsole.append(gen_info_text("Sending kill signal..."))
         self.MultiAdderThread.stop()
-        self.MultiAdderActive = False
         
         
         
     def startMultiAdder(self):
         self.clearLogConsoleTab2()
-        if self.MultiAdderActive == True:
+        if self.MultiAdderThread.isRunning():
             self.FaceRecognitionPage.textBrowser_cokluEkleme_logConsole.append(f"<B>ERROR: </B>Ekleme işlemi zaten aktif önce işlemi durdurmanız gerek!")
             return
         
@@ -387,7 +383,7 @@ class FaceRecognitionWidget(QWidget):
         if not os.path.exists(str(self.selectedDirectory)):
             self.FaceRecognitionPage.textBrowser_cokluEkleme_logConsole.append(f"<B>ERROR: </B>Hedef klasör seçilmedi!")
             return    
-        self.MultiAdderActive = True
+       
         self.MultiAdderThread = directoryAdderThread(faceAnalayserUI=self.FaceAnalysisUI,targetDirectory=self.selectedDirectory,
             databaseConnections=self.databaseConnections,databaseCursor=self.databaseCursor)
         self.MultiAdderThread.statusSignal.connect(self.multiAdderThreadSignalHandler)

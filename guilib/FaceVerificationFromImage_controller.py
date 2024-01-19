@@ -49,8 +49,7 @@ class FaceVerificationBackendThread(QThread):
         analysedSourceImage = faceAnalayserUI.get(originalSourceImageData)
         
         if len(analysedSourceImage) > 1:
-            self.__finalyStatusReturner(text=gen_error_text("Kaynak resimde 1 den fazla yüz kabul edilemez"),
-success_status=False,)
+            self.__finalyStatusReturner(text=gen_error_text("Kaynak resimde 1 den fazla yüz kabul edilemez"),success_status=False,)
             return
 
         self.__runningStatusReturner(text=gen_info_text("Hedef resim analizi başlatıldı"))
@@ -93,7 +92,6 @@ success_status=False,)
         originalSourceImageData = cv2.cvtColor(originalSourceImageData,cv2.COLOR_BGR2RGB)
         originalTargetImageData = cv2.cvtColor(originalTargetImageData,cv2.COLOR_BGR2RGB)
         
-        
         originalSourceImageData = landmarks_rectangle(originalSourceImageData,data_list=analysedSourceImage[0]["bbox"])
         originalSourceImageData = landmarks_rectangle_2d(originalSourceImageData, data_list=analysedSourceImage[0]["landmark_2d_106"])
         
@@ -103,11 +101,8 @@ success_status=False,)
         if GetSimilarity < 0:
             GetSimilarity = 0
         
-        final_text = f"""<B>{"-"*20}</B><br>
-Benzerlik Oranı: %{GetSimilarity}<br>
-<B>{"-"*20}</B><br>"""
-        self.__finalyStatusReturner(text=final_text,success_status=True,image_1=originalSourceImageData, image_2=originalTargetImageData
-            ,verification=GetSimilarity,)
+        final_text = f"""<B>{"-"*20}</B><br>Benzerlik Oranı: %{GetSimilarity}<br><B>{"-"*20}</B><br>"""
+        self.__finalyStatusReturner(text=final_text,success_status=True,image_1=originalSourceImageData, image_2=originalTargetImageData,verification=GetSimilarity,)
         
         
 class FaceVerificationScreen_from_image(QWidget):
@@ -124,7 +119,7 @@ class FaceVerificationScreen_from_image(QWidget):
         self.showDefaultImage(targetLabel=self.FaceVerificationFromImage.label_sourceImage)
         self.showDefaultImage(targetLabel=self.FaceVerificationFromImage.label_targetImage)
         
-        
+        self.backEndWorkerThread = QThread
         self.selectedSourceImage = None
         self.selectedTargetImage = None
 
@@ -166,13 +161,6 @@ class FaceVerificationScreen_from_image(QWidget):
             image_data_2 = QtGui.QImage(image_data_2, img_width, img_height,QtGui.QImage.Format.Format_RGB888)
             self.FaceVerificationFromImage.label_targetImage.setPixmap(QtGui.QPixmap.fromImage(image_data_2))
         
-        """
-        image_data = cv2.resize(image_data, self.labelDefaultResulation)
-        image_data = cv2.cvtColor(image_data, cv2.COLOR_BGR2RGB)
-        img_height, img_width = self.labelDefaultResulation
-        image_data = QtGui.QImage(image_data, img_width, img_height,QtGui.QImage.Format.Format_RGB888)
-        target_label.setPixmap(QtGui.QPixmap.fromImage(image_data))
-        """
             
     def selectSourceImage(self):
         fileSelector = QFileDialog()
@@ -216,14 +204,15 @@ class FaceVerificationScreen_from_image(QWidget):
         self.addImageInWindow_usingFilePath(target_image=self.selectedTargetImage,target_label=self.FaceVerificationFromImage.label_targetImage)
     
     def startVerification(self):
-        if self.selectedTargetImage == None or self.selectedSourceImage == None:
-            self.FaceVerificationFromImage.textBrowser_logConsole.append(
-                gen_error_text("Kaynak resim veya hedef resim seçilmedi, işlem iptal edildi"))
+        if self.backEndWorkerThread.isRunning():
+            self.FaceVerificationFromImage.textBrowser_logConsole.append(gen_error_text("Aktif bir karşılaştırma devam ederken tekrar istek yapılamaz."))
             return
         
-        self.backEndWorkerThread = FaceVerificationBackendThread(
-            sourceImagePath=self.selectedSourceImage, targetImagePath=self.selectedTargetImage
-        )
+        if self.selectedTargetImage == None or self.selectedSourceImage == None:
+            self.FaceVerificationFromImage.textBrowser_logConsole.append(gen_error_text("Kaynak resim veya hedef resim seçilmedi, işlem iptal edildi"))
+            return
+        
+        self.backEndWorkerThread = FaceVerificationBackendThread(sourceImagePath=self.selectedSourceImage, targetImagePath=self.selectedTargetImage)
         self.backEndWorkerThread.statusSignal.connect(self.threadSignalHandler)
         self.backEndWorkerThread.start()
     
