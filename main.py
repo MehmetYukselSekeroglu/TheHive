@@ -25,7 +25,7 @@ from guilib.main_controller import TheHive_mainPage
 DB_CNN = sqlite3.connect(DATABASE_PATH,check_same_thread=False)
 DB_CURSOR = DB_CNN.cursor()
 DBS_CONF = [DB_CNN, DB_CURSOR]
-
+DB_CURSOR.executescript(database_structure.FACE_RECOGNITION_DATABASE_STRUCTUR_COMMAND)
 
 if database_tools.check_db_init_status(*DBS_CONF) == False:
     console_tools.LogPrinter(f"Database init started")
