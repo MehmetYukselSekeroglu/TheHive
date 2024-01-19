@@ -15,7 +15,7 @@
     - Local authentication to prevent files from being scrambled
     - Open soruce & Free
     - Extensive features
-        - Face recognition ( coming soon )
+        - Face recognition ( Now Active )
         - Face detection (Now Active)
         - Face verification ( Now Active )
         - Voice verification ( Now Active)
@@ -117,6 +117,25 @@ deactivate
 
 <p>Thanks to Resemblyzer-based voice verification, you can understand whether 2 voice samples belong to the same person or to others. Thanks to Resemblyzer, the parts of the voice for analysis are detected and the similarity ratio is calculated using cosine similarity. Generally, rates of 75% and above belong to the same person, but do not forget that the model may be wrong.</p>
 <br>
+
+
+## Face Recognition
+
+<br>
+
+### Searching for a face in the database
+<img src="./img/personInDatabase.png">
+
+
+### Searching for a face that is not in the database
+<img src="./img/personNoInDB.png" />
+<br>
+
+
+<p>Thanks to the local SQLite database, it enables fast and clear database searches without the need for any server or additional installation. Pure binary data of the image, sha1 hash to protect against repeated images, reference points for quick comparison, general points of the face, face frame, name of addition to the system, date of insertion in UTC are stored in the database, thus enabling high-speed searching. In the experiments carried out with 1500 random images, we have not come across a False positive (what the system thinks is correct, but it is wrong) situation. Since cosine similarity is used instead of face models for similarity calculation, the rate will not be 100% in different images of the same person, but it creates a significant difference when compared with others. In this way, the system works efficiently.
+<br>
+
+
 
 ## Face Verification
 
