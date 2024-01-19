@@ -16,7 +16,7 @@ class FaceVerificationBackendThread(QThread):
         super().__init__()
 
         self.detectModelDefaultResulation = (640,640)
-        self.labelDefaultResulation =(540,540)
+        self.labelDefaultResulation =(320,320)
         self.sourceImagePath = sourceImagePath
         self.targetImagePath = targetImagePath
 
@@ -50,25 +50,22 @@ class FaceVerificationBackendThread(QThread):
         
         if len(analysedSourceImage) > 1:
             self.__finalyStatusReturner(text=gen_error_text("Kaynak resimde 1 den fazla yüz kabul edilemez"),
-                success_status=False,)
+success_status=False,)
             return
 
         self.__runningStatusReturner(text=gen_info_text("Hedef resim analizi başlatıldı"))
         analysedTargetImage = faceAnalayserUI.get(originalTargetImageData)
         
         if len(analysedSourceImage) == 0:
-            self.__finalyStatusReturner(text=gen_error_text("Kaynak resimde herhangi bir yüz bulunamadı"),
-                success_status=False,)
+            self.__finalyStatusReturner(text=gen_error_text("Kaynak resimde herhangi bir yüz bulunamadı"),success_status=False,)
             return            
 
         if len(analysedTargetImage) == 0:
-            self.__finalyStatusReturner(text=gen_error_text("Hedef resimde herhangi bir yüz bulunamadı"),
-                success_status=False,)
+            self.__finalyStatusReturner(text=gen_error_text("Hedef resimde herhangi bir yüz bulunamadı"),success_status=False,)
             return          
         
         if len(analysedTargetImage) > 1:
-            self.__finalyStatusReturner(text=gen_error_text("Bu sürümde hedef resim 1 den fazla yüzü desteklemez"),
-                success_status=False,)
+            self.__finalyStatusReturner(text=gen_error_text("Bu sürümde hedef resim 1 den fazla yüzü desteklemez"),success_status=False,)
             return
 
         
@@ -118,7 +115,7 @@ class FaceVerificationScreen_from_image(QWidget):
         super().__init__()
         
         self.detectModelDefaultResulation = (640,640)
-        self.labelDefaultResulation =(540,540)
+        self.labelDefaultResulation =(320,320)
         
         self.FaceVerificationFromImage = Ui_FaceVerificationWidget()
         self.FaceVerificationFromImage.setupUi(self)
