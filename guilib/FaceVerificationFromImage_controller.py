@@ -119,7 +119,7 @@ class FaceVerificationScreen_from_image(QWidget):
         self.showDefaultImage(targetLabel=self.FaceVerificationFromImage.label_sourceImage)
         self.showDefaultImage(targetLabel=self.FaceVerificationFromImage.label_targetImage)
         
-        self.backEndWorkerThread = QThread
+        self.backEndWorkerThread = QThread()
         self.selectedSourceImage = None
         self.selectedTargetImage = None
 
