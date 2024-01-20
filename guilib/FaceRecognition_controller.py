@@ -5,10 +5,11 @@ from PyQt5 import QtGui
 from guilib.FaceRecognitionScreen import Ui_FaceRecognitionWidget
 from guilib.html_text_generator.html_draft import gen_error_text,gen_info_text
 from guilib.external_thread_modules.FaceRecognitionDirectoryTransfer import directoryAdderThread
+from guilib.external_thread_modules.FaceRecognitionManuelDatabaseSearch import manuelDatabaseSearcherThread
 
 from hivelibrary.console_tools import InformationPrinter
 from hivelibrary.env import DEFAULT_LOGO_PATH,DB_FACE_RECOGNITION_TABLE,DEFAULT_TEMP_DIR
-from hivelibrary.face_recognition_database_tools import recognitionDbTools
+from hivelibrary.face_recognition_database_tools import recognitionDbTools,get_image_from_id
 from hivelibrary.file_operations import generic_tools
 
 
@@ -138,6 +139,7 @@ class FaceRecognitionWidget(QWidget):
         self.showDefaultImage(targetLabel=self.FaceRecognitionPage.label_soruceImageShower)
         self.showDefaultImage(targetLabel=self.FaceRecognitionPage.label_detectedImageShower)
         self.showDefaultImage(targetLabel=self.FaceRecognitionPage.label_selected_image_show)
+        self.showDefaultImage(targetLabel=self.FaceRecognitionPage.label_dbManuelSearchImageShower)
         self.selectedSourceImage = None
         self.sistemeEklenecekImageSelected = None
         self.FaceRecognitionPage.pushButton_selectSourceImage.clicked.connect(self.selectSourceImage)
@@ -149,8 +151,15 @@ class FaceRecognitionWidget(QWidget):
         self.FaceRecognitionPage.pushButton_selectDirectory.clicked.connect(self.selectTargetDirectory)
         self.FaceRecognitionPage.pushButton_startMultiAdder.clicked.connect(self.startMultiAdder)
         self.FaceRecognitionPage.pushButton_stopMultiAdder.clicked.connect(self.mulitAdderThreadKillSignal)
+        self.FaceRecognitionPage.pushButton_starManueltSearch.clicked.connect(self.start_manuel_database_search)
+        self.FaceRecognitionPage.pushButton_clearResultManuelSearch.clicked.connect(self.clear_all_manuel_search_output)
+        self.FaceRecognitionPage.pushButton_stopActiveManuelSearch.clicked.connect(self.stopActivaManuelSearch)
+        self.FaceRecognitionPage.comboBox_targetColumn.currentIndexChanged.connect(self.updateManuelSearchLineEdit)
+        self.FaceRecognitionPage.tableWidget_resultTable.cellClicked.connect(self.table_widget_signal_handler)
+        self.FaceRecognitionPage.tableWidget_resultTable.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.DatabaseSearchThread = QThread()
         self.MultiAdderThread = QThread()
+        self.manuelSearchThread = QThread()
         self.databaseConnections = db_cnn
         self.databaseCursor = db_curosr
         self.selectedDirectory = None
@@ -388,3 +397,87 @@ class FaceRecognitionWidget(QWidget):
             databaseConnections=self.databaseConnections,databaseCursor=self.databaseCursor)
         self.MultiAdderThread.statusSignal.connect(self.multiAdderThreadSignalHandler)
         self.MultiAdderThread.start()
+        
+        
+        
+
+
+    # Veritabanı listeleme ve arama ekranı için olan kısım 
+    
+    def updateManuelSearchLineEdit(self):
+        getCurrentIndex = self.FaceRecognitionPage.comboBox_targetColumn.currentIndex()
+        self.FaceRecognitionPage.lineEdit_searchInput.setDisabled(getCurrentIndex==2)
+        
+    
+    def stopActivaManuelSearch(self):
+        if not self.manuelSearchThread.isRunning():
+            self.FaceRecognitionPage.textBrowser_ManuelSearchLogConsole.append(gen_error_text("Durdurulacak aktif bir arama işlemi yoktur"))
+            return
+        
+        self.manuelSearchThread.quit()
+        self.manuelSearchThread.wait()
+        self.FaceRecognitionPage.textBrowser_ManuelSearchLogConsole.append(gen_info_text("Aktif arama işlemi kullanıcı tarafından sonlandırıldı"))
+    
+    
+    def clear_all_manuel_search_output(self):
+        self.FaceRecognitionPage.textBrowser_ManuelSearchLogConsole.setText(f"<B>LOG CONSOLE:</B>")
+        self.FaceRecognitionPage.tableWidget_resultTable.clearContents()
+        self.FaceRecognitionPage.tableWidget_resultTable.setRowCount(0)
+        self.showDefaultImage(self.FaceRecognitionPage.label_dbManuelSearchImageShower)
+        
+    
+    def table_widget_signal_handler(self,row,column):
+        if column == 1:
+            db_id = self.FaceRecognitionPage.tableWidget_resultTable.item(row,0).text()
+            image_data = get_image_from_id(self.databaseCursor,db_id=int(db_id))
+            if image_data["success"] != True:
+                self.FaceRecognitionPage.textBrowser_ManuelSearchLogConsole.append(gen_error_text(f"Resim ekrana getirilemedi: {image_data['data']}"))
+                return
+            self.show_cv2_image_target_label(image_data=image_data["data"],targetLabel=self.FaceRecognitionPage.label_dbManuelSearchImageShower)
+    
+    def manuel_database_search_thread_signal_handler(self,thread_dict):
+        results = thread_dict
+        
+        if results["success"] == None and results["end"] == False:
+            self.FaceRecognitionPage.textBrowser_ManuelSearchLogConsole.append(str(results["text"]))
+            return
+        
+        if results["success"] == False and results["end"] == True:
+            self.FaceRecognitionPage.textBrowser_ManuelSearchLogConsole.append(str(results["text"]))
+            return
+        
+        if results["success"] == True and results["end"] == True:
+            self.FaceRecognitionPage.textBrowser_ManuelSearchLogConsole.append(str(results["text"]))
+            result_data = results["data"]
+            self.FaceRecognitionPage.tableWidget_resultTable.setRowCount(len(result_data))
+            currentLine = 0
+            
+            for single_row in result_data:
+                database_id = single_row[0]
+                face_image_text = "tıkla ve görüntüle"
+                image_hash = single_row[2]
+                face_name = single_row[6]
+                add_date = single_row[7]
+                
+                
+                self.FaceRecognitionPage.tableWidget_resultTable.setItem(currentLine,0,QTableWidgetItem(str(database_id)))
+                self.FaceRecognitionPage.tableWidget_resultTable.setItem(currentLine,1,QTableWidgetItem(face_image_text))
+                self.FaceRecognitionPage.tableWidget_resultTable.setItem(currentLine,2,QTableWidgetItem(image_hash))
+                self.FaceRecognitionPage.tableWidget_resultTable.setItem(currentLine,3,QTableWidgetItem(face_name))
+                self.FaceRecognitionPage.tableWidget_resultTable.setItem(currentLine,4,QTableWidgetItem(add_date))
+                currentLine += 1
+            
+    
+    
+    def start_manuel_database_search(self):
+        currentSearchType = self.FaceRecognitionPage.comboBox_targetColumn.currentIndex()
+        currentSearchString = self.FaceRecognitionPage.lineEdit_searchInput.text()
+        
+        if len(currentSearchString) == 0 and currentSearchType == 2:
+            self.FaceRecognitionPage.textBrowser_ManuelSearchLogConsole.append(gen_error_text("Geçerli bir arama terimi girilmedi, işlem iptal edildi"))
+            return
+        
+        self.manuelSearchThread = manuelDatabaseSearcherThread(db_cnn=self.databaseConnections,db_curosr=self.databaseCursor,search_keywords=currentSearchString,selected_search=currentSearchType)
+        self.manuelSearchThread.threadSignal.connect(self.manuel_database_search_thread_signal_handler)
+        self.manuelSearchThread.start()
+        

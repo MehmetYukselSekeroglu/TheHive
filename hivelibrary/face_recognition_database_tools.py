@@ -4,6 +4,24 @@ from hivelibrary.env import DB_FACE_RECOGNITION_TABLE
 
 
 
+def get_image_from_id(db_cursor:sqlite3.Connection,db_id:int) -> dict:
+    try:
+        
+        STATIC_SQL_COMMAND = f"SELECT * FROM {DB_FACE_RECOGNITION_TABLE} WHERE id=?"
+        STATIC_DATA_TUPLE = (db_id,)
+        
+        results = db_cursor.execute(STATIC_SQL_COMMAND,STATIC_DATA_TUPLE).fetchall()
+        
+        if len(results) < 1:
+            return { "success":False , "data":"No results" }
+        
+        return { "success":True, "data":results[0][1] }
+        
+    
+    except Exception as err:
+        return { "success":False, "data":f"Failed to get data, {err}" }
+
+
 class recognitionDbTools():
     
     def __init__(self, db_curosr:sqlite3.Cursor, db_cnn:sqlite3.Connection) -> None:

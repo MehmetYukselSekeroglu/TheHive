@@ -1,5 +1,6 @@
 __pycache__
 hive_database.sqlite3
+testFile.py
 *.sqlite3
 *.db
 tmp*
