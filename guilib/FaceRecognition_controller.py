@@ -8,7 +8,7 @@ from guilib.external_thread_modules.FaceRecognitionDirectoryTransfer import dire
 from guilib.external_thread_modules.FaceRecognitionManuelDatabaseSearch import manuelDatabaseSearcherThread
 
 from hivelibrary.console_tools import InformationPrinter
-from hivelibrary.env import DEFAULT_LOGO_PATH,DB_FACE_RECOGNITION_TABLE,DEFAULT_TEMP_DIR
+from hivelibrary.env import DEFAULT_LOGO_PATH,DB_FACE_RECOGNITION_TABLE,DEFAULT_TEMP_DIR,DEFAULT_ROOT_DIR_NAME
 from hivelibrary.face_recognition_database_tools import recognitionDbTools,get_image_from_id
 from hivelibrary.file_operations import generic_tools
 
@@ -154,6 +154,7 @@ class FaceRecognitionWidget(QWidget):
         self.FaceRecognitionPage.pushButton_starManueltSearch.clicked.connect(self.start_manuel_database_search)
         self.FaceRecognitionPage.pushButton_clearResultManuelSearch.clicked.connect(self.clear_all_manuel_search_output)
         self.FaceRecognitionPage.pushButton_stopActiveManuelSearch.clicked.connect(self.stopActivaManuelSearch)
+        self.FaceRecognitionPage.pushButton_saveCurrentImage.clicked.connect(self.save_current_image)
         self.FaceRecognitionPage.comboBox_targetColumn.currentIndexChanged.connect(self.updateManuelSearchLineEdit)
         self.FaceRecognitionPage.tableWidget_resultTable.cellClicked.connect(self.table_widget_signal_handler)
         self.FaceRecognitionPage.tableWidget_resultTable.setEditTriggers(QAbstractItemView.NoEditTriggers)
@@ -480,4 +481,26 @@ class FaceRecognitionWidget(QWidget):
         self.manuelSearchThread = manuelDatabaseSearcherThread(db_cnn=self.databaseConnections,db_curosr=self.databaseCursor,search_keywords=currentSearchString,selected_search=currentSearchType)
         self.manuelSearchThread.threadSignal.connect(self.manuel_database_search_thread_signal_handler)
         self.manuelSearchThread.start()
+        
+    def save_current_image(self):
+        
+        getCurrentLine = self.FaceRecognitionPage.tableWidget_resultTable.currentRow()
+        getCurrentColumn = self.FaceRecognitionPage.tableWidget_resultTable.currentColumn()
+        if getCurrentLine < 0 and getCurrentColumn != 1:
+            self.FaceRecognitionPage.textBrowser_ManuelSearchLogConsole.append(gen_error_text("Kaydedilecek resmin üzerine tıklayınız önce."))
+            return
+        
+        db_id = self.FaceRecognitionPage.tableWidget_resultTable.item(getCurrentLine,0).text()
+        faceNmae = self.FaceRecognitionPage.tableWidget_resultTable.item(getCurrentLine,3).text()
+        image_data = get_image_from_id(self.databaseCursor,db_id=int(db_id))
+        
+        if image_data["success"] != True:
+            self.FaceRecognitionPage.textBrowser_ManuelSearchLogConsole.append(gen_error_text(f"Resim kaydedilemedi: {image_data['data']}"))
+            return
+        
+        file_path = DEFAULT_ROOT_DIR_NAME + str(os.path.sep) + str(faceNmae)+".png"
+        with open(file_path,"wb") as targetFile:
+            targetFile.write(image_data["data"])
+        
+        self.FaceRecognitionPage.textBrowser_ManuelSearchLogConsole.append(gen_info_text(f"Resim başarıyla dışa aktarıldı, {file_path}"))
         
