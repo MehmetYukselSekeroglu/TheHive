@@ -27,7 +27,7 @@ class faceRecognitionBackendThread(QThread):
         self.targetImagePath = targetFaceImagePath
         self.faceAnalayserUI = faceAnalayserUI
         self.threadStopSignal = False
-        self.minSimilarity = 30
+        self.minSimilarity = 35
         self.similartiyStorageDcit = {}
         self.maxThread = 100
         
@@ -209,6 +209,10 @@ class FaceRecognitionWidget(QWidget):
         if self.DatabaseSearchThread.isRunning():
             self.FaceRecognitionPage.textBrowser_logConsole.append(gen_error_text("İşlem zaten aktif, yeniden başlatmak için bitmeli veya durdurulmalı"))
             return   
+        
+        if self.MultiAdderThread.isRunning():
+            self.FaceRecognitionPage.textBrowser_logConsole.append(gen_error_text("Klasör ekleme işlemi aktif iken arama yapılamaz"))
+            return
         
         if self.selectedSourceImage == None :
             self.FaceRecognitionPage.textBrowser_logConsole.append(gen_error_text("Kaynak resim seçilmedi, işlem iptal edildi"))
@@ -435,7 +439,9 @@ class FaceRecognitionWidget(QWidget):
                 self.FaceRecognitionPage.textBrowser_ManuelSearchLogConsole.append(gen_error_text(f"Resim ekrana getirilemedi: {image_data['data']}"))
                 return
             self.show_cv2_image_target_label(image_data=image_data["data"],targetLabel=self.FaceRecognitionPage.label_dbManuelSearchImageShower)
-    
+            
+            
+            
     def manuel_database_search_thread_signal_handler(self,thread_dict):
         results = thread_dict
         
@@ -474,7 +480,7 @@ class FaceRecognitionWidget(QWidget):
         currentSearchType = self.FaceRecognitionPage.comboBox_targetColumn.currentIndex()
         currentSearchString = self.FaceRecognitionPage.lineEdit_searchInput.text()
         
-        if len(currentSearchString) == 0 and currentSearchType == 2:
+        if len(currentSearchString) == 0 and currentSearchType != 2:
             self.FaceRecognitionPage.textBrowser_ManuelSearchLogConsole.append(gen_error_text("Geçerli bir arama terimi girilmedi, işlem iptal edildi"))
             return
         
