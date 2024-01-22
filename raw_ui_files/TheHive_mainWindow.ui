@@ -122,11 +122,18 @@
     </widget>
     <addaction name="menuTurkey_Only"/>
    </widget>
+   <widget class="QMenu" name="menuExternel_Madules">
+    <property name="title">
+     <string>Externel Madules</string>
+    </property>
+    <addaction name="actionimport_module"/>
+   </widget>
    <addaction name="menuSecurity"/>
    <addaction name="menuOsintTools"/>
    <addaction name="menuFile_operations"/>
    <addaction name="menuIdentify_Tools"/>
    <addaction name="menuRegion_specific_only"/>
+   <addaction name="menuExternel_Madules"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionChange_Login_Password">
@@ -187,6 +194,11 @@
   <action name="actionTC_Calculator">
    <property name="text">
     <string>TC Calculator</string>
+   </property>
+  </action>
+  <action name="actionimport_module">
+   <property name="text">
+    <string>import module</string>
    </property>
   </action>
  </widget>

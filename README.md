@@ -133,6 +133,9 @@ deactivate
 
 
 <p>Thanks to the local SQLite database, it enables fast and clear database searches without the need for any server or additional installation. Pure binary data of the image, sha1 hash to protect against repeated images, reference points for quick comparison, general points of the face, face frame, name of addition to the system, date of insertion in UTC are stored in the database, thus enabling high-speed searching. In the experiments carried out with 1500 random images, we have not come across a False positive (what the system thinks is correct, but it is wrong) situation. Since cosine similarity is used instead of face models for similarity calculation, the rate will not be 100% in different images of the same person, but it creates a significant difference when compared with others. In this way, the system works efficiently.
+
+
+As a result of the experiment conducted on 35,000 random images, the lower limit of similarity was reduced to 35%, thus preventing erroneous results from being returned.
 <br>
 
 
