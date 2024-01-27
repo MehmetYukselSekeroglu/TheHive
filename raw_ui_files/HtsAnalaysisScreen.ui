@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>HTSanalaysis</class>
+ <widget class="QMainWindow" name="HTSanalaysis">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>974</width>
+    <height>714</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>30</y>
+      <width>911</width>
+      <height>261</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Boyutu:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QTextBrowser" name="textBrowser_2">
+       <property name="minimumSize">
+        <size>
+         <width>550</width>
+         <height>31</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>550</width>
+         <height>31</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>sha1 has'i</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QTextBrowser" name="textBrowser">
+       <property name="minimumSize">
+        <size>
+         <width>550</width>
+         <height>31</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>550</width>
+         <height>31</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QTextBrowser" name="textBrowser_4">
+       <property name="minimumSize">
+        <size>
+         <width>550</width>
+         <height>31</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>550</width>
+         <height>31</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Dosya Yolu:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QTextBrowser" name="textBrowser_3">
+       <property name="minimumSize">
+        <size>
+         <width>550</width>
+         <height>31</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>550</width>
+         <height>31</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Formatı:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>974</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuDosya_A">
+    <property name="title">
+     <string>Dosya Aç</string>
+    </property>
+    <addaction name="actionExcel_Dosyas"/>
+   </widget>
+   <widget class="QMenu" name="menuBilgi">
+    <property name="title">
+     <string>Bilgi</string>
+    </property>
+    <addaction name="actionDesteklenen_Formatlar"/>
+   </widget>
+   <addaction name="menuDosya_A"/>
+   <addaction name="menuBilgi"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionDosya_A">
+   <property name="text">
+    <string>Dosya Aç</string>
+   </property>
+  </action>
+  <action name="actionBu_format_nedir">
+   <property name="text">
+    <string>Bu format nedir?</string>
+   </property>
+  </action>
+  <action name="actionExcel_Dosyas">
+   <property name="text">
+    <string>Excel Dosyası</string>
+   </property>
+  </action>
+  <action name="actionDesteklenen_Formatlar">
+   <property name="text">
+    <string>Desteklenen Formatlar</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
