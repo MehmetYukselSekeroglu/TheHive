@@ -52,3 +52,10 @@ def loginCreditHhasher(text:str) -> str:
 
 
 
+def file_hash_sha1(file_path:str) -> str:
+    sha_1_hasher = hashlib.sha1()
+    with open(file_path,"rb") as targetFile:
+        sha_1_hasher.update(targetFile.read())
+    return sha_1_hasher.hexdigest()
+
+

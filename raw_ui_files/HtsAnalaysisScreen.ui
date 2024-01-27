@@ -1,183 +1,287 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>HTSanalaysis</class>
- <widget class="QMainWindow" name="HTSanalaysis">
+ <widget class="QWidget" name="HTSanalaysis">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>974</width>
-    <height>714</height>
+    <width>868</width>
+    <height>642</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Form</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="widget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>30</y>
-      <width>911</width>
-      <height>261</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Boyutu:</string>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab_1_general">
+      <attribute name="title">
+       <string>Dosya Bilgileri</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0">
+        <widget class="QWidget" name="widget" native="true">
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Dosya Yolu:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QTextBrowser" name="textBrowser_targetFileSize">
+            <property name="minimumSize">
+             <size>
+              <width>550</width>
+              <height>31</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>550</width>
+              <height>31</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QPushButton" name="pushButton_selectFile">
+            <property name="text">
+             <string>Dosya Seç</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Boyutu:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QPushButton" name="pushButton_stopAnalays">
+            <property name="text">
+             <string>Analizi Durdur</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QTextBrowser" name="textBrowser_targetFilePathShow">
+            <property name="minimumSize">
+             <size>
+              <width>550</width>
+              <height>31</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>550</width>
+              <height>31</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2" rowspan="4">
+           <widget class="Line" name="line">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QPushButton" name="pushButton_startAnalays">
+            <property name="text">
+             <string>Analizi Başlat</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>sha1 has'i</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Formatı:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QTextBrowser" name="textBrowser_targetFileFormatStatus">
+            <property name="minimumSize">
+             <size>
+              <width>550</width>
+              <height>31</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>550</width>
+              <height>31</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="3" column="1">
+           <widget class="QTextBrowser" name="textBrowser_targetFileSha1Hash">
+            <property name="minimumSize">
+             <size>
+              <width>550</width>
+              <height>31</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>550</width>
+              <height>31</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="3">
+           <widget class="QPushButton" name="pushButton_clearAll">
+            <property name="text">
+             <string>Temizle</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QTextBrowser" name="textBrowser_logConsole_tab1">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>381</height>
+          </size>
+         </property>
+         <property name="html">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Cantarell'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;LOG CONSOLE:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Analiz Ekranı</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>Arama yap</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <item row="0" column="0">
+        <widget class="QWidget" name="widget_2" native="true">
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Aranacak Sütun:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QComboBox" name="comboBox_tab3_searchSutun"/>
+          </item>
+          <item row="3" column="2">
+           <widget class="QPushButton" name="pushButton_tab3_temizle">
+            <property name="text">
+             <string>Temizle</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="3">
+           <widget class="QPushButton" name="pushButton_tab3_runSearch">
+            <property name="text">
+             <string>Ara</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="4">
+           <widget class="QPushButton" name="pushButton_tab3_saveExcel">
+            <property name="text">
+             <string>Kaydet (excel olarak)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>Arana Terimi:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1" colspan="4">
+           <widget class="QLineEdit" name="lineEdit_tab3_searchInput"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QTableWidget" name="tableWidget_tab3_resutTable"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Harita Ekranı</string>
+      </attribute>
+      <widget class="QWebView" name="webView">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>40</y>
+         <width>491</width>
+         <height>491</height>
+        </rect>
+       </property>
+       <property name="url">
+        <url>
+         <string>about:blank</string>
+        </url>
        </property>
       </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QTextBrowser" name="textBrowser_2">
-       <property name="minimumSize">
-        <size>
-         <width>550</width>
-         <height>31</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>550</width>
-         <height>31</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>sha1 has'i</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QTextBrowser" name="textBrowser">
-       <property name="minimumSize">
-        <size>
-         <width>550</width>
-         <height>31</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>550</width>
-         <height>31</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QTextBrowser" name="textBrowser_4">
-       <property name="minimumSize">
-        <size>
-         <width>550</width>
-         <height>31</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>550</width>
-         <height>31</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Dosya Yolu:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QTextBrowser" name="textBrowser_3">
-       <property name="minimumSize">
-        <size>
-         <width>550</width>
-         <height>31</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>550</width>
-         <height>31</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>Formatı:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
-   </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>974</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuDosya_A">
-    <property name="title">
-     <string>Dosya Aç</string>
-    </property>
-    <addaction name="actionExcel_Dosyas"/>
-   </widget>
-   <widget class="QMenu" name="menuBilgi">
-    <property name="title">
-     <string>Bilgi</string>
-    </property>
-    <addaction name="actionDesteklenen_Formatlar"/>
-   </widget>
-   <addaction name="menuDosya_A"/>
-   <addaction name="menuBilgi"/>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionDosya_A">
-   <property name="text">
-    <string>Dosya Aç</string>
-   </property>
-  </action>
-  <action name="actionBu_format_nedir">
-   <property name="text">
-    <string>Bu format nedir?</string>
-   </property>
-  </action>
-  <action name="actionExcel_Dosyas">
-   <property name="text">
-    <string>Excel Dosyası</string>
-   </property>
-  </action>
-  <action name="actionDesteklenen_Formatlar">
-   <property name="text">
-    <string>Desteklenen Formatlar</string>
-   </property>
-  </action>
+     </widget>
+    </widget>
+   </item>
+  </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QWebView</class>
+   <extends>QWidget</extends>
+   <header location="global">QtWebKitWidgets/QWebView</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
