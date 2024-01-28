@@ -132,7 +132,7 @@ class TheHive_mainPage(QMainWindow):
         self.FaceDetectionScreen.show()
     
     def menuAction_voiceVerification(self):
-        self.voiceVerificationScreen = voiceVerificationPage(temp_dir=env.DEFAULT_TEMP_DIR)
+        self.voiceVerificationScreen = CoomingSoonPage(outputMessage="Kütüpahne güncellemesi nedeniyle doğruluk oranları tekrar hesaplanacaktır bu modul şuan kapalıdır")
         self.voiceVerificationScreen.show()
     
     def menuAction_soundConverter(self):

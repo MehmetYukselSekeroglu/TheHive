@@ -8,5 +8,5 @@ Resemblyzer<=0.1.4
 opencv-python<=4.8.0.74
 onnxruntime<=1.16.3
 insightface<=0.7.3
-numpy<=1.26.3
+numpy<=1.26.2
 shodan<=1.30.1
