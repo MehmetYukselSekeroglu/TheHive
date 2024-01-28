@@ -12,3 +12,7 @@ share*
 testFile*
 test*
 primeexternal*
+*.venv
+.venv/*
+.venv
+.venv*
