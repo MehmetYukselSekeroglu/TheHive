@@ -18,6 +18,7 @@
         - Face recognition ( Now Active )
         - Face detection (Now Active)
         - Face verification ( Now Active )
+        - Reverse IP lookup ( Now Active )
         - Voice verification ( Now Active)
         - Clone voice detections ( coming soon )
         - Iban parser ( Now Active)
@@ -183,6 +184,14 @@ As a result of the experiment conducted on 35,000 random images, the lower limit
 <img src="./img/ibanParserGUI.png">
 <br>
 <p>IBAN, which is frequently used in payment transactions, contains certain information. You can access certain open source information by analyzing them. This module does this automatically. Currently, there is full support only for IBANs belonging to Turkey. It is possible that it may provide incomplete information for other IBANs.</p>
+<br>
+
+
+
+## Reverse IP lookup (Basic)
+
+<br>
+<img src="./img/reverseIPlookup_basic.png">
 <br>
 
 
