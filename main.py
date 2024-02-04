@@ -6,18 +6,26 @@
 
 # importing hive toolkit
 from hivelibrary import console_tools
+from hivelibrary.banner import printBanner
+
+printBanner()
+
+console_tools.InformationPrinter("importing TheHive library")
 from hivelibrary.env import *
 from hivelibrary import database_tools
 from hivelibrary import database_structure
 
+console_tools.InformationPrinter("importing PyQt")
 # importing python packagets
 from PyQt5.QtWidgets import *
 import sqlite3
 
+console_tools.InformationPrinter("importing TheHive UI")
 # importing gui 
 from guilib.login_controller import LoginScreen
 from guilib.new_account_controller import NewAccountScreen
 from guilib.main_controller import TheHive_mainPage
+
 
 if not os.path.exists(DEFAULT_TEMP_DIR) or not os.path.isdir(DEFAULT_TEMP_DIR):
     os.makedirs(DEFAULT_TEMP_DIR)
@@ -32,15 +40,15 @@ DBS_CONF = [DB_CNN, DB_CURSOR]
 DB_CURSOR.executescript(database_structure.FACE_RECOGNITION_DATABASE_STRUCTUR_COMMAND)
 
 if database_tools.check_db_init_status(*DBS_CONF) == False:
-    console_tools.LogPrinter(f"Database init started")
-    console_tools.LogPrinter("Inıting database schema")
+    console_tools.InformationPrinter(f"Database init started")
+    console_tools.InformationPrinter("Inıting database schema")
     DB_CURSOR.executescript(database_structure.DATABASE_STRUCTURE_COMMAND)
     print(database_tools.insertData_systemTable(*DBS_CONF,sql_key=APPLICATION_VENDOR_KEY, key_value=APPLICATION_VENDOR_VALUE))
     print(database_tools.insertData_systemTable(*DBS_CONF,sql_key=APPLICATION_NAME_KEY, key_value=APPLICATION_NAME_VALUE))
     print(database_tools.insertData_systemTable(*DBS_CONF,sql_key=APPLICATION_VERSION_KEY, key_value=APPLICATION_VERSION_VALUE))
 
 
-console_tools.LogPrinter("Database alredy configurated")
+console_tools.InformationPrinter("Database alredy configurated")
 
 
 if database_tools.check_admin_is_generated(db_cursor=DB_CURSOR)["success"] == True:
@@ -50,7 +58,7 @@ if database_tools.check_admin_is_generated(db_cursor=DB_CURSOR)["success"] == Tr
     standartApp.exec_()
     
 else:
-    console_tools.LogPrinter("admin account not be detect starting account manager")
+    console_tools.InformationPrinter("admin account not be detect starting account manager")
     firstStartApp = QApplication([])
     firstStartWindow = NewAccountScreen(db_connections=DB_CNN,db_cursor=DB_CURSOR,targetWindow=TheHive_mainPage)
     firstStartWindow.show()
