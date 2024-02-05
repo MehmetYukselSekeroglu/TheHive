@@ -39,6 +39,8 @@ DB_CURSOR = DB_CNN.cursor()
 DBS_CONF = [DB_CNN, DB_CURSOR]
 DB_CURSOR.executescript(database_structure.FACE_RECOGNITION_DATABASE_STRUCTUR_COMMAND)
 
+console_tools.InformationPrinter("UI starting")
+
 if database_tools.check_db_init_status(*DBS_CONF) == False:
     console_tools.InformationPrinter(f"Database init started")
     console_tools.InformationPrinter("Inıting database schema")

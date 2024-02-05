@@ -20,14 +20,14 @@ class faceRecognitionBackendThread(QThread):
     
     statusSignal = pyqtSignal(dict)
 
-    def __init__(self, targetFaceImagePath:str, faceAnalayserUI:object, db_curosr:sqlite3.Cursor,):
+    def __init__(self, targetFaceImagePath:str, faceAnalayserUI:object, db_curosr:sqlite3.Cursor, minSimilarityRate:int):
         super().__init__()
         
         self.databaseCursor = db_curosr
         self.targetImagePath = targetFaceImagePath
         self.faceAnalayserUI = faceAnalayserUI
         self.threadStopSignal = False
-        self.minSimilarity = 35
+        self.minSimilarity = minSimilarityRate
         self.similartiyStorageDcit = {}
         self.maxThread = 100
         
@@ -53,6 +53,7 @@ class faceRecognitionBackendThread(QThread):
         self.__runningStatusReturner(text="Gereksinimler başarıyla içe aktarıldı")
         raw_cv2_image = cv2.imread(self.targetImagePath)
         analysedSourceImage = self.faceAnalayserUI.get(raw_cv2_image)
+        self.__runningStatusReturner(text=f"Seçilen en düşük benzerlik değeri: %{self.minSimilarity}")
         self.__runningStatusReturner(text="Veritabanı kontrol ediliyor")
         rsults = self.databaseCursor.execute(f"SELECT COUNT(*) FROM {DB_FACE_RECOGNITION_TABLE}").fetchall()[0][0]
         
@@ -161,6 +162,7 @@ class FaceRecognitionWidget(QWidget):
         self.DatabaseSearchThread = QThread()
         self.MultiAdderThread = QThread()
         self.manuelSearchThread = QThread()
+        self.minimumSimilaritySize = self.getMinSimilartiyCurrentValue()
         self.databaseConnections = db_cnn
         self.databaseCursor = db_curosr
         self.selectedDirectory = None
@@ -176,6 +178,37 @@ class FaceRecognitionWidget(QWidget):
         InformationPrinter("FaceRecognitionDatabaseTools successfuly init")
         
     
+
+    
+    def getMinSimilartiyCurrentValue(self) -> int:
+        currentIndex = self.FaceRecognitionPage.comboBox_minSimVal.currentIndex()
+        
+        if currentIndex == 0:
+            return 10
+        if currentIndex == 1:
+            return 20
+        if currentIndex == 2:
+            return 30
+        if currentIndex == 3:
+            return 35
+        if currentIndex == 4:
+            return 40
+        if currentIndex == 5:
+            return 45
+        if currentIndex == 6:
+            return 50
+        if currentIndex == 7:
+            return 60
+        if currentIndex == 8:
+            return 70
+        if currentIndex == 9:
+            return 80
+        if currentIndex == 10:
+            return 90
+        if currentIndex == 11:
+            return 100
+        
+        
     
     def threadSignalHandler(self,thread_dict):
         if thread_dict["success"] == None and thread_dict["end"] == False:
@@ -218,8 +251,10 @@ class FaceRecognitionWidget(QWidget):
             self.FaceRecognitionPage.textBrowser_logConsole.append(gen_error_text("Kaynak resim seçilmedi, işlem iptal edildi"))
             return
         
+        
+        self.minimumSimilaritySize = self.getMinSimilartiyCurrentValue()
         self.FaceRecognitionPage.textBrowser_logConsole.append(gen_info_text("Veritabanı araması başlaılıyor"))
-        self.DatabaseSearchThread = faceRecognitionBackendThread(targetFaceImagePath=self.selectedSourceImage,faceAnalayserUI=self.FaceAnalysisUI,db_curosr=self.databaseCursor)
+        self.DatabaseSearchThread = faceRecognitionBackendThread(targetFaceImagePath=self.selectedSourceImage,faceAnalayserUI=self.FaceAnalysisUI,db_curosr=self.databaseCursor,minSimilarityRate=self.minimumSimilaritySize)
         self.DatabaseSearchThread.statusSignal.connect(self.threadSignalHandler)
         self.DatabaseSearchThread.start()
 
