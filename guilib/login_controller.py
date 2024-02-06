@@ -2,6 +2,7 @@
 from guilib.loginScreen import Ui_AuthenticationScreen
 
 from hivelibrary import database_tools
+from hivelibrary import console_tools
 
 from PyQt5.QtWidgets import *
 import sqlite3
@@ -11,6 +12,9 @@ import sys
 class LoginScreen(QWidget):
     def __init__(self, sqlite_cnn:sqlite3.Connection, sqlite_curosr:sqlite3.Cursor, targetWindow):
         super().__init__()
+        
+        console_tools.InformationPrinter("Starting login screen")
+        
         # set external varaibles
         self.db_connections = sqlite_cnn
         self.db_cursor = sqlite_curosr
@@ -41,12 +45,14 @@ class LoginScreen(QWidget):
         input_password = self.loginScreen.lineEdit_initralAuth_password.text()
         
         if self.CURRENT_TRY >= self.MAX_LOGIN_TRY:
+            console_tools.WarnPrinter("Maximum trial limit exceeded, exiting the program")
             self.exitProtocol()
         
             
         authenticateStatus = database_tools.is_authenticated(username=input_username,password=input_password,db_cursor=self.db_cursor)
 
         if authenticateStatus["success"] != True:
+            console_tools.ErrorPrinter("Wrong password or username")
             err_text = f"Status: Failed, {str(self.MAX_LOGIN_TRY - self.CURRENT_TRY)} credit left."
             self.loginScreen.label_4_authenticate_status.setText(err_text)
             self.loginScreen.lineEdit_initralAuth_username.clear()
@@ -54,6 +60,7 @@ class LoginScreen(QWidget):
             return
 
         else:
+            console_tools.InformationPrinter("Authentication successfully")
             self.hide()
             self.targetMainWindow.show()
     
