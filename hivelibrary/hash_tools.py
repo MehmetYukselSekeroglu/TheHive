@@ -59,3 +59,23 @@ def file_hash_sha1(file_path:str) -> str:
     return sha_1_hasher.hexdigest()
 
 
+
+
+def all_hash(file_path:str) -> dict:     
+    with open(file_path, "rb") as targetFile:
+        raw_data = targetFile.read()
+    
+    return {
+        "sha1": hashlib.sha1(raw_data).hexdigest(),
+        "sha256":hashlib.sha256(raw_data).hexdigest(),
+        "md5":hashlib.sha256(raw_data).hexdigest()
+    }
+        
+        
+        
+            
+    
+    
+    
+    
+    

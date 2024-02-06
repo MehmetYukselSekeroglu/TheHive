@@ -1,11 +1,4 @@
-from guilib.IPtracerBasic_controller import BasicIPtracerWidget
-
-
-from PyQt5.QtWidgets import *
+import androguard
 
 
 
-app = QApplication([])
-win = BasicIPtracerWidget()
-win.show()
-app.exec_()
