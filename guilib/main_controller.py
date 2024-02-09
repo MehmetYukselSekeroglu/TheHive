@@ -73,8 +73,9 @@ TheHive version: {env.APPLICATION_VERSION_VALUE}"""
 
 
 class TheHive_mainPage(QMainWindow):
-    def __init__(self, db_cnn:sqlite3.Connection, db_cursor:sqlite3.Cursor):
+    def __init__(self, db_cnn, db_cursor):
         super().__init__()
+        
         
         self.mainScreen = Ui_TheHve_MainWindow()
         self.mainScreen.setupUi(self)

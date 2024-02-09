@@ -20,7 +20,7 @@ class faceRecognitionBackendThread(QThread):
     
     statusSignal = pyqtSignal(dict)
 
-    def __init__(self, targetFaceImagePath:str, faceAnalayserUI:object, db_curosr:sqlite3.Cursor, minSimilarityRate:int):
+    def __init__(self, targetFaceImagePath:str, faceAnalayserUI:object, db_curosr, minSimilarityRate:int):
         super().__init__()
         
         self.databaseCursor = db_curosr
@@ -55,8 +55,8 @@ class faceRecognitionBackendThread(QThread):
         analysedSourceImage = self.faceAnalayserUI.get(raw_cv2_image)
         self.__runningStatusReturner(text=f"Seçilen en düşük benzerlik değeri: %{self.minSimilarity}")
         self.__runningStatusReturner(text="Veritabanı kontrol ediliyor")
-        rsults = self.databaseCursor.execute(f"SELECT COUNT(*) FROM {DB_FACE_RECOGNITION_TABLE}").fetchall()[0][0]
-        
+        self.databaseCursor.execute(f"SELECT COUNT(*) FROM {DB_FACE_RECOGNITION_TABLE}")
+        rsults = self.databaseCursor.fetchall()[0][0]
         if int(rsults) < 1:
             self.__finalyStatusReturner(text=gen_error_text("Veritabanı boş, arama yapmak için önce veritabanına ekleme yapınız"),success_status=False,)
             return 
@@ -106,11 +106,11 @@ class faceRecognitionBackendThread(QThread):
             if value == enYuksekBenzerlik:
                 enBenzerID = key
         
-        STATIC_SQL_COMMAND = f"SELECT * FROM {DB_FACE_RECOGNITION_TABLE} WHERE id=?"
+        STATIC_SQL_COMMAND = f"SELECT * FROM {DB_FACE_RECOGNITION_TABLE} WHERE id=%s"
         STATIC_DATA_TUPLE = (enBenzerID,)
         
-        results = self.databaseCursor.execute(STATIC_SQL_COMMAND,STATIC_DATA_TUPLE).fetchall()[0]
-        
+        self.databaseCursor.execute(STATIC_SQL_COMMAND,STATIC_DATA_TUPLE)
+        results = self.databaseCursor.fetchall()[0]
         detectedFaceSimilartiyRate = self.similartiyStorageDcit[enBenzerID]
         detectedFaceDatabaseID= enBenzerID
         detectedFacePictur = results[1]
@@ -130,7 +130,7 @@ class faceRecognitionBackendThread(QThread):
         self.__finalyStatusReturner(text=return_text,success_status=True,cv2_image=detectedFacePictur,face_name=detectedFaceName,similartiy=detectedFaceSimilartiyRate)
 
 class FaceRecognitionWidget(QWidget):
-    def __init__(self, db_cnn:sqlite3.Connection, db_curosr:sqlite3.Cursor):
+    def __init__(self, db_cnn, db_curosr):
         super().__init__()
         
         self.FaceRecognitionPage = Ui_FaceRecognitionWidget()
@@ -500,6 +500,7 @@ class FaceRecognitionWidget(QWidget):
                 image_hash = single_row[2]
                 face_name = single_row[6]
                 add_date = single_row[7]
+                add_date = str(add_date)
                 
                 
                 self.FaceRecognitionPage.tableWidget_resultTable.setItem(currentLine,0,QTableWidgetItem(str(database_id)))

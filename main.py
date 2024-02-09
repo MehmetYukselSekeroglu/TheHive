@@ -15,6 +15,10 @@ from hivelibrary.env import *
 from hivelibrary import database_tools
 from hivelibrary import database_structure
 
+
+console_tools.InformationPrinter("importing PostgreSQL config")
+from hivelibrary.psqlConfig import POSTGRESQL_CONFIG
+
 console_tools.InformationPrinter("importing PyQt")
 # importing python packagets
 from PyQt5.QtWidgets import *
@@ -34,25 +38,25 @@ if not os.path.exists(DEFAULT_ROOT_DIR_NAME) or not os.path.isdir(DEFAULT_ROOT_D
     os.makedirs(DEFAULT_ROOT_DIR_NAME)
 
 # Start database connections
-DB_CNN = sqlite3.connect(DATABASE_PATH,check_same_thread=False)
-DB_CURSOR = DB_CNN.cursor()
+DB_CNN , DB_CURSOR = database_tools.connection_function(POSTGRESQL_CONFIG)
 DBS_CONF = [DB_CNN, DB_CURSOR]
-DB_CURSOR.executescript(database_structure.FACE_RECOGNITION_DATABASE_STRUCTUR_COMMAND)
+
+
+
+
+
 
 console_tools.InformationPrinter("UI starting")
-
 if database_tools.check_db_init_status(*DBS_CONF) == False:
     console_tools.InformationPrinter(f"Database init started")
     console_tools.InformationPrinter("Inıting database schema")
-    DB_CURSOR.executescript(database_structure.DATABASE_STRUCTURE_COMMAND)
+    DB_CURSOR.execute(database_structure.POSTGRESQL_DATABASE_STRUCTURE)
     print(database_tools.insertData_systemTable(*DBS_CONF,sql_key=APPLICATION_VENDOR_KEY, key_value=APPLICATION_VENDOR_VALUE))
     print(database_tools.insertData_systemTable(*DBS_CONF,sql_key=APPLICATION_NAME_KEY, key_value=APPLICATION_NAME_VALUE))
     print(database_tools.insertData_systemTable(*DBS_CONF,sql_key=APPLICATION_VERSION_KEY, key_value=APPLICATION_VERSION_VALUE))
 
 
 console_tools.InformationPrinter("Database alredy configurated")
-
-
 if database_tools.check_admin_is_generated(db_cursor=DB_CURSOR)["success"] == True:
     standartApp = QApplication([])
     standartWindow = LoginScreen(sqlite_cnn=DB_CNN,sqlite_curosr=DB_CURSOR,targetWindow=TheHive_mainPage)

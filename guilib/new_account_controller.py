@@ -10,10 +10,10 @@ import sys
 
 
 class NewAccountScreen(QWidget):
-    def __init__(self, db_connections:sqlite3.Connection, db_cursor:sqlite3.Cursor, targetWindow):
+    def __init__(self, db_connections, db_cursor, targetWindow,):
         super().__init__()
         
-        # setup the ui
+    # setup the ui
         self.newAccountPage = Ui_ConfigureAccounts()
         self.newAccountPage.setupUi(self)
         

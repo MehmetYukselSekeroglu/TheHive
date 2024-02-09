@@ -4,8 +4,8 @@ import os
 # table structure
 DB_SYSTEM_TABLE = "system_core"
 DB_BLOB_STORAGE = "blob_storage"
-DB_LOCAL_AUTHENTICATE_TABLE = "local_authentication"
-DB_FACE_RECOGNITION_TABLE = "face_recognition_storage"
+DB_LOCAL_AUTHENTICATE_TABLE = "authentication"
+DB_FACE_RECOGNITION_TABLE = "face_recognition_standart"
 
 # Data storage types
 DB_DATA_TYPE__SYSTEM = "system"
@@ -23,6 +23,9 @@ DATABASE_INIT_STATUS = "database_status"
 APPLICATION_VENDOR_KEY = "application_vendor"
 APPLICATION_NAME_KEY = "application_name"
 APPLICATION_VERSION_KEY = "application_version"
+
+DATABASE_NAME = "thehive"
+
 
 DATABASE_FILE_NAME = "hive_database.sqlite3"
 DATABASE_PATH = DATABASE_FILE_NAME

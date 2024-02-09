@@ -46,6 +46,6 @@ def get_memory_usage() -> dict:
 
 
 def max_thread_calculator() -> int:
-    total_cpu_count = total_cpu_count()
-    maxThread = total_cpu_count * 3
+    total_cpı = total_cpu_count()
+    maxThread = total_cpı
     return maxThread

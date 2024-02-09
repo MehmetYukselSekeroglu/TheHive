@@ -10,9 +10,8 @@ import sys
 
 
 class LoginScreen(QWidget):
-    def __init__(self, sqlite_cnn:sqlite3.Connection, sqlite_curosr:sqlite3.Cursor, targetWindow):
+    def __init__(self, sqlite_cnn, sqlite_curosr, targetWindow):
         super().__init__()
-        
         console_tools.InformationPrinter("Starting login screen")
         
         # set external varaibles

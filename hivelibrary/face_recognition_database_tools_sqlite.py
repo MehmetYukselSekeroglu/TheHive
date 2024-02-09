@@ -1,20 +1,16 @@
+import sqlite3
 import hashlib
 from hivelibrary.env import DB_FACE_RECOGNITION_TABLE
-import psycopg2
 
 
 
-# for postgresql
-
-
-def get_image_from_id(db_cursor,db_id:int) -> dict:
+def get_image_from_id(db_cursor:sqlite3.Connection,db_id:int) -> dict:
     try:
         
-        STATIC_SQL_COMMAND = f"SELECT * FROM {DB_FACE_RECOGNITION_TABLE} WHERE id=%s"
+        STATIC_SQL_COMMAND = f"SELECT * FROM {DB_FACE_RECOGNITION_TABLE} WHERE id=?"
         STATIC_DATA_TUPLE = (db_id,)
         
-        db_cursor.execute(STATIC_SQL_COMMAND,STATIC_DATA_TUPLE)
-        results = db_cursor.fetchall()
+        results = db_cursor.execute(STATIC_SQL_COMMAND,STATIC_DATA_TUPLE).fetchall()
         
         if len(results) < 1:
             return { "success":False , "data":"No results" }
@@ -28,7 +24,7 @@ def get_image_from_id(db_cursor,db_id:int) -> dict:
 
 class recognitionDbTools():
     
-    def __init__(self, db_curosr, db_cnn) -> None:
+    def __init__(self, db_curosr:sqlite3.Cursor, db_cnn:sqlite3.Connection) -> None:
         
         self.databaseConnections = db_cnn
         self.databaseCursor = db_curosr
@@ -39,34 +35,27 @@ class recognitionDbTools():
         image_hash = image_hash.hexdigest()
         return image_hash
         
-        
     def check_hash_is_exists(self, image_hash)-> bool:
-        
-        STATIC_SQL_COMMAND = f"SELECT EXISTS(SELECT 1 FROM {DB_FACE_RECOGNITION_TABLE} WHERE picture_sha1_hash=%s);"
+        STATIC_SQL_COMMAND = f"SELECT id,picture_sha1_hash FROM {DB_FACE_RECOGNITION_TABLE} WHERE picture_sha1_hash=?"
         STATIC_DATA_TUPLE = (str(image_hash),)
         
-        self.databaseCursor.execute(STATIC_SQL_COMMAND,STATIC_DATA_TUPLE)
-        results = self.databaseCursor.fetchall()[0][0]
+        results = self.databaseCursor.execute(STATIC_SQL_COMMAND,STATIC_DATA_TUPLE).fetchall()
         
-        if results == False:
-            return False
+        if len(results) != 0:
+            return True
         
-        return True
-        
+        return False
     
     def check_name_is_exists(self, face_name) -> bool:
-        STATIC_SQL_COMMAND = f"SELECT EXISTS(SELECT 1 FROM {DB_FACE_RECOGNITION_TABLE} WHERE face_name=%s);"
+        STATIC_SQL_COMMAND = f"SELECT id,face_name FROM {DB_FACE_RECOGNITION_TABLE} WHERE face_name=?"
         STATIC_DATA_TUPLE = (str(face_name),)
         
-        self.databaseCursor.execute(STATIC_SQL_COMMAND,STATIC_DATA_TUPLE)
-        results = self.databaseCursor.fetchall()[0][0]
+        results = self.databaseCursor.execute(STATIC_SQL_COMMAND,STATIC_DATA_TUPLE).fetchall()
         
-        if results == False:
-            return False
+        if len(results) != 0:
+            return True
         
-        return True
-        
-        
+        return False
             
     
     
@@ -103,8 +92,8 @@ class recognitionDbTools():
             
             STATIC_SQL_COMMAND = f"""INSERT INTO {DB_FACE_RECOGNITION_TABLE} (
                 face_picture_blob, picture_sha1_hash, face_embedding_data, landmarks_2d, face_box, face_name)
-                VALUES (%s, %s, %s, %s, %s,%s )"""
-            STATIC_DATA_TUPLE = (blobl_image_data, str(cv2_image_hash), psycopg2.Binary(face_embedding_sourceFile), psycopg2.Binary(landmark_2d),psycopg2.Binary(face_box) ,str(face_name))
+                VALUES (?, ?, ?, ?, ?,? )"""
+            STATIC_DATA_TUPLE = (blobl_image_data, str(cv2_image_hash), sqlite3.Binary(face_embedding_sourceFile), sqlite3.Binary(landmark_2d),sqlite3.Binary(face_box) ,str(face_name))
             
             self.databaseCursor.execute(STATIC_SQL_COMMAND, STATIC_DATA_TUPLE)
             self.databaseConnections.commit()

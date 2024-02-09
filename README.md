@@ -38,6 +38,42 @@
 <h1> Installation and Startup </h1>
 <br>
 
+## Preparing the PostgreSQL server
+
+<br>
+<p>
+TheHive is powered by PostgreSQL, one of the most powerful relational database systems, to keep a high amount of data, analyze it quickly when necessary, and add more data. Since it cannot install the server automatically, you need to install a normal Postgresql server and run the command below.</p>
+
+```SQL
+CREATE DATABASE thehive;
+```
+
+<br>
+
+
+Şimdi ise bağlantı sağlanabilmesi için `hivelibrart/psqlConfig.py`  yapılandırma dosyasına gerekli bilgileri girmeniz gerekir ardından diğer adıma geçebilirsiniz
+
+
+open this file hivelibrart/psqlConfig.py
+
+```python
+
+
+from hivelibrary.env import DATABASE_NAME
+# enter the postgresql database server connection info
+POSTGRESQL_CONFIG = {
+    "host":"localhost",
+    "port":"5432",
+    "user":"postgres",
+    "password":"change_it", # change this
+    "database":DATABASE_NAME
+}
+
+
+```
+
+<br>
+
 ## Direct Installing ( No python venv )
 
 <br>
@@ -133,7 +169,7 @@ deactivate
 <br>
 
 
-<p>Thanks to the local SQLite database, it enables fast and clear database searches without the need for any server or additional installation. Pure binary data of the image, sha1 hash to protect against repeated images, reference points for quick comparison, general points of the face, face frame, name of addition to the system, date of insertion in UTC are stored in the database, thus enabling high-speed searching. In the experiments carried out with 1500 random images, we have not come across a False positive (what the system thinks is correct, but it is wrong) situation. Since cosine similarity is used instead of face models for similarity calculation, the rate will not be 100% in different images of the same person, but it creates a significant difference when compared with others. In this way, the system works efficiently.
+<p>Pure binary data of the image, sha1 hash to protect against repeated images, reference points for quick comparison, general points of the face, face frame, name of addition to the system, date of insertion in UTC are stored in the database, thus enabling high-speed searching. In the experiments carried out with 1500 random images, we have not come across a False positive (what the system thinks is correct, but it is wrong) situation. Since cosine similarity is used instead of face models for similarity calculation, the rate will not be 100% in different images of the same person, but it creates a significant difference when compared with others. In this way, the system works efficiently.
 
 
 As a result of the experiment conducted on 35,000 random images, the lower limit of similarity was reduced to 35%, thus preventing erroneous results from being returned.

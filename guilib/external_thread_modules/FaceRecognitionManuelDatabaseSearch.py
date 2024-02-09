@@ -1,5 +1,4 @@
 from PyQt5.QtCore import QThread, pyqtSignal
-import sqlite3
 from guilib.html_text_generator.html_draft import gen_error_text,gen_info_text
 from hivelibrary.env import DB_FACE_RECOGNITION_TABLE
 
@@ -7,7 +6,7 @@ class manuelDatabaseSearcherThread(QThread):
     threadSignal = pyqtSignal(dict)
     
     
-    def __init__(self, db_cnn:sqlite3.Connection, db_curosr:sqlite3.Cursor,search_keywords:str, selected_search:int):
+    def __init__(self, db_cnn, db_curosr,search_keywords:str, selected_search:int):
         super().__init__()
         
         
@@ -32,12 +31,13 @@ class manuelDatabaseSearcherThread(QThread):
     def run(self):
         self.__status(text=gen_info_text("Arama işlemi başladıldı."))
         if self.searchType == 0:
-            STATIC_SQL_COMMAND = f"SELECT * FROM {DB_FACE_RECOGNITION_TABLE} WHERE face_name LIKE ?"
+            STATIC_SQL_COMMAND = f"SELECT * FROM {DB_FACE_RECOGNITION_TABLE} WHERE face_name LIKE %s"
             searchString = "%"+str(self.searchKeyword)+"%"
             STATIC_DATA_TUPLE = (searchString, )
             
             try:
-                resutls = self.databaseConnections.execute(STATIC_SQL_COMMAND,STATIC_DATA_TUPLE).fetchall()
+                self.databaseCursor.execute(STATIC_SQL_COMMAND,STATIC_DATA_TUPLE)
+                resutls = self.databaseCursor.fetchall()
                 if len(resutls) < 1:
                     self.__finaly(success_status=False,data=None,text=gen_error_text("ilgili terim için veritabanında sonuç bulunamadı"))
                     return
@@ -51,12 +51,13 @@ class manuelDatabaseSearcherThread(QThread):
         
         # resim sha1 ile arama 
         if self.searchType == 1:
-            STATIC_SQL_COMMAND = f"SELECT * FROM {DB_FACE_RECOGNITION_TABLE} WHERE picture_sha1_hash LIKE ?"
+            STATIC_SQL_COMMAND = f"SELECT * FROM {DB_FACE_RECOGNITION_TABLE} WHERE picture_sha1_hash LIKE %s"
             searchString = "%"+str(self.searchKeyword)+"%"
             STATIC_DATA_TUPLE = (searchString, )
             
             try:
-                resutls = self.databaseConnections.execute(STATIC_SQL_COMMAND,STATIC_DATA_TUPLE).fetchall()
+                self.databaseCursor.execute(STATIC_SQL_COMMAND,STATIC_DATA_TUPLE)
+                resutls = self.databaseCursor.fetchall()
                 if len(resutls) < 1:
                     self.__finaly(success_status=False,data=None,text=gen_error_text("ilgili terim için veritabanında sonuç bulunamadı"))
                     return
@@ -71,7 +72,8 @@ class manuelDatabaseSearcherThread(QThread):
         if self.searchType == 2:
             STATIC_SQL_COMMAND = f"SELECT * FROM {DB_FACE_RECOGNITION_TABLE}"
             try:
-                resutls = self.databaseConnections.execute(STATIC_SQL_COMMAND).fetchall()
+                self.databaseCursor.execute(STATIC_SQL_COMMAND)
+                resutls = self.databaseCursor.fetchall()
                 if len(resutls) < 1:
                     self.__finaly(success_status=False,data=None,text=gen_error_text("ilgili terim için veritabanında sonuç bulunamadı"))
                     return
