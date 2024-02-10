@@ -134,7 +134,7 @@ class directoryAdderThread(QThread):
                 
                 while threading.active_count() > self.maxThreadCount:
                     time.sleep(0.5)
-                    
+                    continue
                             
                 worker_thread = threading.Thread(
                     daemon=True,
