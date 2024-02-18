@@ -24,6 +24,9 @@ APPLICATION_VENDOR_KEY = "application_vendor"
 APPLICATION_NAME_KEY = "application_name"
 APPLICATION_VERSION_KEY = "application_version"
 
+SHODAN_API_KEY = "shodan_api_key"
+
+
 DATABASE_NAME = "thehive"
 
 

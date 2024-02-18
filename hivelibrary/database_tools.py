@@ -44,6 +44,23 @@ def check_db_init_status(db, db_cursor) -> bool:
         return False
 
 
+def check_exists_systemTable(db_curosr, sql_key) -> list[bool, str]:
+    try:
+        STATIC_SQL_COMMAND = f"SELECT * FROM {DB_SYSTEM_TABLE} WHERE unique_key=%s"
+        STATIC_DATA_TUPLE = ( str(sql_key), )
+        
+        db_curosr.execute(STATIC_SQL_COMMAND, STATIC_SQL_COMMAND)
+        
+        results = db_curosr.fetchall()
+        
+        if len(results) < 1:
+            return [ False, "Key not exists" ]
+        
+        return [ True, "key exists"]
+    
+    except Exception as err:
+        return [ False, err ]
+    
 
 def insertData_systemTable(db, db_cursor, sql_key:str, key_value:str) -> dict:
     try:
@@ -68,7 +85,7 @@ def insertData_systemTable(db, db_cursor, sql_key:str, key_value:str) -> dict:
 def insertData_blobTable(db, db_cursor, unique_key:str, blob_data, data_type=DB_DATA_TYPE__USER,info_notes="NULL"):
     try:
         STATIC_SQL_COMMAND = f"SELECT * FROM {DB_BLOB_STORAGE} WHERE unique_blob_key=%s"
-        STATIC_DATA_TUPLE = (unique_key)
+        STATIC_DATA_TUPLE = (unique_key,)
         db_cursor.execute(STATIC_SQL_COMMAND,STATIC_DATA_TUPLE)
         results = db_cursor.fetchall()
         if len(results) != 0:
