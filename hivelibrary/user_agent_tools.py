@@ -91,3 +91,15 @@ USER_AGENT_ARRAY = [
 
 def randomUserAgent() -> str:
     return str(random.choice(USER_AGENT_ARRAY))
+
+
+
+# For url handler
+
+GOOGLE_BOT_IMAGE = "Googlebot-Image/1.0"
+GOOGLE_BOT_VIDEO ="Googlebot-Video/1.0"
+GOOGLE_BOT_STORE = "Mozilla/5.0 (X11; Linux x86_64; Storebot-Google/1.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36"
+GOOGLE_BOT_INSPECTION_ADVANCED_SEARCH = "Mozilla/5.0 (compatible; Google-InspectionTool/1.0;)"
+GOOGLE_BOT_ADS = "Mozilla/5.0 (iPhone; CPU iPhone OS 14_7_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.2 Mobile/15E148 Safari/604.1 (compatible; AdsBot-Google-Mobile; +http://www.google.com/mobile/adsbot.html)"
+GOOGLE_ADSENSE = "Mediapartners-Google"
+GOOGLE_SAFE_SEARCH = "Google-Safety"
