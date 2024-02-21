@@ -17,13 +17,15 @@ from guilib.TcNumberValidationChecker_controller import TcValidatorCheckerWidget
 from guilib.TcNumberCalculator_controller import TcCalculatorWidget
 from guilib.FaceRecognition_controller import FaceRecognitionWidget
 from guilib.IPtracerBasic_controller import BasicIPtracerWidget
-
+from guilib.BinLookup_controller import BinLookupWidget
 
 from hivelibrary import env
 from hivelibrary import os_information
-import sqlite3
-import time
+from hivelibrary.console_tools import *
 
+
+import time
+import psycopg2.extensions
 
 WELCOME_SCREEN_TEXT = f"""Welcome to <B>TheHive Remastred</B><br><br>
 TheHive is a fully equipped professional osint kit project with v2 version. Developed by {env.APPLICATION_VENDOR_VALUE}.
@@ -73,7 +75,7 @@ TheHive version: {env.APPLICATION_VERSION_VALUE}"""
 
 
 class TheHive_mainPage(QMainWindow):
-    def __init__(self, db_cnn, db_cursor):
+    def __init__(self, db_cnn:psycopg2.extensions.connection, db_cursor:psycopg2.extensions.cursor):
         super().__init__()
         
         
@@ -103,9 +105,14 @@ class TheHive_mainPage(QMainWindow):
         self.mainScreen.actionTC_Calculator.triggered.connect(self.menuAction_TcCalculator)
         self.mainScreen.actionFace_Recognition.triggered.connect(self.menuAction_FaceInsight_FaceRecognition)
         self.mainScreen.actionreverse_ip_lookup.triggered.connect(self.menuAction_ReverseIpLookup)
+        self.mainScreen.actionBin_Lookup.triggered.connect(self.menuAction_BinLookup)
         
         self.mainScreen.textBrowser_WelcomeAndToolinfo.setText(WELCOME_SCREEN_TEXT)
         
+        
+    def menuAction_BinLookup(self):
+        self.BinLookup = BinLookupWidget()
+        self.BinLookup.show()
 
     def menuAction_ReverseIpLookup(self):
         self.reverseIPlookup = BasicIPtracerWidget()

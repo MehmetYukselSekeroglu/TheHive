@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="main_icon_files.qrc">
+   <iconset resource="../iconfiles/main_icon_files.qrc">
     <normaloff>:/mainLogo/logo.png</normaloff>:/mainLogo/logo.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -86,6 +86,7 @@
     <addaction name="actioniban_Parser"/>
     <addaction name="actionreverse_ip_lookup"/>
     <addaction name="actionPhone_number_parser"/>
+    <addaction name="actionBin_Lookup"/>
    </widget>
    <widget class="QMenu" name="menuFile_operations">
     <property name="title">
@@ -201,9 +202,14 @@
     <string>import module</string>
    </property>
   </action>
+  <action name="actionBin_Lookup">
+   <property name="text">
+    <string>Bin lookup</string>
+   </property>
+  </action>
  </widget>
  <resources>
-  <include location="main_icon_files.qrc"/>
+  <include location="../iconfiles/main_icon_files.qrc"/>
  </resources>
  <connections/>
 </ui>

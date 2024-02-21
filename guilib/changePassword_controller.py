@@ -2,10 +2,9 @@ from guilib.changePassworScreen import Ui_changePassword
 from  hivelibrary import database_tools
 
 from PyQt5.QtWidgets import *
-import sqlite3
 
 class PasswordChangePage(QWidget):
-    def __init__(self, db_connections:sqlite3.Connection, db_cursor:sqlite3.Cursor):
+    def __init__(self, db_connections, db_cursor):
         super().__init__()
         
         self.passwordChangeWidget = Ui_changePassword()
