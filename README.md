@@ -15,22 +15,24 @@
     - Local authentication to prevent files from being scrambled
     - Open soruce & Free
     - Extensive features
-        - Face recognition ( Now Active )
-        - Face detection (Now Active)
-        - Face verification ( Now Active )
-        - Reverse IP lookup ( Now Active )
-        - Voice verification ( Now Active)
+        - Face recognition ( Active )
+        - Face detection ( Active)
+        - Face verification ( Active )
+        - Reverse IP lookup ( Active )
+        - BIN lookup ( Active )
+        - Android APK analysis ( coming soon )
+        - Voice verification ( Active)
         - Clone voice detections ( coming soon )
-        - Iban parser ( Now Active)
-        - Video frame extractor ( Now Active)
-        - Phone number parser ( Now Active )
+        - Iban parser ( Active)
+        - Video frame extractor ( Active)
+        - Phone number parser ( Active )
         - Google dork generator ( coming soon )
         - Hash identify ( coming soon )
         - External module support ( coming soon )
 
         - Region based tools
-            - Tc Verificator ( math algorithm ) ( Now Active ) 
-            - Tc Calculator ( math algorithm ) ( Now Active )
+            - Tc Verificator ( Active ) 
+            - Tc Calculator ( Active )
 
 
 <br>
