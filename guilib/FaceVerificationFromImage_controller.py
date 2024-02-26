@@ -72,7 +72,7 @@ class FaceVerificationBackendThread(QThread):
 
         face_embedding_sourceFile = analysedSourceImage[0]["embedding"]
         face_embedding_targetFile = analysedTargetImage[0]["embedding"]
-        
+
 
         self.__runningStatusReturner(text=gen_info_text("Benzerlik oranı hesaplanıyor"))
 

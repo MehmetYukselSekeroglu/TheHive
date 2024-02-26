@@ -116,16 +116,20 @@ class FaceDetectionWidget(QWidget):
     def __init__(self):
         super().__init__()
         
-        
+        # Global değişkenler belirlenir 
         self.detectModelDefaultResulation = (640,640)
+        self.selectedTargetImageFile = None
         
+        # temel sistem tanımlandı
         self.FaceDetectionPage = Ui_FaceDetectionOnly()
         self.FaceDetectionPage.setupUi(self)
         self.setWindowTitle("Face Detection")
         
         
-        self.selectedTargetImageFile = None
-        self.showDefaultImage()                            
+        # ön tanımlı resim belirtildi
+        self.showDefaultImage()      
+        
+        # sinyaller slotlara bağlandı                      
         self.FaceDetectionPage.pushButton_selectImage.clicked.connect(self.selectTargetImage)
         self.FaceDetectionPage.pushButton_runDetection.clicked.connect(self.startDetectionProccess)
         self.FaceDetectionPage.pushButton_clearLogConsole.clicked.connect(self.clearLogConsole)
@@ -133,8 +137,11 @@ class FaceDetectionWidget(QWidget):
     
     
     def showDefaultImage(self):
+        
+        # QT5 ile openCV çakışmasını engellemek için kod içi import 
         import cv2
         
+        # ön tanımlı logo okunur boyutlandırılır, renk ayarı verilir ve label içine eklenir 
         image_data = cv2.imread(DEFAULT_LOGO_PATH)
         image_data = cv2.resize(image_data, self.detectModelDefaultResulation)
         image_data = cv2.cvtColor(image_data, cv2.COLOR_BGR2RGB)
@@ -143,12 +150,15 @@ class FaceDetectionWidget(QWidget):
         self.FaceDetectionPage.label_showImage.setPixmap(QtGui.QPixmap(image_data))
  
     def selectTargetImage(self):
+        
+        # Dosya seçim ekranı açılır
         fileSelector = QFileDialog()
         fileSelector.setNameFilter("Image Files (*.jpg *.png *.jpeg *.webm)")
         
         if fileSelector.exec_():
             self.selectedTargetImageFile = fileSelector.selectedFiles()[0]
 
+        # Seçilen dosya kontrol edilir 
         if self.selectedTargetImageFile == None:
             self.FaceDetectionPage.textBrowser_logConsole.append(html_draft.gen_error_text("Ivalid file selections, proccess stopped"))
             self.selectedTargetImageFile = None
@@ -159,7 +169,7 @@ class FaceDetectionWidget(QWidget):
             self.selectedTargetImageFile = None
             return
         
-        
+        # seçim geçerli ises değişkene atanır
         self.FaceDetectionPage.textBrowser_logConsole.append(html_draft.gen_info_text(f"Target file: {self.selectedTargetImageFile}"))
         self.addImageInWindow_usingFilePath(target_image=self.selectedTargetImageFile)
     

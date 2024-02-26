@@ -22,7 +22,7 @@ def get_information_standard(apk_path:str) -> list:
         included_files = targetApk.get_files()
         included_librarys = targetApk.get_libraries()
         
-        return [True, 
+        return [True, [
             apk_appname,
             apk_packageName,
             apk_targetSdk,
@@ -37,7 +37,7 @@ def get_information_standard(apk_path:str) -> list:
             apk_v3_issigned,
             included_librarys,
             included_files
-            ]            
+        ]]            
     
     except Exception as err:
         return [False, err]
