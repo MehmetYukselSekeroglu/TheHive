@@ -2,12 +2,13 @@ from guilib.AndroidAnlysisScreen import Ui_AndroidAnlysisWidget
 from guilib.html_text_generator import html_draft
 
 from hivelibrary.AndroidTools import androguard_tools
+from hivelibrary.hash_tools import all_hash
 
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 import os
 
-
+DEFAULT_SPACE:int="30"
 
 """
 *** ANDROID ANALIZ ARAC SETI ***
@@ -43,15 +44,104 @@ class backendWorker(QThread):
             
         })
 
+    def __finalyReturner(self, success:bool=False, end:bool=True, message:str=None):
+        return self.threadSignal.emit({
+            "success":success,
+            "end":end,
+            "message":message
+        })
 
     def run(self):
         general_iformation = androguard_tools.get_information_standard(apk_path=self.targetApkFile)
+        hash_information = all_hash(file_path=self.targetApkFile)
         
-        if general_iformation[0] != True:
-            pass
+        if general_iformation[0] != True:    
+            self.__finalyReturner(success=False, end=True, message=html_draft.gen_error_text(general_iformation[1]))
+            return
+        
+        
+        apk_info = general_iformation[1]
+        
+        apk_name = apk_info[0]
+        packet_anem = apk_info[1]
+        apk_target_sdk = apk_info[2]
+        apk_min_sdk = apk_info[3]
+        apk_max_sdk = apk_info[4]
+        apk_internalVersion = apk_info[5]
+        apk_displayedVersion= apk_info[6]
+        apk_permissions_list = apk_info[7]
+        apk_services_list = apk_info[8]
+        apk_v1_issigned = apk_info[9]
+        apk_v2_issigned = apk_info[10]
+        apk_v3_issigned = apk_info[11]
+        included_librarys_list = apk_info[12]
+        included_files_list = apk_info[13]
         
         
         
+        RETURN_TEXT = f"""
+[ INFO ] FILE PATH:{self.targetApkFile}<br>
+[ INFO ] DATE:None<br>
+<br>
+[ INFO ] HASHES:<br>
+MD-5: {hash_information["md5"]}<br>
+SHA-1: {hash_information["sha1"]}<br>
+SHA-256: {hash_information["sha256"]}<br>
+<br>
+[ INFP ] PACKAGE INFORMATION:<br>
+<br>
+Apk Name: {apk_name}<br>
+Package Name: {packet_anem}<br>
+Displayed Version: {apk_displayedVersion}<br>
+Internal Version: {apk_internalVersion}<br>
+Target SDK: {apk_target_sdk}<br>
+Minimum SDK: {apk_min_sdk}<br>
+Maximum SDK: {apk_max_sdk}<br>
+V1 Signature: {apk_v1_issigned}<br>
+V2 Signature: {apk_v2_issigned}<br>
+V3 Signature: {apk_v3_issigned}<br><br>"""
+
+
+
+        if len(apk_services_list) > 0:
+            RETURN_TEXT += """[ INFO ] SERVICES:<br><br>"""
+
+            for file in apk_services_list:
+                RETURN_TEXT += f"""{file}<br>"""
+
+            RETURN_TEXT += "<br><br>"
+        else:
+            RETURN_TEXT += """[ INFO ] NO SERVICES<br><br>"""
+
+        if len(apk_permissions_list) > 0:
+            RETURN_TEXT += """[ INFO ] PERMISSIONS:<br><br>"""
+
+            for file in apk_permissions_list:
+                RETURN_TEXT += f"""{file}<br>"""
+
+            RETURN_TEXT += "<br><br>"
+        else:
+            RETURN_TEXT += """[ INFO ] NO PERMISSIONS<br><br>"""
+
+
+
+
+        if len(included_librarys_list) > 0:
+            RETURN_TEXT += """[ INFO ] INCLUDED LIBRARY:<br><br>"""
+
+            for file in included_librarys_list:
+                RETURN_TEXT += f"""{file}<br>"""
+
+            RETURN_TEXT += "<br><br>"
+        else:
+            RETURN_TEXT += """[ INFO ] NO INCLIDED LIBRARY<br><br>"""
+
+
+
+
+
+
+        self.__runningReturner(message=RETURN_TEXT)        
         
 
 

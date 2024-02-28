@@ -68,7 +68,7 @@ def all_hash(file_path:str) -> dict:
     return {
         "sha1": hashlib.sha1(raw_data).hexdigest(),
         "sha256":hashlib.sha256(raw_data).hexdigest(),
-        "md5":hashlib.sha256(raw_data).hexdigest()
+        "md5":hashlib.md5(raw_data).hexdigest()
     }
         
         
