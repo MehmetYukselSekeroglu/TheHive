@@ -129,12 +129,19 @@
     </property>
     <addaction name="actionimport_module"/>
    </widget>
+   <widget class="QMenu" name="menuAnalysis">
+    <property name="title">
+     <string>Analysis</string>
+    </property>
+    <addaction name="actionAndroid_Static_Analysis"/>
+   </widget>
    <addaction name="menuSecurity"/>
    <addaction name="menuOsintTools"/>
    <addaction name="menuFile_operations"/>
    <addaction name="menuIdentify_Tools"/>
    <addaction name="menuRegion_specific_only"/>
    <addaction name="menuExternel_Madules"/>
+   <addaction name="menuAnalysis"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionChange_Login_Password">
@@ -205,6 +212,11 @@
   <action name="actionBin_Lookup">
    <property name="text">
     <string>Bin lookup</string>
+   </property>
+  </action>
+  <action name="actionAndroid_Static_Analysis">
+   <property name="text">
+    <string>Android Static Analysis</string>
    </property>
   </action>
  </widget>

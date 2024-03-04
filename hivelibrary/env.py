@@ -25,7 +25,7 @@ APPLICATION_NAME_KEY = "application_name"
 APPLICATION_VERSION_KEY = "application_version"
 
 SHODAN_API_KEY = "shodan_api_key"
-
+VIRUSTOTAL_API_KEY = "virustotal_api_key"
 
 DATABASE_NAME = "thehive"
 

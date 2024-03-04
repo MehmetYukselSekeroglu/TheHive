@@ -18,6 +18,7 @@ from guilib.TcNumberCalculator_controller import TcCalculatorWidget
 from guilib.FaceRecognition_controller import FaceRecognitionWidget
 from guilib.IPtracerBasic_controller import BasicIPtracerWidget
 from guilib.BinLookup_controller import BinLookupWidget
+from guilib.AndroidAnlysis_controller import AndroidAnlysisPage
 
 from hivelibrary import env
 from hivelibrary import os_information
@@ -77,12 +78,8 @@ TheHive version: {env.APPLICATION_VERSION_VALUE}"""
 class TheHive_mainPage(QMainWindow):
     def __init__(self, db_cnn:psycopg2.extensions.connection, db_cursor:psycopg2.extensions.cursor):
         super().__init__()
-        
-        
         self.mainScreen = Ui_TheHve_MainWindow()
         self.mainScreen.setupUi(self)
-        
-        
         self.setWindowTitle("TheHive Remastred")
         
         self.db_cnn = db_cnn
@@ -92,7 +89,6 @@ class TheHive_mainPage(QMainWindow):
         self.backEndWorkerThread = welcomeScreenSourceThread(updateSecond=1)
         self.backEndWorkerThread.returnSignal.connect(self.sourceThreadSignalHandler)
         self.backEndWorkerThread.start()
-        
         self.mainScreen.actioniban_Parser.triggered.connect(self.menuAction_ibanParser)
         self.mainScreen.actionChange_Login_Password.triggered.connect(self.menuAction_loginPasswordChange)
         self.mainScreen.actionSound_Converter.triggered.connect(self.menuAction_soundConverter)
@@ -106,9 +102,14 @@ class TheHive_mainPage(QMainWindow):
         self.mainScreen.actionFace_Recognition.triggered.connect(self.menuAction_FaceInsight_FaceRecognition)
         self.mainScreen.actionreverse_ip_lookup.triggered.connect(self.menuAction_ReverseIpLookup)
         self.mainScreen.actionBin_Lookup.triggered.connect(self.menuAction_BinLookup)
+        self.mainScreen.actionAndroid_Static_Analysis.triggered.connect(self.menuAction_AndroidAnalysis)
         
         self.mainScreen.textBrowser_WelcomeAndToolinfo.setText(WELCOME_SCREEN_TEXT)
         
+    
+    def menuAction_AndroidAnalysis(self):
+        self.AndroidAnalysis = AndroidAnlysisPage()
+        self.AndroidAnalysis.show()
         
     def menuAction_BinLookup(self):
         self.BinLookup = BinLookupWidget()
@@ -173,7 +174,7 @@ class TheHive_mainPage(QMainWindow):
 <br>
 <br>
 <B>GitHub:</B> https://github.com/MehmetYukselSekeroglu/TheHive <br>
-<B>e-mail:</B> PrimeSecurity@gmail.com <br>
+<B>e-mail:</B> contact.primesec@gmail.com<br>
 """
         self.informationPage = CoomingSoonPage(outputMessage=msg)
         self.informationPage.show()

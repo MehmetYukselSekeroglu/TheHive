@@ -67,6 +67,8 @@ class Ui_TheHve_MainWindow(object):
         self.menuTurkey_Only.setObjectName("menuTurkey_Only")
         self.menuExternel_Madules = QtWidgets.QMenu(self.menubar_menuController)
         self.menuExternel_Madules.setObjectName("menuExternel_Madules")
+        self.menuAnalysis = QtWidgets.QMenu(self.menubar_menuController)
+        self.menuAnalysis.setObjectName("menuAnalysis")
         TheHve_MainWindow.setMenuBar(self.menubar_menuController)
         self.statusbar = QtWidgets.QStatusBar(TheHve_MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -99,6 +101,8 @@ class Ui_TheHve_MainWindow(object):
         self.actionimport_module.setObjectName("actionimport_module")
         self.actionBin_Lookup = QtWidgets.QAction(TheHve_MainWindow)
         self.actionBin_Lookup.setObjectName("actionBin_Lookup")
+        self.actionAndroid_Static_Analysis = QtWidgets.QAction(TheHve_MainWindow)
+        self.actionAndroid_Static_Analysis.setObjectName("actionAndroid_Static_Analysis")
         self.menuSecurity.addAction(self.actionChange_Login_Password)
         self.menuOsintTools.addAction(self.actioniban_Parser)
         self.menuOsintTools.addAction(self.actionreverse_ip_lookup)
@@ -115,12 +119,14 @@ class Ui_TheHve_MainWindow(object):
         self.menuTurkey_Only.addAction(self.actionTC_Calculator)
         self.menuRegion_specific_only.addAction(self.menuTurkey_Only.menuAction())
         self.menuExternel_Madules.addAction(self.actionimport_module)
+        self.menuAnalysis.addAction(self.actionAndroid_Static_Analysis)
         self.menubar_menuController.addAction(self.menuSecurity.menuAction())
         self.menubar_menuController.addAction(self.menuOsintTools.menuAction())
         self.menubar_menuController.addAction(self.menuFile_operations.menuAction())
         self.menubar_menuController.addAction(self.menuIdentify_Tools.menuAction())
         self.menubar_menuController.addAction(self.menuRegion_specific_only.menuAction())
         self.menubar_menuController.addAction(self.menuExternel_Madules.menuAction())
+        self.menubar_menuController.addAction(self.menuAnalysis.menuAction())
 
         self.retranslateUi(TheHve_MainWindow)
         self.tabWidget.setCurrentIndex(0)
@@ -139,6 +145,7 @@ class Ui_TheHve_MainWindow(object):
         self.menuRegion_specific_only.setTitle(_translate("TheHve_MainWindow", "Region specific only"))
         self.menuTurkey_Only.setTitle(_translate("TheHve_MainWindow", "Türkey Only"))
         self.menuExternel_Madules.setTitle(_translate("TheHve_MainWindow", "Externel Madules"))
+        self.menuAnalysis.setTitle(_translate("TheHve_MainWindow", "Analysis"))
         self.actionChange_Login_Password.setText(_translate("TheHve_MainWindow", "Change Login Password"))
         self.actioniban_Parser.setText(_translate("TheHve_MainWindow", "Iban parser"))
         self.actionreverse_ip_lookup.setText(_translate("TheHve_MainWindow", "Reverse ip lookup"))
@@ -153,6 +160,7 @@ class Ui_TheHve_MainWindow(object):
         self.actionTC_Calculator.setText(_translate("TheHve_MainWindow", "TC Calculator"))
         self.actionimport_module.setText(_translate("TheHve_MainWindow", "import module"))
         self.actionBin_Lookup.setText(_translate("TheHve_MainWindow", "Bin lookup"))
+        self.actionAndroid_Static_Analysis.setText(_translate("TheHve_MainWindow", "Android Static Analysis"))
 import main_icon_files_rc
 
 

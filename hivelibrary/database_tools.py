@@ -1,11 +1,11 @@
-
-
-
 from hivelibrary.env import DB_BLOB_STORAGE, DB_SYSTEM_TABLE, DB_LOCAL_AUTHENTICATE_TABLE
 from hivelibrary.env import DB_DATA_TYPE__USER
 from hivelibrary.env import APPLICATION_NAME_KEY
 from hivelibrary.hash_tools import loginCreditHhasher
 import psycopg2
+
+
+from hivelibrary.types import t_PsqlCursor,t_PsqlCnn
 
 def connection_function(db_config_dict) -> object:
     cnn= psycopg2.connect(**db_config_dict)
@@ -13,7 +13,7 @@ def connection_function(db_config_dict) -> object:
     return cnn, cursor
 
 
-def check_db_init_status(db, db_cursor) -> bool:
+def check_db_init_status(db, db_cursor:t_PsqlCursor) -> bool:
     try:
         STATIC_SQL_COMMAND = "SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name=%s)"
         STATIC_DATA_TUPLE = (DB_SYSTEM_TABLE, )
@@ -44,7 +44,7 @@ def check_db_init_status(db, db_cursor) -> bool:
         return False
 
 
-def check_exists_systemTable(db_curosr, sql_key) -> list[bool, str]:
+def check_exists_systemTable(db_curosr:t_PsqlCursor, sql_key:str) -> list[bool, str]:
     try:
         STATIC_SQL_COMMAND = f"SELECT * FROM {DB_SYSTEM_TABLE} WHERE unique_key=%s"
         STATIC_DATA_TUPLE = ( str(sql_key), )
@@ -62,7 +62,7 @@ def check_exists_systemTable(db_curosr, sql_key) -> list[bool, str]:
         return [ False, err ]
     
 
-def insertData_systemTable(db, db_cursor, sql_key:str, key_value:str) -> dict:
+def insertData_systemTable(db:t_PsqlCnn, db_cursor:t_PsqlCursor, sql_key:str, key_value:str) -> dict:
     try:
         STATIC_SQL_COMMAND = f"SELECT * FROM {DB_SYSTEM_TABLE} WHERE unique_key=%s"
         STATIC_DATA_TUPLE = (sql_key,)
@@ -104,7 +104,7 @@ def insertData_blobTable(db, db_cursor, unique_key:str, blob_data, data_type=DB_
     
     
     
-def is_authenticated(username:str, password:str,  db_cursor) -> dict:
+def is_authenticated(username:str, password:str,  db_cursor:t_PsqlCursor) -> dict:
     """
     Yerel kimlik doğrulaması için otonom fonksiyon
 
@@ -138,7 +138,7 @@ def is_authenticated(username:str, password:str,  db_cursor) -> dict:
     
 
 
-def generate_admin_accounts(username:str, password:str,db, db_cursor) -> dict:
+def generate_admin_accounts(username:str, password:str,db:t_PsqlCnn, db_cursor:t_PsqlCursor) -> dict:
     try:
         STATIC_SQL_COMMAND = f"SELECT * FROM {DB_LOCAL_AUTHENTICATE_TABLE}"
         
