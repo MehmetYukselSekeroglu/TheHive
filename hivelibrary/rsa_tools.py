@@ -1,14 +1,9 @@
 import rsa
 import os
 DEFAULT_CHARSET_ENCODINGS = "utf-8"
-SUPPORTED_KEY_SIZES = [
-    1024,
-    2048,
-    4096
-]
+SUPPORTED_KEY_SIZES = [1024,2048,4096]
 
 def generateNewKeyAndSave(keysize:int, key_name:str, save_dir:str) -> dict:
-    
     if keysize not in SUPPORTED_KEY_SIZES:
         return {"success":False, "message":"Not supported keysize", "private_path":None, "public_path":None, "code":"invalid_ksize"}
     
@@ -39,49 +34,31 @@ def generateNewKeyAndSave(keysize:int, key_name:str, save_dir:str) -> dict:
         private_key_file.write(private_key.save_pkcs1())
         
         
-    return {
-        "success":True,
-        "message":"RSA new keys successfully generated",
-        "private_path": PRIVATE_KEY_PATH,
+    return {"success":True,"message":"RSA new keys successfully generated","private_path": PRIVATE_KEY_PATH,
         "public_path":  PUBLIC_KEY_PATH,
-        "code":"success"
-        
-    }
+        "code":"success"}
     
 
 
 
 def loadPrivateKey(private_key_file_path:str) -> dict:
     if not os.path.exists(private_key_file_path):
-        return {
-            "success": "false",
-            "message": f"{private_key_file_path} not found"
-        }
+        return {"success": "false","message": f"{private_key_file_path} not found"}
         
     with open(private_key_file_path, "rb") as private_key_file:
         key_data = private_key_file.read()
         key_data = rsa.PrivateKey.load_pkcs1(key_data)
-        return {
-            "success":"true",
-            "data": key_data
-        }
+        return {"success":"true","data": key_data}
         
-
 
 def loadPublicKey(public_key_file_path:str) -> dict:
     if not os.path.exists(public_key_file_path):
-        return {
-            "success" : False,
-            "message" : f"{public_key_file_path} not found"
-        }
+        return {"success" : False,"message" : f"{public_key_file_path} not found"}
     
     with open(public_key_file_path, "rb") as public_key_file:
         key_data = public_key_file.read()
         key_data = rsa.PublicKey.load_pkcs1(key_data)
-        return {
-            "success" : True,
-            "data": key_data
-        }
+        return {"success" : True,"data": key_data}
 
 
 

@@ -6,20 +6,13 @@ from openpyxl import load_workbook
 
 
 class HtsToolkit():
-    supported_formats = [
-        "BTK_BASIC_1",
-        "BTK_STANDARD_1"
-    ]
-    
+    supported_formats = ["BTK_BASIC_1","BTK_STANDARD_1"]
     not_support_returner = "UNSUPPORTED"
-    
     def __init__(self):
         pass
-
+    
     def detect_hts_record_formats(self,targetFilePath:str) -> str:
-        # Check is excel file or other file[s]
-        
-        
+        # Check is excel file or other file[s]    
         try:
             workbook = load_workbook(targetFilePath)
             workbook.close()
@@ -59,8 +52,8 @@ class HtsToolkit():
             hedef_numara_tc_numarası = str(workSheet.cell(52,8).value)
             source_imei = str(workSheet.cell(52,9).value)
             islemGerceklesenBaz = str(workSheet.cell(52,10).value)
-            
             control_basamak = workSheet.cell(52,11).value
+            
             imei_proccessed = source_imei.replace("-","")
             imei_proccessed = imei_proccessed.replace(" ","")
             workBook.close()
@@ -72,7 +65,6 @@ class HtsToolkit():
             
         except Exception as err:
             pass
-        
         
         
         return self.not_support_returner

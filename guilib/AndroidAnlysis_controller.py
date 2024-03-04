@@ -47,6 +47,7 @@ class backendWorker(QThread):
             self.__finalyReturner(success=False, end=True, message=html_draft.gen_error_text(general_iformation[1]))
             return
         
+        # liste okunabilir hale getirilir
         apk_info = general_iformation[1]
         apk_name = apk_info[0]
         packet_anem = apk_info[1]
@@ -63,7 +64,7 @@ class backendWorker(QThread):
         included_librarys_list = apk_info[12]
         included_files_list = apk_info[13]
         
-        
+        # define a finaly text
         RETURN_TEXT = """"""
         RETURN_TEXT += f"""<B>FILE PATH: </B>{self.targetApkFile}\n\n"""
         RETURN_TEXT += f"""<B>APK SHA-1 HASH: </B>{hash_information["sha1"]}\n"""

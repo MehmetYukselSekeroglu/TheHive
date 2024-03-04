@@ -22,9 +22,9 @@ class soundConverterPage(QWidget):
         self.OUTPUT_DIRECTORY = output_dir
         self.TEMP_DIRECTORY = temp_dir
         self.soundConverterSelectedFile = None
-        
+
         self.setWindowTitle("Sound Converter")
-        
+
         self.soundConverterWidget.pushButton_soundConverter_selectSoundFile.clicked.connect(self.soundConverterSelectTargetFile)
         self.soundConverterWidget.pushButton_soundConverter_runConvert.clicked.connect(self.soundConverterRunConvert)
         
@@ -65,13 +65,9 @@ class soundConverterPage(QWidget):
         raw_path_output = convert_status["path"]
         finally_output_name = output_name + "." + target_format
         finally_output_name = self.OUTPUT_DIRECTORY + finally_output_name
-        
         shutil.copyfile(src=raw_path_output, dst=finally_output_name)
-
         self.soundConverterWidget.textBrowser_soundConverter_logConsole.append(f"[ + ] Removing temp files")
         os.remove(raw_path_output)
-            
-            
         the_final_message = f"[ + ] Proccess successfuly complated.<br>[ + ] Your file: {finally_output_name}<br>"
         self.soundConverterWidget.textBrowser_soundConverter_logConsole.append(the_final_message)
     

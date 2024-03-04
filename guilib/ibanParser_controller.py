@@ -12,13 +12,14 @@ class ibanParserPage(QWidget):
         
         self.ibanParserWidget = Ui_iban_parser_form()
         self.ibanParserWidget.setupUi(self)
-        
         self.setWindowTitle("iban parser")
         
+        # define Global Varables
         self.lastParsedData = {}
         self.resultPrinted = False
         self.ayrac = "-"*30
         
+        # button slot connections
         self.ibanParserWidget.pushButton_clearResult.clicked.connect(self.clearInputAndOutput)
         self.ibanParserWidget.pushButton_parse_iban.clicked.connect(self.parseTargetIban)
         self.ibanParserWidget.pushButton_save_result.clicked.connect(self.saveResultFromFile)
@@ -36,12 +37,10 @@ class ibanParserPage(QWidget):
         if self.ibanParserWidget.comboBox_saveType.currentIndex() == 0:
             saveFileName, _ = QFileDialog.getSaveFileName(self, "Save Result",filter="Text file (*.txt)")
 
-
             if not saveFileName:
                 err_msg = f"[ - ] Save file not selected"
                 self.ibanParserWidget.textBrowser_resultConsole.append(err_msg)
                 return         
-                
                 
             if self.resultPrinted != True:
                 err_msg = f"[ - ] There are no results to save"

@@ -5,13 +5,13 @@ from hivelibrary import database_tools
 from hivelibrary import console_tools
 
 from PyQt5.QtWidgets import *
-import sqlite3
 import sys
 
 
 class LoginScreen(QWidget):
     def __init__(self, sqlite_cnn, sqlite_curosr, targetWindow):
         super().__init__()
+        # Console Log
         console_tools.InformationPrinter("Starting login screen")
         
         # set external varaibles
@@ -38,18 +38,22 @@ class LoginScreen(QWidget):
         self.loginScreen.pushButton_initralAuth_exitButton.clicked.connect(self.exitProtocol)
     
     def tryAuthenticate(self):
+        # add count in current trying
         self.CURRENT_TRY += 1
         
+        # get username & password 
         input_username = self.loginScreen.lineEdit_initralAuth_username.text()
         input_password = self.loginScreen.lineEdit_initralAuth_password.text()
         
-        if self.CURRENT_TRY >= self.MAX_LOGIN_TRY:
+        # check trying count
+        if self.CURRENT_TRY > self.MAX_LOGIN_TRY:
             console_tools.WarnPrinter("Maximum trial limit exceeded, exiting the program")
             self.exitProtocol()
         
-            
+        # send username password to hive api
         authenticateStatus = database_tools.is_authenticated(username=input_username,password=input_password,db_cursor=self.db_cursor)
 
+        # TheHive api ye gönderilen verilerin sonuçları kontrol edilir 
         if authenticateStatus["success"] != True:
             console_tools.ErrorPrinter("Wrong password or username")
             err_text = f"Status: Failed, {str(self.MAX_LOGIN_TRY - self.CURRENT_TRY)} credit left."

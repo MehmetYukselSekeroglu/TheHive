@@ -60,7 +60,6 @@ def generateGoogleDork(phone_numbber:str) -> str:
     abone_numarası = phone_numbber[3:13]
     raw_number = phone_numbber
     raw_number_2 = "0" + abone_numarası
-    
     DORK = f"""INURL:"{raw_number}" OR INTEXT:"{raw_number}" OR INTITLE:"{raw_number}" OR INURL:"{abone_numarası}" OR INTEXT:"{abone_numarası}" OR INTITLE:"{abone_numarası}" """
     return DORK
     

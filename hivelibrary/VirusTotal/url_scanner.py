@@ -6,15 +6,10 @@ from urllib.parse import urlparse
 def virustotal_url_scanner(target_url, vt_api_key) -> list:
     target_url = str(target_url)
     vt_api_key = str(vt_api_key)
-
     STATIC_URL_SCAN_API_URL = "https://www.virustotal.com/vtapi/v2/url/scan"
-    request_parametres = {
-        "apikey" : vt_api_key,
-        "url" : target_url
-        }
-    
-    rawReq = requests.post(url=STATIC_URL_SCAN_API_URL, data=request_parametres)
+    request_parametres = {"apikey" : vt_api_key,"url" : target_url}
 
+    rawReq = requests.post(url=STATIC_URL_SCAN_API_URL, data=request_parametres)
     if rawReq.status_code == 200:
         try:
             parsed_req = rawReq.json()
@@ -34,17 +29,11 @@ def virustotal_url_scanner(target_url, vt_api_key) -> list:
 def virustotal_url_response_handler(vt_api_key, is_response_id) -> list:
     vt_api_key = str(vt_api_key)
     is_response_id = str(is_response_id)
-
     # api url
     STATIC_REPORT_URL = "https://www.virustotal.com/vtapi/v2/url/report"
-
-    request_prametres = {
-        "apikey" : vt_api_key,
-        "resource" : is_response_id
-        }
+    request_prametres = {"apikey" : vt_api_key,"resource" : is_response_id}
     
     get_results = requests.get(url=STATIC_REPORT_URL, params=request_prametres)
-
     if get_results.status_code == 200:
         try:
             results_json = get_results.json()
@@ -67,6 +56,8 @@ def virustotal_url_response_handler(vt_api_key, is_response_id) -> list:
             return [False, f"Veri işlenirken hata gerçekleşti"]
     else:
         return [ False, f"İstek geçersiz durum kodu döndürdü kod: {str(get_results.status_code)}" ]
+
+
 
 def is_url(string):
     parsed_url = urlparse(string)

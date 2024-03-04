@@ -45,17 +45,14 @@ class BasicIPtracerWidget(QWidget):
             return
         
         if resultDict["cordinate"] != None:
-            
             dict_is = resultDict["cordinate"]
             dict_is = str(resultDict["cordinate"]).split(",")
-            mapData = drawNewMap(cordinate_array_or_tuple=dict_is, note_text="IP network distribution point or location")
-            
+            mapData = drawNewMap(cordinate_array_or_tuple=dict_is, note_text="IP network distribution point or location")    
             self.BasicIpTracer.webView_mapView.setHtml(mapData)    
         
         for dict_key in resultDict["dict"].keys():
             name_is = str(dict_key).upper()
             self.BasicIpTracer.textBrowser_logConsole.append(f"<B>[ {name_is} ]:</B> {resultDict['dict'][dict_key]}")
-        
         
     
     def clearOutputs(self):
@@ -63,7 +60,6 @@ class BasicIPtracerWidget(QWidget):
         self.BasicIpTracer.textBrowser_logConsole.setText("<B>LOG CONSOLE:</B>")
         self.BasicIpTracer.lineEdit_ipInput.clear()
         
-    
     
     def showDefaultMap(self):
         self.BasicIpTracer.webView_mapView.setHtml(drawNewMap(cordinate_array_or_tuple=(0.0,0.0),zoom_start=1))

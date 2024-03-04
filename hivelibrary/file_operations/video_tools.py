@@ -2,22 +2,7 @@ import cv2
 import os
 
 
-
-
-SUPPORTED_VIDEO_FORMATS = [
-    "avi",
-    "mp4",
-    "mkv",
-    "mov",
-    "flv",
-    "wmv",
-    "webm",
-    "mpeg",
-    "mpg"
-]
-
-
-
+SUPPORTED_VIDEO_FORMATS = ["avi","mp4","mkv","mov","flv","wmv","webm","mpeg","mpg"]
 
 
 def preparedVideoForCV2(video_path:str) -> dict:
@@ -34,10 +19,7 @@ def preparedVideoForCV2(video_path:str) -> dict:
 def releaseVideoForCV2(preparedVideo:cv2.VideoCapture) -> dict:
     preparedVideo.release()
 
-
 def getFrameCountOnVideo(preparedVideo:cv2.VideoCapture, counter:int) -> dict:
-
-
     while(True):
         is_succes, now_frame = preparedVideo.read()
         if is_succes:
@@ -49,10 +31,6 @@ def getFrameCountOnVideo(preparedVideo:cv2.VideoCapture, counter:int) -> dict:
     print("\n[+] Finished...")
     preparedVideo.release()
     
-    
-#print(type(preparedVideoForCV2(video_path="/home/delta/Videolar/OBS/2023-07-23 21-21-03.mp4")["data"]))
-
-
 
 
 def frame_sharpening(frame) -> object:

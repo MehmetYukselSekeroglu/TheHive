@@ -10,9 +10,7 @@ Github Page: https://github.com/MehmetYukselSekeroglu/tc-hesaplayici
 
 
 #girilen tc numarası matematiksel olarak geçerlimi kontrol eder 
-
 def gecerlilik_kontrol(tc:str) -> dict:
-
     if len(tc) != 11:
         return { "success": False, "data":"TC numarası 11 hane olmadığı için geçerli değildir" }
     
@@ -35,7 +33,6 @@ def gecerlilik_kontrol(tc:str) -> dict:
     final_indis_10 = str(final_indis_10)
     final_indis_11=final_indis_11%10
     final_indis_11 = str(final_indis_11)
-
 
     if final_indis_10 == tc[9] and final_indis_11 == tc[10]:
         return { "success": True, "data":f"{str(tc)} numarası geçerlidir" }

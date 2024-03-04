@@ -8,7 +8,6 @@ def sizeMB(file_path:str) -> str:
         return f"{round(data_is,2)} Bayt"
     
     mb_size = kb_size / 1024
-    
     if mb_size < 1.0:
         return f"{round(kb_size,2)} KB"
     

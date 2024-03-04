@@ -35,7 +35,6 @@ class comparsionThread(QThread):
         
         vaw_file_1 = raw_file_1_convert_status["path"]
         vaw_file_2 = raw_file_2_convert_status["path"]
-
         msg = {"end":False,"success":None,"text":"<B>INFO: </B>Comparing voice similarity rates..."}
         self.statusSignal.emit(msg)
         

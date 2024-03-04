@@ -23,7 +23,6 @@ DATABASE_INIT_STATUS = "database_status"
 APPLICATION_VENDOR_KEY = "application_vendor"
 APPLICATION_NAME_KEY = "application_name"
 APPLICATION_VERSION_KEY = "application_version"
-
 SHODAN_API_KEY = "shodan_api_key"
 VIRUSTOTAL_API_KEY = "virustotal_api_key"
 
@@ -34,7 +33,6 @@ DATABASE_FILE_NAME = "hive_database.sqlite3"
 DATABASE_PATH = DATABASE_FILE_NAME
 
 # Default charset 
-
 DEFAULT_CHARSET = "utf-8"
 
 
@@ -43,10 +41,9 @@ DEFAULT_LOG_FILE_NAME = "hive_logs.txt"
 
 
 # default app root dir
-
 DEFAULT_ROOT_DIR_NAME = "data"
 DEFAULT_TEMP_DIR ="tmp"
 
-# DEFAULT LOGO PATH
 
+# DEFAULT LOGO PATH
 DEFAULT_LOGO_PATH = f"iconfiles{os.path.sep}logo.png"

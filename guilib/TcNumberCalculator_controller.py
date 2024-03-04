@@ -13,7 +13,6 @@ class TcCalculatorWidget(QWidget):
         
         self.TcCalculatorPage = Ui_TcNumberCalculator()
         self.TcCalculatorPage.setupUi(self)
-        
         self.setWindowTitle("Tc Calculator")
         
         self.TcCalculatorPage.pushButton_startCalculator.clicked.connect(self.startCalculating)    
@@ -48,12 +47,12 @@ class TcCalculatorWidget(QWidget):
         self.TcCalculatorPage.textBrowser_logConsole.append(str(gen_info_text("Hesaplama başaryıla tamamlandı.")))
         self.TcCalculatorPage.textBrowser_logConsole.append("<br>[ INFO ]: İleriye Dönük")
         for tc in ileriye_donuk:
-            tc = f"[ + ] {tc}"
+            tc = f"{tc}"
             self.TcCalculatorPage.textBrowser_logConsole.append(str(tc))
             
         self.TcCalculatorPage.textBrowser_logConsole.append("<br>[ INFO ]: Geriye Dönük")
         for tc in geriye_donuk:
-            tc = f"[ + ] {tc}"
+            tc = f"{tc}"
             self.TcCalculatorPage.textBrowser_logConsole.append(tc)
         
         self.TcCalculatorPage.textBrowser_logConsole.append(str(gen_info_text("İşlem başarıyla tamamlandı")))

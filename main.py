@@ -2,7 +2,8 @@
 # Project: TheHive v2 Remastred
 # Official GitHub Address: https://github.com/MehmetYukselSekeroglu/TheHive
 # Developed By Prime Security
-# Version: v2.0.0 Testing
+# Website primesecurity.net.tr ( cooming soon )
+# Version: v2.1.0 Testing 
 
 # importing hive toolkit
 from hivelibrary import console_tools
@@ -22,7 +23,6 @@ from hivelibrary.psqlConfig import POSTGRESQL_CONFIG
 console_tools.InformationPrinter("importing PyQt")
 # importing python packagets
 from PyQt5.QtWidgets import *
-import sqlite3
 
 console_tools.InformationPrinter("importing TheHive UI")
 # importing gui 

@@ -28,6 +28,7 @@ from hivelibrary.console_tools import *
 import time
 import psycopg2.extensions
 
+# static welcome text
 WELCOME_SCREEN_TEXT = f"""Welcome to <B>TheHive Remastred</B><br><br>
 TheHive is a fully equipped professional osint kit project with v2 version. Developed by {env.APPLICATION_VENDOR_VALUE}.
 <br><br>
@@ -39,12 +40,12 @@ E-mail     : contact.primesec@gmail.com<br>
 
 
 class welcomeScreenSourceThread(QThread):
-    returnSignal = pyqtSignal(str)
+    returnSignal = pyqtSignal(str) # define a signal and type
 
     
     def __init__(self, updateSecond=1):
         super().__init__()
-        
+        # Static varables
         self.updateSecond = updateSecond
         self.activeOsUser = os_information.get_active_user()
         self.computerHostname = os_information.get_hostname()
@@ -52,6 +53,7 @@ class welcomeScreenSourceThread(QThread):
         
     def run(self):
         while True:
+            # dynamic varables
             currentBattaryStatus = os_information.get_battery_percentage()
             memoryDict = os_information.get_memory_usage()
             totalRam = memoryDict["total"]
@@ -59,6 +61,7 @@ class welcomeScreenSourceThread(QThread):
             yuzdelikRam = memoryDict["yüzde"]
             cpu_usage = os_information.get_cpu_usage()
             
+            # update output text
             outputText =  f"""<B style="align:center;"> SYSTEM INFORMATION </B><br><br>
 Os User     :    {self.activeOsUser}<br>
 Hostname    :    {self.computerHostname}<br>
@@ -70,7 +73,8 @@ Battary :    {currentBattaryStatus}<br>
 <br>
 Update  :    {self.updateSecond} sec<br>
 TheHive version: {env.APPLICATION_VERSION_VALUE}"""
-          
+
+            # send signal and wait
             self.returnSignal.emit(outputText)
             time.sleep(self.updateSecond)
 
@@ -86,9 +90,12 @@ class TheHive_mainPage(QMainWindow):
         self.db_cursor = db_cursor
         self.DBS_CONF = [self.db_cnn, self.db_cursor]
         
+        # defina and run Backend-Thread
         self.backEndWorkerThread = welcomeScreenSourceThread(updateSecond=1)
         self.backEndWorkerThread.returnSignal.connect(self.sourceThreadSignalHandler)
         self.backEndWorkerThread.start()
+        
+        # menu slot connections
         self.mainScreen.actioniban_Parser.triggered.connect(self.menuAction_ibanParser)
         self.mainScreen.actionChange_Login_Password.triggered.connect(self.menuAction_loginPasswordChange)
         self.mainScreen.actionSound_Converter.triggered.connect(self.menuAction_soundConverter)
@@ -104,8 +111,11 @@ class TheHive_mainPage(QMainWindow):
         self.mainScreen.actionBin_Lookup.triggered.connect(self.menuAction_BinLookup)
         self.mainScreen.actionAndroid_Static_Analysis.triggered.connect(self.menuAction_AndroidAnalysis)
         
+        # set static text on screen
         self.mainScreen.textBrowser_WelcomeAndToolinfo.setText(WELCOME_SCREEN_TEXT)
-        
+    
+    
+    # menu slot functions     
     
     def menuAction_AndroidAnalysis(self):
         self.AndroidAnalysis = AndroidAnlysisPage()

@@ -23,33 +23,28 @@ class PhoneNumberParserWidget(QWidget):
     
     def runParser(self):
         self.clearLogConsole()
-        
         getNumber = self.phoneNumberParser.lineEdit_phoneInput.text()
         
         if len(getNumber) < 4:
             self.phoneNumberParser.textBrowser_logConsole.append(gen_error_text(
-                f"Geçersiz numara formatı, format: +12948938591"
-            ))
+                f"Geçersiz numara formatı, format: +12948938591"))
             return     
         
         if getNumber[0] != "+":
             self.phoneNumberParser.textBrowser_logConsole.append(gen_error_text(
-                f"Geçersiz numara formatı, format: +12948938591"
-            ))
+                f"Geçersiz numara formatı, format: +12948938591"))
             return
         
         if getNumber[0:3] != "+90":         
             self.phoneNumberParser.textBrowser_logConsole.append(gen_error_text(
-                f"Şuanda sadece türk numaraları desteklenmektedir."
-            ))
+                f"Şuanda sadece türk numaraları desteklenmektedir."))
             return
         
         data_is = check_number_only_TR(phone_numbber=getNumber)
         
         if data_is["success"] != True:
             self.phoneNumberParser.textBrowser_logConsole.append(gen_error_text(
-                data_is["message"]
-            ))
+                data_is["message"]))
             return  
         
         currentOperator = data_is["operatör"]
