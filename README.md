@@ -20,7 +20,7 @@
         - Face verification ( Active )
         - Reverse IP lookup ( Active )
         - BIN lookup ( Active )
-        - Android APK analysis ( coming soon )
+        - Android APK analysis ( Active )
         - Voice verification ( Active)
         - Clone voice detections ( coming soon )
         - Iban parser ( Active)
@@ -226,11 +226,28 @@ As a result of the experiment conducted on 35,000 random images, the lower limit
 
 
 
-## Reverse IP lookup (Basic)
+## Reverse IP lookup (Basic):
 
 <br>
 <img src="./img/reverseIPlookup_basic.png">
 <br>
+
+
+## BIN Lookup (Basic):
+
+<br>
+<img src="./img/BinLookup.png">
+<br>
+
+
+
+## Android APK Static Analysis:
+
+<br>
+<img src="./img/AndroidStaticAnalysis_1.png">
+<br>
+
+
 
 
 ## Sound Converter 

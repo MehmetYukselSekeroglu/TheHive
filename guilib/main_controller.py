@@ -8,7 +8,6 @@ from guilib.coomingSoom_controller import CoomingSoonPage
 from guilib.ibanParser_controller import ibanParserPage
 from guilib.changePassword_controller import PasswordChangePage
 from guilib.soundConverter_controller import soundConverterPage
-from guilib.voiceVerification_controller import voiceVerificationPage
 from guilib.videoFrameExtractor_controller import VideoFrameExtractorPage
 from guilib.FaceDetection_controller import FaceDetectionWidget
 from guilib.FaceVerificationFromImage_controller import FaceVerificationScreen_from_image
