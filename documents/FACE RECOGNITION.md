@@ -1,4 +1,4 @@
-# TheHiva / Yüz Tanımlama ( Recognition )
+# TheHive / Yüz Tanımlama ( Recognition )
 
 
 ## Kullanılan kütüphaneler ve sistemler:

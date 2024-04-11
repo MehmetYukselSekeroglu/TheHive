@@ -244,7 +244,7 @@ As a result of the experiment conducted on 35,000 random images, the lower limit
 ## Android APK Static Analysis:
 
 <br>
-<img src="./img/AndroidStaticAnalysis_1.png">
+<img src="./img/AndroidAnalysis_1.png">
 <br>
 
 
