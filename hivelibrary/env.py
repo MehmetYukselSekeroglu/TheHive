@@ -1,6 +1,15 @@
 import os
 
 
+# new types
+CONFIG_FILE_NAME = "config.json"
+APPLICATION_BASE_DIR = os.getcwd().split(os.path.sep)[-1]
+CONFIG_FILE_PATH = "config" + os.path.sep + "config.json"
+DEFAULT_CHARSET = "utf-8"      
+
+
+
+
 # table structure
 DB_SYSTEM_TABLE = "system_core"
 DB_BLOB_STORAGE = "blob_storage"
