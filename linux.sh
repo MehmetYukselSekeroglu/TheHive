@@ -53,12 +53,11 @@ check_reqiered_commands(){
     p_info "CHECKING REQUIRED PACKAGETS"
     printf "\n"
     
-    check_command "nohup"
+    check_command "docker"
     check_command "jq"
     check_command "docker"
     check_command "python3"
     check_command "pip3"
-    check_command "sudo"
     check_command "cat"
     check_command "make"
     check_command "cmake"
@@ -245,6 +244,37 @@ elif [[ "$1" == "--stop-container" ]]; then
     p_info "Container Successfully stopped:\t$container_name!"
     exit 0
 
+# stop container for user 
+elif [[ "$1" == "--start-container" ]]; then
+    printf "\n"
+    printf "$blue<-[ Starting Docker Container ]->\n$reset"  
+    printf "\n"
+    sleep 1
+
+    docker start $container_name
+
+    if [[ "$?" != "0" ]]; then
+        p_error "Failed to start docker container:\t$container_name !"
+        exit 1
+
+    else
+        p_info "OK..."
+    
+    fi 
+    
+    printf "\n"
+    p_info "Container Successfully start:\t$container_name!"
+    exit 0
+
+
+# stop container for user 
+elif [[ "$1" == "--start-hive" ]]; then
+    printf "\n"
+    printf "$blue<-[ Starting TheHive ]->\n$reset"  
+    printf "\n"
+    sleep 1
+
+    python3 main.py
 
 
 # romove/delete container 

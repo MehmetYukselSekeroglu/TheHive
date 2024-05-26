@@ -28,21 +28,21 @@ def _GetTime():
 
 # BILGILENDIRMELER ICIN 
 def p_info(mesages:str, locations:str=None):
-    sys.stdout.write(f"{C_GREEN}[{_GetTime()}]{T_BOLD}[INFO]: {T_BOLD_RESET}{mesages}\n")
+    sys.stdout.write(f"{C_GREEN}[{_GetTime()}]{T_BOLD} [INFO]: {T_BOLD_RESET}{mesages}\n")
     sys.stdout.flush()
     
 # HATA MESAJLARI ICIN 
 def p_error(mesages:str,locations:str=None):
-    sys.stderr.write(f"{C_RED}[{_GetTime()}]{T_BOLD}[ERR]: {T_BOLD_RESET}{mesages}\n")
+    sys.stderr.write(f"{C_RED}[{_GetTime()}]{T_BOLD} [ERR]: {T_BOLD_RESET}{mesages}\n")
     sys.stdout.flush()
     
 # Uyarıları için
 def p_warn(mesages:str,locations:str=None):
-    print(f"{C_ORANGE}[{_GetTime()}]{T_BOLD}[WARN]: {T_BOLD_RESET}{mesages}")
+    print(f"{C_ORANGE}[{_GetTime()}]{T_BOLD} [WARN]: {T_BOLD_RESET}{mesages}")
 
 #Log mesajları için
 def p_log(mesages:str,locations:str=None):
-    print(f"{C_BLUE}[{_GetTime()}][log]: {mesages}")
+    print(f"{C_BLUE}[{_GetTime()}] [LOG]: {mesages}")
 
 def p_title(your_title:str,locations:str=None):
     
