@@ -26,8 +26,8 @@ __SQL_SCHMEA_PATH__ = __BASE_DIR__ + "sql" + os.path.sep + "postgresql_schema.sq
 # for json
 __CONFIG_FILE_DATA__ = {
     
-    "vendor":"RESRICTED",
-    "name":"ParseTheWold",
+    "vendor":"Prime Security",
+    "name":"TheHive",
     "version":"0.0.0+1",
     "base_dir":__BASE_DIR__,
     "temp_dir":__TEMP_DIR__,
@@ -35,7 +35,7 @@ __CONFIG_FILE_DATA__ = {
     "database_schema":__SQL_SCHMEA_PATH__,
     
     "database_config":{
-            "database":"WebEye",
+            "database":"thehive",
             "user":"postgres",
             "password":"your_secret_password",
             "host":"127.0.0.1",
@@ -45,11 +45,7 @@ __CONFIG_FILE_DATA__ = {
         "ctx_id":-1,
         "det_thresh":0.5,
         "det_size":(640,640)
-        },
-    "api_config":{
-        "port":"8080",
-        "localhost_only":False
-    }
+        }
     
         
     

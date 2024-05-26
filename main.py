@@ -8,6 +8,7 @@
 # importing hive toolkit
 from hivelibrary import console_tools
 from hivelibrary.banner import printBanner
+from hivelibrary.load_config import load_config_from_file
 
 printBanner()
 
@@ -17,8 +18,12 @@ from hivelibrary import database_tools
 from hivelibrary import database_structure
 
 
-console_tools.InformationPrinter("importing PostgreSQL config")
-from hivelibrary.psqlConfig import POSTGRESQL_CONFIG
+console_tools.InformationPrinter("Reading config file ...")
+
+ConfigData = load_config_from_file()
+
+POSTGRESQL_CONFIG = ConfigData[1]["database_config"]
+
 
 console_tools.InformationPrinter("importing PyQt")
 # importing python packagets
@@ -31,11 +36,9 @@ from guilib.new_account_controller import NewAccountScreen
 from guilib.main_controller import TheHive_mainPage
 
 
-if not os.path.exists(DEFAULT_TEMP_DIR) or not os.path.isdir(DEFAULT_TEMP_DIR):
-    os.makedirs(DEFAULT_TEMP_DIR)
+os.makedirs(DEFAULT_TEMP_DIR,exist_ok=True)
 
-if not os.path.exists(DEFAULT_ROOT_DIR_NAME) or not os.path.isdir(DEFAULT_ROOT_DIR_NAME):
-    os.makedirs(DEFAULT_ROOT_DIR_NAME)
+os.makedirs(DEFAULT_ROOT_DIR_NAME,exist_ok=True)
 
 # Start database connections
 DB_CNN , DB_CURSOR = database_tools.connection_function(POSTGRESQL_CONFIG)
