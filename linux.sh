@@ -84,7 +84,8 @@ print_help_exit(){
     printf "$0 --start-container\t:Start the container\n"
     printf "$0 --stop-container\t:Stop the running container\n"
     printf "$0 --remove-container\t:Remove container and database !DANGER!\n"
-    printf "$0 --start-service\t:Start crawler and start web-api for service mode\n"
+    printf "$0 --install-pip-packagets\t:Install Required pip packagets"
+    printf "$0 --install-model\t:Install insightface model"
     printf "$0 --sql-shell\t\t:Connect PostgreSQL cli on \"$db_name\" database\n"
     printf "$0 --help/-h\t\t:Open this menu\n"
     printf "\n"
@@ -276,6 +277,21 @@ elif [[ "$1" == "--start-hive" ]]; then
 
     python3 main.py
 
+elif [[ "$1" == "--install-model" ]]; then
+    printf "\n"
+    printf "$blue<-[ Installing Insightface Model ]->\n$reset"  
+    printf "\n"
+    sleep 1
+
+    python3 hivelibrary/install_insightface_model.py
+    if [[ "$?" != "0" ]]; then
+        p_error "Failed to install insightface model..."
+        exit 1
+
+    else
+        p_info "OK..."
+    
+    fi 
 
 # romove/delete container 
 # for uninstall or reinstall
