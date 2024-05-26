@@ -1,3 +1,4 @@
+config/*
 __pycache__
 hive_database.sqlite3
 testFile.py
