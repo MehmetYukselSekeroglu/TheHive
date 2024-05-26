@@ -5,7 +5,7 @@ testFile.py
 *.db
 tmp*
 data*
-bin*
+bin/*
 lib*
 pyvenv.cfg
 share*
