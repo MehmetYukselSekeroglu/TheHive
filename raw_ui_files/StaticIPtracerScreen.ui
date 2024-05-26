@@ -14,15 +14,6 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="0" rowspan="2">
-    <widget class="QWebView" name="webView_mapView">
-     <property name="url">
-      <url>
-       <string>about:blank</string>
-      </url>
-     </property>
-    </widget>
-   </item>
    <item row="0" column="1">
     <widget class="QWidget" name="widget" native="true">
      <property name="minimumSize">
@@ -69,13 +60,28 @@
    <item row="1" column="1">
     <widget class="QTextBrowser" name="textBrowser_logConsole"/>
    </item>
+   <item row="0" column="0" rowspan="2">
+    <widget class="QWebEngineView" name="webView_mapView">
+     <property name="minimumSize">
+      <size>
+       <width>400</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="url">
+      <url>
+       <string>about:blank</string>
+      </url>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QWebView</class>
+   <class>QWebEngineView</class>
    <extends>QWidget</extends>
-   <header location="global">QtWebKitWidgets/QWebView</header>
+   <header location="global">QtWebEngineWidgets/QWebEngineView</header>
   </customwidget>
  </customwidgets>
  <resources/>

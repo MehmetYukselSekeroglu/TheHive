@@ -17,10 +17,6 @@ class Ui_IPTracerWidget_ipinfoio(object):
         IPTracerWidget_ipinfoio.resize(866, 514)
         self.gridLayout_2 = QtWidgets.QGridLayout(IPTracerWidget_ipinfoio)
         self.gridLayout_2.setObjectName("gridLayout_2")
-        self.webView_mapView = QtWebKitWidgets.QWebView(IPTracerWidget_ipinfoio)
-        self.webView_mapView.setUrl(QtCore.QUrl("about:blank"))
-        self.webView_mapView.setObjectName("webView_mapView")
-        self.gridLayout_2.addWidget(self.webView_mapView, 0, 0, 2, 1)
         self.widget = QtWidgets.QWidget(IPTracerWidget_ipinfoio)
         self.widget.setMinimumSize(QtCore.QSize(391, 0))
         self.widget.setObjectName("widget")
@@ -45,6 +41,11 @@ class Ui_IPTracerWidget_ipinfoio(object):
         self.textBrowser_logConsole = QtWidgets.QTextBrowser(IPTracerWidget_ipinfoio)
         self.textBrowser_logConsole.setObjectName("textBrowser_logConsole")
         self.gridLayout_2.addWidget(self.textBrowser_logConsole, 1, 1, 1, 1)
+        self.webView_mapView = QtWebEngineWidgets.QWebEngineView(IPTracerWidget_ipinfoio)
+        self.webView_mapView.setMinimumSize(QtCore.QSize(400, 0))
+        self.webView_mapView.setUrl(QtCore.QUrl("about:blank"))
+        self.webView_mapView.setObjectName("webView_mapView")
+        self.gridLayout_2.addWidget(self.webView_mapView, 0, 0, 2, 1)
 
         self.retranslateUi(IPTracerWidget_ipinfoio)
         QtCore.QMetaObject.connectSlotsByName(IPTracerWidget_ipinfoio)
@@ -56,7 +57,7 @@ class Ui_IPTracerWidget_ipinfoio(object):
         self.label_2.setText(_translate("IPTracerWidget_ipinfoio", "Target IP:"))
         self.pushButton_startQuery.setText(_translate("IPTracerWidget_ipinfoio", "Start"))
         self.pushButton_clearResults.setText(_translate("IPTracerWidget_ipinfoio", "Clear"))
-from PyQt5 import QtWebKitWidgets
+from PyQt5 import QtWebEngineWidgets
 
 
 if __name__ == "__main__":
