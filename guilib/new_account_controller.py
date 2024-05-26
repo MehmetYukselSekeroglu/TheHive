@@ -10,7 +10,7 @@ import sys
 
 
 class NewAccountScreen(QWidget):
-    def __init__(self, db_connections, db_cursor, targetWindow,):
+    def __init__(self, db_connections, db_cursor, targetWindow,MainConfig):
         super().__init__()
         
     # setup the ui
@@ -22,7 +22,7 @@ class NewAccountScreen(QWidget):
         self.db_cursor = db_cursor
         self.DBS_CONF =  [self.db_connections, self.db_cursor]
         # set return window
-        self.targetMainWindow = targetWindow(*self.DBS_CONF)
+        self.targetMainWindow = targetWindow(*self.DBS_CONF,MainConfig)
         
         # set window title
         self.setWindowTitle("Configure Local Accounts")

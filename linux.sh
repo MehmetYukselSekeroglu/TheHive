@@ -299,7 +299,13 @@ elif [[ "$1" == "--install-pip-packagets" ]]; then
     printf "\n"
     sleep 1
     p_info "Using file:\t$PIP_PACKAGET_FILE"
-    python3 -m pip install -r $PIP_PACKAGET_FILE 2> /dev/null
+
+    while read current_packaget
+    do
+        p_info "Installing packaget:\t$current_packaget"
+        python3 -m pip install $current_packaget
+    done < $PIP_PACKAGET_FILE
+
     exit 0
 
 

@@ -1,3 +1,4 @@
+import psycopg2.extras
 from hivelibrary.env import DB_BLOB_STORAGE, DB_SYSTEM_TABLE, DB_LOCAL_AUTHENTICATE_TABLE
 from hivelibrary.env import DB_DATA_TYPE__USER
 from hivelibrary.env import APPLICATION_NAME_KEY
@@ -7,7 +8,7 @@ import psycopg2
 
 from hivelibrary.types import t_PsqlCursor,t_PsqlCnn
 
-def connection_function(db_config_dict) -> object:
+def connection_function(db_config_dict) -> tuple[psycopg2.extensions.connection, psycopg2.extensions.cursor]:
     cnn= psycopg2.connect(**db_config_dict)
     cursor = cnn.cursor()
     return cnn, cursor

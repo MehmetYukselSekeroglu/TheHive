@@ -9,7 +9,7 @@ import sys
 
 
 class LoginScreen(QWidget):
-    def __init__(self, sqlite_cnn, sqlite_curosr, targetWindow):
+    def __init__(self, sqlite_cnn, sqlite_curosr, targetWindow, MainConfig):
         super().__init__()
         # Console Log
         console_tools.InformationPrinter("Starting login screen")
@@ -24,7 +24,7 @@ class LoginScreen(QWidget):
         self.loginScreen.setupUi(self)
         
         # set return window
-        self.targetMainWindow = targetWindow(*self.DBS_CONF)
+        self.targetMainWindow = targetWindow(*self.DBS_CONF,MainConfig)
         
         # set login credientals
         self.MAX_LOGIN_TRY = 3

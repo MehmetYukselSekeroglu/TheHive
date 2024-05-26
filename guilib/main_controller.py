@@ -79,7 +79,7 @@ TheHive version: {env.APPLICATION_VERSION_VALUE}"""
 
 
 class TheHive_mainPage(QMainWindow):
-    def __init__(self, db_cnn:psycopg2.extensions.connection, db_cursor:psycopg2.extensions.cursor):
+    def __init__(self, db_cnn:psycopg2.extensions.connection, db_cursor:psycopg2.extensions.cursor,MainConfig):
         super().__init__()
         self.mainScreen = Ui_TheHve_MainWindow()
         self.mainScreen.setupUi(self)

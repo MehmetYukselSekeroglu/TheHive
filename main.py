@@ -5,11 +5,14 @@
 # Website primesecurity.net.tr ( cooming soon )
 # Version: v2.1.0 Testing 
 
+# external lib's
+import sys
+
 # importing hive toolkit
 from hivelibrary import console_tools
 from hivelibrary.banner import printBanner
 from hivelibrary.load_config import load_config_from_file
-
+from hivelibrary.consolePrint import p_error,p_info,p_warn
 printBanner()
 
 console_tools.InformationPrinter("importing TheHive library")
@@ -21,6 +24,9 @@ from hivelibrary import database_structure
 console_tools.InformationPrinter("Reading config file ...")
 
 ConfigData = load_config_from_file()
+
+if not ConfigData[0]:
+    sys.exit(1)
 
 POSTGRESQL_CONFIG = ConfigData[1]["database_config"]
 
@@ -62,14 +68,14 @@ if database_tools.check_db_init_status(*DBS_CONF) == False:
 console_tools.InformationPrinter("Database alredy configurated")
 if database_tools.check_admin_is_generated(db_cursor=DB_CURSOR)["success"] == True:
     standartApp = QApplication([])
-    standartWindow = LoginScreen(sqlite_cnn=DB_CNN,sqlite_curosr=DB_CURSOR,targetWindow=TheHive_mainPage)
+    standartWindow = LoginScreen(sqlite_cnn=DB_CNN,sqlite_curosr=DB_CURSOR,targetWindow=TheHive_mainPage,MainConfig=ConfigData)
     standartWindow.show()
     standartApp.exec_()
     
 else:
     console_tools.InformationPrinter("admin account not be detect starting account manager")
     firstStartApp = QApplication([])
-    firstStartWindow = NewAccountScreen(db_connections=DB_CNN,db_cursor=DB_CURSOR,targetWindow=TheHive_mainPage)
+    firstStartWindow = NewAccountScreen(db_connections=DB_CNN,db_cursor=DB_CURSOR,targetWindow=TheHive_mainPage,MainConfig=ConfigData)
     firstStartWindow.show()
     firstStartApp.exec_()
 

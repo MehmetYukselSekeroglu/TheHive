@@ -5,74 +5,49 @@
 <img src="./iconfiles/logo.png" style="border-radius:50%" height="auto" width="auto"/>
 </div>
 
-<p>Advanced professional osint toolkit with TheHive Remastred</p><br>
+<p>Gelişmiş ve Profesyonel OSINT TheHive Remastred ile Sizin Elinizde!</p><br>
 
 
 
 
 - TheHive Remastred:
-    - Advanced and easy graphical interface
-    - Local authentication to prevent files from being scrambled
-    - Open soruce & Free
-    - Extensive features
-        - Face recognition ( Active )
-        - Face detection ( Active)
-        - Face verification ( Active )
-        - Reverse IP lookup ( Active )
-        - BIN lookup ( Active )
-        - Android APK analysis ( Active )
-        - Voice verification ( Active)
-        - Clone voice detections ( coming soon )
-        - Iban parser ( Active)
-        - Video frame extractor ( Active)
-        - Phone number parser ( Active )
-        - Google dork generator ( coming soon )
-        - Hash identify ( coming soon )
-        - External module support ( coming soon )
+    - Gelişmiş ve basit grafiksel arayüz
+    - Yerel kimlik doğrulaması ile karıştırmaya karşı koruma
+    - Açık kaynak ve ücretsiz
+    - Gelişmiş Özellikleri
+        - Yüz tanıma 
+        - Yüz tespit 
+        - Yüz karşılaştırma ( Aktif )
+        - Tersine IP Taraması ( Aktif )
+        - BIN Numarası Arama ( Aktif )
+        - Statik Android APK Analizi ( Aktif )
+        - Clone voice detections ( çok yakında )
+        - Iban Çözümleyici ( Aktif)
+        - Video kare ayrıştırıcı ( Aktif)
+        - Telefon Numarası analiz edici ( Aktif )
+        - Google Drok oluşturucu ( çok yakında )
+        - Hash Tipi Tespit edici ( çok yakında )
+        - Harici Modül Desteği ( çok yakında )
 
-        - Region based tools
-            - Tc Verificator ( Active ) 
-            - Tc Calculator ( Active )
+        - Bölge Tabanlı Sistemler
+            - Tc Verificator ( Aktif ) 
+            - Tc Calculator ( Aktif )
 
 
 <br>
 
-<h1> Installation and Startup </h1>
+<h1> İndirme ve ilk kurulum </h1>
 <br>
 
 ## Preparing the PostgreSQL server
 
 <br>
 <p>
-TheHive is powered by PostgreSQL, one of the most powerful relational database systems, to keep a high amount of data, analyze it quickly when necessary, and add more data. Since it cannot install the server automatically, you need to install a normal Postgresql server and run the command below.</p>
 
-```SQL
-CREATE DATABASE thehive;
-```
 
 <br>
 
 
-Şimdi ise bağlantı sağlanabilmesi için `hivelibrart/psqlConfig.py`  yapılandırma dosyasına gerekli bilgileri girmeniz gerekir ardından diğer adıma geçebilirsiniz
-
-
-open this file hivelibrart/psqlConfig.py
-
-```python
-
-
-from hivelibrary.env import DATABASE_NAME
-# enter the postgresql database server connection info
-POSTGRESQL_CONFIG = {
-    "host":"localhost",
-    "port":"5432",
-    "user":"postgres",
-    "password":"change_it", # change this
-    "database":DATABASE_NAME
-}
-
-
-```
 
 <br>
 
@@ -131,22 +106,23 @@ deactivate
 
 
 <br>
-<h1>Images from the interface</h1>
+<h1>Arayüzden Görüntüler</h1>
 
 <br>
 
-## Welcome Screen
+## Karşılama Ekranı
 
 <br>
 
 <img src="./img/welcomeScreen.png">
 <br>
-<p>A simple welcome screen welcomes you. At the top, there is the latest status of the system and TheHive, and at the bottom, there is brief information about the vehicle and producer contact information. In general, most operations are performed through the menu bar.</p>
+<p>TheHive ilk girişte basit bir arayüz ile sizi karşılar, temel sistem bilgisi ve iletişim 
+bilgileri içeren bu sayfa üzerinden diğer modullere erişim sağlanır.</p>
 
 <br>
 
 
-## Voice Verification
+## Ses Tanıma
 
 <br>
 
@@ -154,86 +130,86 @@ deactivate
 
 <br>
 
-<p>Thanks to Resemblyzer-based voice verification, you can understand whether 2 voice samples belong to the same person or to others. Thanks to Resemblyzer, the parts of the voice for analysis are detected and the similarity ratio is calculated using cosine similarity. Generally, rates of 75% and above belong to the same person, but do not forget that the model may be wrong.</p>
+<p>python Resamblyzer kütüphanesini temel alan bir ses doğrulama & tanıma sistem TheHive içerisinde mevcuttur. Kütüphanenin güncellenmesi nedeniyle tekrar entegre edilmesi için şuan bakım moduna alınmıştır.</p>
 <br>
 
 
-## Face Recognition
+## Yüz Tanıma
 
 <br>
 
-### Searching for a face in the database
+### Veritabanı içerisinde mevcut bir yüzün/kişinin aranması
 <img src="./img/personInDatabase.png">
 
 
-### Searching for a face that is not in the database
+### Veritabanı içerisinde bulunmayan bir yüzün/kişinin aranması
 <img src="./img/personNoInDB.png" />
 <br>
 
 
-<p>Pure binary data of the image, sha1 hash to protect against repeated images, reference points for quick comparison, general points of the face, face frame, name of addition to the system, date of insertion in UTC are stored in the database, thus enabling high-speed searching. In the experiments carried out with 1500 random images, we have not come across a False positive (what the system thinks is correct, but it is wrong) situation. Since cosine similarity is used instead of face models for similarity calculation, the rate will not be 100% in different images of the same person, but it creates a significant difference when compared with others. In this way, the system works efficiently.
+<p>Görüntünün saf ikili verileri, tekrarlanan görüntülere karşı koruma sağlamak için sha1 karması, hızlı karşılaştırma için referans noktaları, yüzün genel noktaları, yüz çerçevesi, sisteme eklenme adı, UTC'ye eklenme tarihi veritabanında saklanır, böylece yüksek hızlı arama. 1500 rastgele görüntü ile yapılan deneylerde Yanlış pozitif (sistemin doğru olduğunu düşündüğü ancak yanlış olduğu) bir duruma rastlamadık. Benzerlik hesaplamasında yüz modelleri yerine kosinüs benzerliği kullanıldığı için aynı kişinin farklı görüntülerinde oran %100 olmayacak ancak diğerleriyle karşılaştırıldığında ciddi bir fark yaratacaktır. Bu sayede sistem verimli çalışır.
 
 
-As a result of the experiment conducted on 35,000 random images, the lower limit of similarity was reduced to 35%, thus preventing erroneous results from being returned.
+35.000 rastgele görüntü üzerinde yapılan deney sonucunda benzerlik alt sınırı %35'e düşürülerek hatalı sonuçların geri dönmesinin önüne geçildi.
 <br>
 
 
 
-## Face Verification
+## Yüz Doğrulama
 
 <br>
 
-### Result given by faces belonging to the same person
+### Aynı kişiye ait yüzlerin verdiği sonuç
 <img src="./img/FaceVerification.png">
 
 
-### The results on different people's faces
+### Farklı insanların yüzlerindeki sonuçlar
 <img src="./img/FaceVerificationFarkliKisiler.png" />
 <br>
 
-<p>There is a high rate of difference between the detection of different and the same people. InsightFace's buffalo_l model is used to detect facial points, then the cosine similarity formula is used via numpy to calculate the similarity, which is why it does not give 100% in different pictures of the same people.
+<p>Farklı kişilerin tespiti ile aynı kişilerin tespiti arasında yüksek oranda fark bulunmaktadır. InsightFace'in buffalo_l modeli yüz noktalarını tespit etmek için kullanılır, daha sonra numpy aracılığıyla kosinüs benzerlik formülü kullanılarak benzerliğin hesaplanması sağlanır, bu nedenle aynı kişilerin farklı fotoğraflarında %100 vermez.
 <br>
 
-## Face Detection
+## Yüz Tespiti
 
 <br>
 
 
 <img src="./img/FaceDetection.png">
 
-<p>All analysis results are printed in the other tab to get full details about the insightFace based face detection system detections for the detection system and trials before the face verification system</p>
+<p>Analiz hakkında tüm detayları almak için tüm analiz sonuçları diğer sekmede yazdırılır.</p>
 
 <br>
 
 
-## Video Frame Extractor
+## Video Kare Ayrıştırıcı
 
 <br>
 <img src="./img/video2frame.png">
 
 <br>
-<p>In order to examine the videos more easily and in detail, the opencv-based video frame parsing feature separates the videos into frames, giving the entire status to the screen without the application freezing, thanks to its multi-threading feature</p>
+<p>Videoların daha kolay ve detaylı incelenebilmesi için opencv tabanlı video kare ayrıştırma özelliği, çoklu iş parçacığı özelliği sayesinde videoları karelere ayırarak uygulama donmadan tüm durumu ekrana verir</p>
 <br>
 
 
-## Iban Parser
+## Iban Çözümleyici
 
 <br>
 <img src="./img/ibanParserGUI.png">
 <br>
-<p>IBAN, which is frequently used in payment transactions, contains certain information. You can access certain open source information by analyzing them. This module does this automatically. Currently, there is full support only for IBANs belonging to Turkey. It is possible that it may provide incomplete information for other IBANs.</p>
+<p>Ödeme işlemlerinde sıklıkla kullanılan IBAN, belirli bilgileri içerir. Bazı açık kaynak bilgilerine analiz ederek erişebilirsiniz. Bu modül bunu otomatik olarak yapar. Şu anda sadece Türkiye'ye ait IBAN'lara tam destek verilmektedir. Diğer IBAN'lar için eksik bilgi vermesi mümkündür.</p>
 <br>
 
 
 
-## Reverse IP lookup (Basic):
+## Basit IP Takibi
 
 <br>
 <img src="./img/reverseIPlookup_basic.png">
 <br>
 
 
-## BIN Lookup (Basic):
+## Basit BIN Numrası Takibi
 
 <br>
 <img src="./img/BinLookup.png">
@@ -241,7 +217,7 @@ As a result of the experiment conducted on 35,000 random images, the lower limit
 
 
 
-## Android APK Static Analysis:
+## Statik Android APK Analizi:
 
 <br>
 <img src="./img/AndroidAnalysis_1.png">
@@ -250,14 +226,14 @@ As a result of the experiment conducted on 35,000 random images, the lower limit
 
 
 
-## Sound Converter 
+## Ses Dönüştürücü 
 
 <br>
 
 <img src="./img/soundConverter.png">
 
 <br>
-<p>Although it is not necessary in this tool, I wanted to add the audio converter that I wrote during the learning phase :)</p>
+<p>Bu araçta pek gerekli olmasa da öğrenme aşamasında yazdığım ses dönüştürücüyü eklemek istedim:)</p>
 
 <br>
 
@@ -265,6 +241,6 @@ As a result of the experiment conducted on 35,000 random images, the lower limit
 # Credit[s]
 
 <p>
-Logo Designer <a hred="https://github.com/omersayak">Ömer Şayak</a>
+Logo Tasarımcısı <a hred="https://github.com/omersayak">Ömer Şayak</a>
 
 </p>
