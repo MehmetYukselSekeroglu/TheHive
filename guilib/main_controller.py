@@ -118,7 +118,7 @@ class TheHive_mainPage(QMainWindow):
     # menu slot functions     
     
     def menuAction_AndroidAnalysis(self):
-        self.AndroidAnalysis = AndroidAnlysisPage()
+        self.AndroidAnalysis = AndroidAnlysisPage(mainConfig=self.mainConfig)
         self.AndroidAnalysis.show()
         
     def menuAction_BinLookup(self):

@@ -3,7 +3,6 @@ from guilib.html_text_generator import html_draft
 from hivelibrary.AndroidTools import androguard_tools
 from hivelibrary.hash_tools import all_hash
 from hivelibrary.database_tools import check_exists_systemTable,connection_function
-from hivelibrary.psqlConfig import POSTGRESQL_CONFIG
 from hivelibrary.env import VIRUSTOTAL_API_KEY
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
@@ -121,8 +120,11 @@ class backendWorker(QThread):
 
 
 class AndroidAnlysisPage(QWidget):
-    def __init__(self):
+    def __init__(self, mainConfig):
         super().__init__()
+        
+        # ana config verisi tanımlandı 
+        self.mainConfig = mainConfig
         
         # temel sistem tanımlandı
         self.AndroidPage = Ui_AndroidAnlysisWidget()
@@ -130,7 +132,7 @@ class AndroidAnlysisPage(QWidget):
         self.setWindowTitle("Android Anlysis")
         self.AndroidPage.lineEdit_showTargetPath.setDisabled(True)
         
-        self.databaseCnn, self.databaseCursor = connection_function(db_config_dict=POSTGRESQL_CONFIG)
+        self.databaseCnn, self.databaseCursor = connection_function(db_config_dict=self.mainConfig[1]["database_config"])
         
         # buton sinyalleri slolata bağlandı
         self.AndroidPage.pushButton_selectFile.clicked.connect(self.selectTargetFile)
