@@ -85,6 +85,7 @@ class TheHive_mainPage(QMainWindow):
         self.mainScreen.setupUi(self)
         self.setWindowTitle("TheHive Remastred")
         
+        self.mainConfig = MainConfig
         self.db_cnn = db_cnn
         self.db_cursor = db_cursor
         self.DBS_CONF = [self.db_cnn, self.db_cursor]
@@ -129,7 +130,7 @@ class TheHive_mainPage(QMainWindow):
         self.reverseIPlookup.show()
 
     def menuAction_FaceInsight_FaceRecognition(self):
-        self.FaceRecognition = FaceRecognitionWidget(db_cnn=self.db_cnn, db_curosr=self.db_cursor)
+        self.FaceRecognition = FaceRecognitionWidget(db_cnn=self.db_cnn, db_curosr=self.db_cursor,mainConfig=self.mainConfig)
         self.FaceRecognition.show()
 
     def menuAction_TcCalculator(self):

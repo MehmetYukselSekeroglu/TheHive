@@ -7,7 +7,7 @@ from guilib.html_text_generator.html_draft import *
 from hivelibrary.face_recognition_database_tools import recognitionDbTools
 from hivelibrary.os_information import max_thread_calculator
 from hivelibrary.database_tools import connection_function
-from hivelibrary.psqlConfig import POSTGRESQL_CONFIG
+
 
 
 class directoryAdderThread(QThread):
@@ -15,10 +15,10 @@ class directoryAdderThread(QThread):
     statusSignal = pyqtSignal(dict)
     
     
-    def __init__(self, faceAnalayserUI:object ,targetDirectory:str, databaseConnections, databaseCursor):
+    def __init__(self, faceAnalayserUI:object ,targetDirectory:str, databaseConnections, databaseCursor, mainConfig):
         super().__init__()
         
-        self.connectionConfig = POSTGRESQL_CONFIG
+        self.connectionConfig = mainConfig[1]["database_config"]
         self.targetDirectory = targetDirectory
         self.databaseConnections = databaseConnections
         self.databaseCursor = databaseCursor
@@ -78,9 +78,11 @@ class directoryAdderThread(QThread):
             
 
             def thread_function(database_connection_func,signleTarget) -> None:
+                
+                db, db_curosr = database_connection_func(self.connectionConfig)
                 try:
                     
-                    db, db_curosr = database_connection_func(self.connectionConfig)
+                   
                     
                     databaseTools = recognitionDbTools(db_cnn=db,db_curosr=db_curosr)
                     fullImagePath = str(self.targetDirectory + signleTarget)

@@ -130,9 +130,9 @@ class faceRecognitionBackendThread(QThread):
         self.__finalyStatusReturner(text=return_text,success_status=True,cv2_image=detectedFacePictur,face_name=detectedFaceName,similartiy=detectedFaceSimilartiyRate)
 
 class FaceRecognitionWidget(QWidget):
-    def __init__(self, db_cnn, db_curosr):
+    def __init__(self, db_cnn, db_curosr, mainConfig):
         super().__init__()
-        
+        self.mainConfig = mainConfig
         self.FaceRecognitionPage = Ui_FaceRecognitionWidget()
         self.FaceRecognitionPage.setupUi(self)
         self.setWindowTitle("Face Recognition From Image")
@@ -216,7 +216,7 @@ class FaceRecognitionWidget(QWidget):
             return
         
         if thread_dict["success"] != True and thread_dict["end"] == True:
-            self.FaceRecognitionPage.textBrowser_logConsole.append(gen_error_text(str(thread_dict["text"])))
+            self.FaceRecognitionPage.textBrowser_logConsole.append(str(thread_dict["text"]))
             self.FaceRecognitionPage.progressBar_benzerlikBari.setValue(0)
             self.showDefaultImage(targetLabel=self.FaceRecognitionPage.label_detectedImageShower)
             return
@@ -251,7 +251,7 @@ class FaceRecognitionWidget(QWidget):
             self.FaceRecognitionPage.textBrowser_logConsole.append(gen_error_text("Kaynak resim seçilmedi, işlem iptal edildi"))
             return
         
-        
+        self.FaceRecognitionPage.textBrowser_logConsole.clear()
         self.minimumSimilaritySize = self.getMinSimilartiyCurrentValue()
         self.FaceRecognitionPage.textBrowser_logConsole.append(gen_info_text("Veritabanı araması başlaılıyor"))
         self.DatabaseSearchThread = faceRecognitionBackendThread(targetFaceImagePath=self.selectedSourceImage,faceAnalayserUI=self.FaceAnalysisUI,db_curosr=self.databaseCursor,minSimilarityRate=self.minimumSimilaritySize)
@@ -434,7 +434,7 @@ class FaceRecognitionWidget(QWidget):
             return    
        
         self.MultiAdderThread = directoryAdderThread(faceAnalayserUI=self.FaceAnalysisUI,targetDirectory=self.selectedDirectory,
-            databaseConnections=self.databaseConnections,databaseCursor=self.databaseCursor)
+            databaseConnections=self.databaseConnections,databaseCursor=self.databaseCursor,mainConfig=self.mainConfig)
         self.MultiAdderThread.statusSignal.connect(self.multiAdderThreadSignalHandler)
         self.MultiAdderThread.start()
         
