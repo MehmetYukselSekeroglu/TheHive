@@ -39,12 +39,6 @@
 <h1> İndirme ve ilk kurulum </h1>
 
 
-Öncelikle Repomuzu GitHub dan çekerek içerisinde girelim sonra diğer adımlara geçebiliriz.
-
-```shell
-git clone https://github.com/MehmetYukselSekeroglu/TheHive.git
-cd TheHive
-```
 
 <h3> <a href="./documents/Linux Kurulumu.md">Linux Üzerinde TheHive Kurulumu </a> </h3>
 <h3> <a href="./documents/Windows Kurulumu.md">Windows Üzerinde TheHive Kurulumu </a> </h3>

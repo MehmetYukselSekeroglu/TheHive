@@ -68,9 +68,10 @@ python windows.py --start-hive
 
 
 
+# Windows Arayüzünden Örnek Bir Görüntü:
 
 
-
+<img src="../img/temsil2.png">
 
 
 
