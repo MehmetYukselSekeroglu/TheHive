@@ -37,72 +37,17 @@
 <br>
 
 <h1> İndirme ve ilk kurulum </h1>
-<br>
-
-## Preparing the PostgreSQL server
-
-<br>
-<p>
 
 
-<br>
-
-
-
-<br>
-
-## Direct Installing ( No python venv )
-
-<br>
+Öncelikle Repomuzu GitHub dan çekerek içerisinde girelim sonra diğer adımlara geçebiliriz.
 
 ```shell
-# Clone the repo
 git clone https://github.com/MehmetYukselSekeroglu/TheHive.git
-
-# Join TheHive directory
 cd TheHive
-
-# Install requirements
-python -m pip install -r requirements.txt
-
-# Start Application 
-python main.py
-
 ```
 
-<br>
-
-## Installing with python venv
-
-<br>
-
-
-```shell
-# Clone the repo
-git clone https://github.com/MehmetYukselSekeroglu/TheHive.git
-
-# Join TheHive directory
-cd TheHive
-
-# Generate new virtaul env
-python -m venv .venv
-
-# Activate venv
-.venv\Scripts\activate # Windows
-source .venv/bin/activate # Linux and MacOS
-
-# Install requirements for venv
-python -m pip install -r requirements.txt
-
-# Start Application 
-python main.py
-
-# To exit the virtual environment ( All Platforms )
-deactivate
-
-```
-
-
+<h3> <a href="./documents/Linux Kurulumu.md">Linux Üzerinde TheHive Kurulumu </a> </h3>
+<h3> <a href="./documents/Windows Kurulumu.md">Windows Üzerinde TheHive Kurulumu </a> </h3>
 
 
 <br>

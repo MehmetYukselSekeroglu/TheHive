@@ -55,7 +55,6 @@ check_reqiered_commands(){
     
     check_command "docker"
     check_command "jq"
-    check_command "docker"
     check_command "python3"
     check_command "pip3"
     check_command "cat"
@@ -78,16 +77,17 @@ print_help_exit(){
 
     printf "COMMANDS:\n"
     
-    printf "$0 --check-commands\t:Check the required commands status\n"
-    printf "$0 --generate-docker\t:Create the docker container for PostgreSQL\n"
-    printf "$0 --prepare-psql\t:Create database and execute database schema\n"
-    printf "$0 --start-container\t:Start the container\n"
-    printf "$0 --stop-container\t:Stop the running container\n"
-    printf "$0 --remove-container\t:Remove container and database !DANGER!\n"
-    printf "$0 --install-pip-packagets\t:Install Required pip packagets"
-    printf "$0 --install-model\t:Install insightface model"
-    printf "$0 --sql-shell\t\t:Connect PostgreSQL cli on \"$db_name\" database\n"
-    printf "$0 --help/-h\t\t:Open this menu\n"
+    printf "$0 --check-commands\t\t:Check the required commands status\n"
+    printf "$0 --generate-docker\t\t:Create the docker container for PostgreSQL\n"
+    printf "$0 --prepare-psql\t\t:Create database and execute database schema\n"
+    printf "$0 --start-container\t\t:Start the container\n"
+    printf "$0 --stop-container\t\t:Stop the running container\n"
+    printf "$0 --remove-container\t\t:Remove container and database !DANGER!\n"
+    printf "$0 --install-pip-packagets\t:Install Required pip packagets\n"
+    printf "$0 --install-model\t\t:Install insightface model\n"
+    printf "$0 --sql-shell\t\t\t:Connect PostgreSQL cli on \"$db_name\" database\n"
+    printf "$0 --wizard\t\t\t:Otomatik indirme aracı\n"
+    printf "$0 --help/-h\t\t\t:Open this menu\n"
     printf "\n"
     exit 0
 
@@ -337,6 +337,35 @@ elif [[ "$1" == "--sql-shell" ]]; then
     docker exec -it $container_name psql -p $db_port -h $db_hostname -U $db_username -d "$db_name" 
     p_info "OK.."
     exit 0
+
+elif [[ "$1" == "--wizard" ]]; then
+    printf "\n"
+    printf "$blue<-[ Otomatik İndirme Aracı Başlatılıyor ]->\n$reset"  
+    printf "\n"
+
+    checkRoot=1
+
+    if [[ "$checkRoot" == "1" && "$UID" == "0" ]] ;then
+        p_error "Otomatik indirme yardımcısı root olarak çalışamaz! Gerekli oldugu zaman sudo parolası ister!"
+        printf "\n"
+        printf "Eğer sistemi root olarak kullanıyorsanız 347. satırdaki \$checkRoot=1 değerini \$checkRoot=0 yapınız."
+        exit 1
+    fi
+
+    sudo bash ./linux.sh --generate-container
+
+    p_info "Docker'in hazırlanması için 10 saniye uyku moduna geçiliyor"
+    sleep 10
+
+    sudo bash ./linux.sh --prepare-psql
+
+    bash ./linux.sh --install-pip-packagets
+
+    bash ./linux.sh --start-hive
+
+
+
+
 
 
 elif [[ "$1" == "--install-pip-packagets" ]]; then
