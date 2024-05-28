@@ -10,9 +10,11 @@ import json
 import sys
 import os
 
+    
+
+
 # local library import's
 from .env import CONFIG_FILE_PATH as __CONFIG_FILE_PATH__
-from .consolePrint import (p_info, p_error)
 
 
 
@@ -65,10 +67,10 @@ if __name__ == "__main__":
             json.dump(__CONFIG_FILE_DATA__,conf_file,indent=4)
         
     except Exception as err:
-        p_error(f"Failed to crate {__CONFIG_FILE_PATH__}, {err}")
+        print(f"Failed to crate {__CONFIG_FILE_PATH__}, {err}")
         sys.exit(-1)        
 
-    p_info(f"{__CONFIG_FILE_PATH__} successfuly generated.")
+    print(f"{__CONFIG_FILE_PATH__} successfuly generated.")
     sys.exit(0)
 
 
