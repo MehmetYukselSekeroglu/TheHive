@@ -1,4 +1,11 @@
 
+Öncelikle Repomuzu GitHub dan çekerek içerisinde girelim sonra diğer adımlara geçebiliriz.
+
+```shell
+git clone https://github.com/MehmetYukselSekeroglu/TheHive.git
+cd TheHive
+```
+
 
 ## 1) Config Dosyasını Oluşturma
 
@@ -52,7 +59,6 @@ Kurulum tamamlandığı zaman otomatik olarak TheHive açılacaktır.
 ```shell
 bash linux.sh --start-hive
  ```
-
 
 
 
